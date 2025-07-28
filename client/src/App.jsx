@@ -4,6 +4,10 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
+// import { Analytics } from "@vercel/analytics/next";
+// import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
 import {
   BrowserRouter as Router,
@@ -457,6 +461,8 @@ function App() {
         </Routes>
       </ToTop>
       <ToastContainer position="top-right" autoClose={3000} />
+      <Analytics />
+      <SpeedInsights />
     </>
   );
 }
