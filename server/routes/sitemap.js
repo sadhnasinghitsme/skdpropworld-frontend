@@ -8,6 +8,14 @@ const Blog = require("../models/Blog"); // Ensure valid Mongoose model
 const router = express.Router();
 
 router.get("/sitemap.xml", async (req, res) => {
+  // Utility: Safe ISO date or undefined
+
+
+  const safeDate = (d) => {
+    const date = new Date(d);
+    return isNaN(date) ? undefined : date.toISOString();
+  };
+
   try {
     const hostname = "https://www.skdpropworld.com";
 
@@ -47,7 +55,7 @@ router.get("/sitemap.xml", async (req, res) => {
       url: `/projects/${proj.slug}`,
       changefreq: "weekly",
       priority: 0.95,
-      lastmod: new Date(proj.updatedAt),
+      lastmod: safeDate(proj.updatedAt),
     }));
 
     // ✅ Fetch dynamic blog URLs
@@ -56,7 +64,7 @@ router.get("/sitemap.xml", async (req, res) => {
       url: `/read-blog/${blog._id}`,
       changefreq: "weekly",
       priority: 0.9,
-      lastmod: new Date(blog.updatedAt),
+      lastmod: safeDate(blog.updatedAt),
     }));
 
     // ✅ Combine all routes
