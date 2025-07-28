@@ -89,8 +89,10 @@ const SupportWidget = () => {
       <div className="support-widget">
         <div className={`support-box ${open ? "open" : ""}`}>
           {/* Draggable only around the button */}
-          <Draggable bounds="parent">
-            <div>
+          <Draggable bounds="body">
+            <div style={{ touchAction: "none" }}>
+              {" "}
+              {/* 👈 required for mobile */}
               <button
                 className="support-toggle glow-ring"
                 onClick={() => setOpen(!open)}
