@@ -112,8 +112,8 @@ const ViewYouTubeSeries = () => {
                     <iframe
                       src={
                         v.url
-                          .replace("youtube.com", "youtube-nocookie.com")
-                          .replace(/\?si=.*$/, "") // ⛔️ removes the ?si=... if present
+                          .replace("youtube.com", "www.youtube-nocookie.com")
+                          .replace(/\?si=.*$/, "") // remove any ?si= params
                       }
                       title={v.title}
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
