@@ -27,6 +27,8 @@
   cursor: pointer;
   position: relative;
   animation: pulse 1.8s infinite !important;
+  z-index: 999999 !important;
+  pointer-events: auto !important;
 }
 
 .support-widget .support-toggle .icon {

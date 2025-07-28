@@ -55,7 +55,8 @@ const SupportWidget = () => {
           <div className={`support-box ${open ? "open" : ""}`}>
             <button
               className="support-toggle support-toggle glow-ring"
-              onClick={() => setOpen(!open)}
+              onTouchEnd={() => setOpen(!open)}
+              onClick={() => setOpen(!open)} // keep both for fallback
             >
               <FaHeadset className="icon" />
               <span className="blink-text">We're here</span>
