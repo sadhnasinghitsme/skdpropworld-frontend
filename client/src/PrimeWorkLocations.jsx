@@ -34,10 +34,6 @@ const PrimeWorkLocations = () => {
         />
         <meta name="author" content="SKD Propworld" />
         <meta name="robots" content="index, follow" />
-        <link
-          rel="canonical"
-          href="https://www.skdpropworld.com/prime-locations"
-        />
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />

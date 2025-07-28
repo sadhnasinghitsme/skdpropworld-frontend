@@ -34,7 +34,7 @@ const Collaborators = () => {
           name="keywords"
           content="real estate collaborators, top builders in Noida, trusted developers, YEIDA partners, Greater Noida builders, Delhi NCR real estate"
         />
-        <link rel="canonical" href="https://www.yoursite.com/collaborators" />
+        {/* <link rel="canonical" href="https://www.yoursite.com/collaborators" /> */}
 
         {/* Open Graph Tags */}
         <meta
@@ -81,7 +81,6 @@ const Collaborators = () => {
                   alt={`Partner ${idx + 1}`}
                   className="logo-img"
                   loading="lazy"
-                 
                 />
               </div>
             ))}

@@ -54,7 +54,7 @@ const OfficeBearers = () => {
           name="author"
           content="SKD Propworld - YEIDA Real Estate Experts"
         />
-        <link rel="canonical" href="https://skdpropworld.com/team" />
+        {/* <link rel="canonical" href="https://skdpropworld.com/team" /> */}
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />

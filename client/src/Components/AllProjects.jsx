@@ -269,7 +269,7 @@ const AllProjects = () => {
           name="description"
           content="Browse top residential and commercial projects in NCR."
         />
-        <link rel="canonical" href="https://skdpropworld.com/projects" />
+        {/* <link rel="canonical" href="https://skdpropworld.com/projects" /> */}
       </Helmet>
 
       <div className="all-projects-wrapper ">
