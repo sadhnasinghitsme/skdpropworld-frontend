@@ -50,7 +50,7 @@ const SupportWidget = () => {
         />
       </Helmet>
       {/* ✅ Wrap this in Draggable */}
-      <Draggable>
+      {/* <Draggable>
         <div className="support-widget ">
           <div className={`support-box ${open ? "open" : ""}`}>
             <button
@@ -85,7 +85,44 @@ const SupportWidget = () => {
             )}
           </div>
         </div>
-      </Draggable>
+      </Draggable> */}
+      <div className="support-widget">
+        <div className={`support-box ${open ? "open" : ""}`}>
+          {/* Draggable only around the button */}
+          <Draggable bounds="parent">
+            <div>
+              <button
+                className="support-toggle glow-ring"
+                onClick={() => setOpen(!open)}
+                onTouchEnd={() => setOpen(!open)}
+              >
+                <FaHeadset className="icon" />
+                <span className="blink-text">We're here</span>
+              </button>
+            </div>
+          </Draggable>
+
+          {/* This remains untouched and fully clickable */}
+          {open && (
+            <div className="support-options">
+              <a href="tel:+919091010909" className="support-option">
+                <FaPhone /> +91 9091010909
+              </a>
+              <a
+                href="https://wa.me/919091010909"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="support-option"
+              >
+                <FaWhatsapp /> WhatsApp Chat
+              </a>
+              <a href="mailto:info@skdpropworld.com" className="support-option">
+                <FaEnvelope /> info@skdpropworld.com
+              </a>
+            </div>
+          )}
+        </div>
+      </div>
     </>
   );
 };
