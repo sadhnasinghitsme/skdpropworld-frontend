@@ -105,17 +105,24 @@ const Footer = () => {
           <div className="row text-md-start text-center">
             {/* Brand */}
             <div className="col-md-4 mb-4">
-              <h4 className="text-warning fw-bold">SKD PROPWORLD</h4>
+              <h4 className="text-warning fw-bold">
+                SKD PROPWORLD PRIVATE LIMITED
+              </h4>
               <p className="text-light">
-                SKD Propworld Pvt. Ltd. is a leading real estate company in
-                India, offering residential and commercial properties across key
-                cities. We help clients buy, sell, and invest in premium flats,
-                luxury villas, office spaces, and plots.
+                SKD PropWorld Pvt. Ltd. is a trusted real estate company in
+                India, specializing in residential, commercial, and industrial
+                properties across Noida, Greater Noida, YEIDA, Delhi, and
+                Ghaziabad. We offer expert guidance for buying, selling, and
+                investing in premium apartments, luxury villas, commercial
+                office spaces, and residential plots.
               </p>
               <p className="text-light">
-                With years of experience and global reach, we are your trusted
-                partner for property solutions in Noida, Delhi, Greater Noida,
-                Ghaziabad and international places.
+                With over a decade of experience and a growing international
+                presence, SKD PropWorld is your reliable property consultant for
+                real estate solutions in key Indian cities and abroad. We are
+                committed to delivering transparency, trust, and tailored real
+                estate services to meet every client’s unique needs serving
+                since 2011.
               </p>
             </div>
 
