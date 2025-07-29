@@ -24,7 +24,7 @@ function NewsScroller() {
   }, []);
 
   return (
-    <div className="container my-4 news-scroller-wrapper border rounded shadow">
+    <div className="container my-4 news-scroller-wrapper bg-light bg-white border rounded shadow">
       <h5 className="p-1 bg-dark text-white mb-0 mt-0">
         🗞️ Latest Real Estate News
       </h5>
