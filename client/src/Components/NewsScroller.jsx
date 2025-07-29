@@ -36,7 +36,7 @@ function NewsScroller() {
 
   return (
     <div className="bg-white bg-light p-3">
-      <div className="container my-4 news-scroller-wrapper bg-light w-100 bg-white border rounded shadow">
+      <div className="container my-4 news-scroller-wrapper bg-light w-100 bg-white border rounded ">
         <h5 className="p-1 bg-dark text-white mb-0 mt-0">
           🗞️ Latest Real Estate News
         </h5>
@@ -89,7 +89,7 @@ function NewsScroller() {
                 )
               )}
 
-              <div style={{ height: "200px" }}></div>
+              <div style={{ height: "50px" }}></div>
             </div>
           )}
         </div>
