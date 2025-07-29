@@ -5,6 +5,21 @@
   position: relative;
   background-color: rgb(236, 236, 235);
 }
+.news-break {
+  height: 80px;
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
 .news-scroller {
   height: 100%;
