@@ -7,7 +7,7 @@
 }
 .news-scroller-wrapper:hover {
   background-color: rgb(105, 105, 104);
-  color: white;
+  /* color: white; */
 }
 .news-break {
   height: 80px;
