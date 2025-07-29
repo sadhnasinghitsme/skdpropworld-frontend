@@ -3,6 +3,7 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "./WorldMap.css";
+//  <link rel="preconnect" href="https://skd-backend.onrender.com" crossorigin />
 
 // Fix marker icon
 import iconUrl from "leaflet/dist/images/marker-icon.png";
