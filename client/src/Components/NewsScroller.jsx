@@ -49,7 +49,7 @@ function NewsScroller() {
               ref={scrollRef}
               style={{ animationDuration: duration }}
             >
-              {[...newsList, ...newsList, { isBreak: true }].map((news, idx) =>
+              {[...newsList, { isBreak: true }].map((news, idx) =>
                 news.isBreak ? (
                   <div
                     key={`break-${idx}`}
@@ -88,6 +88,7 @@ function NewsScroller() {
                   </div>
                 )
               )}
+
               <div style={{ height: "200px" }}></div>
             </div>
           )}
