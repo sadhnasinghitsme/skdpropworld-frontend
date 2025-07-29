@@ -556,7 +556,7 @@ const Homepage = () => {
       <Collaborators />
 
       <GlobalPresence />
-      <NewsScroller />
+      
       <PrimeWorkLocations />
 
       <Testimonials />

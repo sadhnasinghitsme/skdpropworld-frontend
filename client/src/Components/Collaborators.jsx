@@ -1,6 +1,7 @@
 import React from "react";
 import "./Collaborators.css";
 import { Helmet } from "react-helmet-async";
+import NewsScroller from "./NewsScroller";
 
 const collaboratorLogos = [
   "/Collaborators/ACE.png",
@@ -87,6 +88,7 @@ const Collaborators = () => {
           </div>
         </div>
       </div>
+      <NewsScroller />
     </>
   );
 };
