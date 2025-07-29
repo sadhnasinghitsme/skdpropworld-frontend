@@ -29,7 +29,7 @@
 }
 
 .scrolling-content {
-  animation: scrollNews 35s linear infinite;
+  animation: scrollNews 40s linear infinite;
 }
 
 .news-scroller:hover .scrolling-content {
@@ -38,7 +38,7 @@
 
 @keyframes scrollNews {
   0% {
-    transform: translateY(100%);
+    transform: translateY(0%);
   }
   100% {
     transform: translateY(-100%);
