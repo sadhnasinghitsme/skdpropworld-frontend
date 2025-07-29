@@ -29,7 +29,9 @@
 }
 
 .scrolling-content {
-  animation: scrollNews 60s linear infinite;
+  animation-timing-function: linear;
+  animation-name: scrollNews;
+  animation-iteration-count: infinite;
 }
 
 .news-scroller:hover .scrolling-content {
