@@ -97,11 +97,13 @@ const ViewYouTubeSeries = () => {
               <div className="video-strip">
                 {videos.map((v) => (
                   <div key={v._id} className="video-card">
-                    {/* <iframe
+                    <iframe
                       src={v.url}
                       title={v.title}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      loading="lazy"
                       allowFullScreen
-                    ></iframe> */}
+                    ></iframe>
                     {/* <iframe
                       src={v.url.replace("youtube.com", "youtube-nocookie.com")}
                       title={v.title}
@@ -109,7 +111,7 @@ const ViewYouTubeSeries = () => {
                       allowFullScreen
                       loading="lazy"
                     /> */}
-                    <iframe
+                    {/* <iframe
                       src={
                         v.url
                           .replace("youtube.com", "www.youtube-nocookie.com")
@@ -119,7 +121,7 @@ const ViewYouTubeSeries = () => {
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                       allowFullScreen
                       loading="lazy"
-                    />
+                    /> */}
 
                     <h4>{v.title}</h4>
                     <p>{v.description}</p>
