@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
+Allow: /favicon.ico
 Sitemap: https://www.skdpropworld.com/sitemap.xml
-
