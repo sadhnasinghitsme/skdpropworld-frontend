@@ -57,7 +57,7 @@ app.use("/api/snippet", htmlSnippetRoutes);
 //   });
 // }
 app.use("/", sitemap); // <-- mount it
-// app.use("/api", require("./routes/htmlSnippet"));
+app.use("/api", require("./routes/htmlSnippet"));
 
 console.log("→ Mounting /api/admin");
 app.use("/api/admin", require("./routes/adminRoutes"));
