@@ -2,6 +2,18 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="https://www.skdpropworld.com/favicon.ico"
+    />
+    <!-- Favicons and PWA Support -->
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="SKDPropWorld" />
+    <link rel="manifest" href="/site.webmanifest" />
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
     <link
@@ -41,7 +53,7 @@
     />
 
     <meta name="robots" content="index, follow" />
-    <!-- <meta name="theme-color" content="#002B5B" /> -->
+    <meta name="theme-color" content="#3a3a3b" />
     <meta property="og:locale" content="en_IN" />
     <meta name="twitter:card" content="summary_large_image" />
 
@@ -50,39 +62,20 @@
       content="Best real estate consultants for residential, commercial, and industrial flat, apartments, plots, villa, house, and industrial as well as commercial properties in YEIDA, Noida, Delhi, Greater Noida & Ghaziabad. Trusted property dealers and agents for buying or selling plots, flats, and commercial spaces."
     />
 
-    <!-- Favicons and PWA Support -->
-    <!-- <link
-      rel="icon"
-      type="image/png"
-      href="%PUBLIC_URL%/favicon-96x96.png"
-      sizes="96x96"
-    />
-    <link rel="icon" type="image/svg+xml" href="%PUBLIC_URL%/favicon.svg" />
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="%PUBLIC_URL%/apple-touch-icon.png"
-    />
-    <meta name="apple-mobile-web-app-title" content="SKDPropWorld" />
-    <link rel="manifest" href="%PUBLIC_URL%/site.webmanifest" /> -->
-
-    <!-- Favicons and PWA Support -->
-    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="shortcut icon" href="/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <meta name="apple-mobile-web-app-title" content="SKDPropWorld" />
-    <link rel="manifest" href="/site.webmanifest" />
-
-    <!-- Favicon -->
-    <!-- <link rel="icon" type="image/x-icon" href="/TitleLogo.ico" /> -->
-
     <!-- Open Graph Meta (for Facebook, LinkedIn, WhatsApp) -->
     <meta
       property="og:title"
       content="SKD PropWorld Pvt. Ltd. | Buy, Sell & Invest in Properties across Noida, YEIDA, Greater Noida, Ghaziabad & Delhi NCR"
     />
+    <meta property="og:site_name" content="SKD PropWorld Pvt. Ltd." />
+    <meta name="twitter:site" content="@skd_propworld" />
+    <link
+      rel="alternate"
+      hreflang="en-IN"
+      href="https://www.skdpropworld.com/"
+    />
+    <meta name="author" content="SKD PropWorld Pvt. Ltd." />
+
     <meta
       property="og:description"
       content="Buy or sell properties in Noida, Delhi, YEIDA, Greater Noida & Ghaziabad with SKD PropWorld – Experts in residential, commercial, and industrial real estate."
@@ -110,10 +103,20 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "SKD PropWorld",
+        "@type": "RealEstateAgent",
+        "name": "SKD PropWorld Pvt. Ltd.",
+        "image": "https://www.skdpropworld.com/og-image.png",
         "url": "https://www.skdpropworld.com",
-        "logo": "https://www.skdpropworld.com/TitleLogo.ico",
+        "logo": "https://www.skdpropworld.com/favicon.ico",
+        "telephone": "+919091010909",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "7th & 8th Floor, Kaisons Alpha Square, Alpha 1 Commercial Belt, Greater Noida, Uttar Pradesh, 201308, India",
+          "addressLocality": "Greater Noida",
+          "addressRegion": "UP",
+          "postalCode": "201310",
+          "addressCountry": "IN"
+        },
         "sameAs": [
           "https://www.facebook.com/skdprp/",
           "https://www.instagram.com/official.skdpropworld/",
@@ -155,9 +158,14 @@
 
   <body>
     <div id="root"></div>
-    <!-- <script type="module" src="/src/main.jsx"></script> -->
-    <script type="module" src="/src/main.jsx"></script>
+    <noscript>
+      <div style="text-align: center; padding: 20px; color: #555">
+        This site requires JavaScript to function properly. Please enable it in
+        your browser.
+      </div>
+    </noscript>
 
+    <script type="module" src="/src/main.jsx"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
