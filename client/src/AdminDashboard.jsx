@@ -46,11 +46,41 @@ function AdminDashboard() {
   const [htmlSnippet, setHtmlSnippet] = useState("");
   const confettiRef = useRef(null);
   const [existingSnippets, setExistingSnippets] = useState([]);
+  const [showNewsModal, setShowNewsModal] = useState(false);
+  const [newsTitle, setNewsTitle] = useState("");
+  const [newsHTML, setNewsHTML] = useState("");
+  const [newsTags, setNewsTags] = useState("");
+  const [newsRibbon, setNewsRibbon] = useState("");
+
+  // ✅ Step 3: News Submit Handler
+  const handleSubmitNews = async () => {
+    try {
+      const payload = {
+        title: newsTitle,
+        htmlContent: newsHTML,
+        tags: newsTags.split(",").map((tag) => tag.trim()),
+        ribbon: newsRibbon,
+      };
+
+      await axios.post(
+        `${import.meta.env.VITE_API_BASE_URL}/api/admin/news/add`,
+        payload
+      );
+
+      setShowNewsModal(false);
+      setNewsTitle("");
+      setNewsHTML("");
+      setNewsTags("");
+      setNewsRibbon("");
+    } catch (err) {
+      console.error("Error adding news:", err);
+    }
+  };
 
   const fetchSnippets = async () => {
     try {
       const res = await axios.get(
-        `${import.meta.env.VITE_API_BASE_URL}/api/snippet/all`
+        `${import.meta.env.VITE_API_BASE_URL}/api/snippet/all-snippets`
       );
       setExistingSnippets(res.data || []);
     } catch (err) {
@@ -78,8 +108,9 @@ function AdminDashboard() {
   const handleDeleteSnippet = async (id) => {
     try {
       await axios.delete(
-        `${import.meta.env.VITE_API_BASE_URL}/api/snippet/${id}`
+        `${import.meta.env.VITE_API_BASE_URL}/api/snippet/delete-snippet/${id}`
       );
+
       fetchSnippets(); // Refresh
     } catch (err) {
       console.error("Error deleting snippet:", err);
@@ -89,12 +120,13 @@ function AdminDashboard() {
   const handleSaveHtmlSnippet = async () => {
     try {
       if (editingSnippetId) {
-        await axios.put(
+        await axios.patch(
           `${
             import.meta.env.VITE_API_BASE_URL
-          }/api/snippet/${editingSnippetId}`,
-          { htmlCode: htmlSnippet }
+          }/api/snippet/update-snippet/${editingSnippetId}`,
+          { htmlCode: htmlSnippet } // ✅ CORRECT
         );
+
         console.log("Snippet updated");
       } else {
         await axios.post(
@@ -405,6 +437,14 @@ function AdminDashboard() {
                 </button>
               </div>
             </div>
+            <div className="my-4">
+              <button
+                className="btn btn-lg btn-warning fw-bold w-100 shadow"
+                onClick={() => setShowNewsModal(true)}
+              >
+                🗞️ Add Breaking Real Estate News
+              </button>
+            </div>
             <div
               className="my-4 position-relative festival-button-wrapper"
               ref={confettiRef}
@@ -478,7 +518,6 @@ function AdminDashboard() {
           </Button>
         </Modal.Footer>
       </Modal>
-
       <Modal
         show={showFestivalModal}
         onHide={() => setShowFestivalModal(false)}
@@ -521,9 +560,11 @@ function AdminDashboard() {
           </Button>
         </Modal.Footer>
       </Modal>
-
       {existingSnippets.map((snippet, idx) => (
-        <div key={idx} className="mb-3 position-relative border rounded p-2">
+        <div
+          key={idx}
+          className="mb-3 position-relative border rounded p-2 text-white"
+        >
           <div dangerouslySetInnerHTML={{ __html: snippet.htmlCode }}></div>
 
           <div className="position-absolute top-0 end-0 m-2 d-flex gap-2">
@@ -549,6 +590,78 @@ function AdminDashboard() {
           </div>
         </div>
       ))}
+
+      <Modal
+        show={showNewsModal}
+        onHide={() => setShowNewsModal(false)}
+        size="lg"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>🗞️ Add Real Estate News</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="mb-3">
+            <label className="form-label fw-semibold">Title</label>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="e.g. YEIDA announces new plot scheme"
+              value={newsTitle}
+              onChange={(e) => setNewsTitle(e.target.value)}
+            />
+          </div>
+
+          <div className="mb-3">
+            <label className="form-label fw-semibold">
+              Formatted HTML Content
+            </label>
+            <textarea
+              className="form-control"
+              rows={6}
+              placeholder="<p>YEIDA has launched...</p>"
+              value={newsHTML}
+              onChange={(e) => setNewsHTML(e.target.value)}
+            ></textarea>
+          </div>
+
+          <div className="mb-3">
+            <label className="form-label fw-semibold">
+              Tags (comma separated)
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="yeida, plot scheme, 2025"
+              value={newsTags}
+              onChange={(e) => setNewsTags(e.target.value)}
+            />
+          </div>
+
+          <div className="mb-3">
+            <label className="form-label fw-semibold">Custom Ribbon Text</label>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Breaking | Just In | Must Read"
+              value={newsRibbon}
+              onChange={(e) => setNewsRibbon(e.target.value)}
+            />
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowNewsModal(false)}>
+            Cancel
+          </Button>
+          <Button
+            variant="primary"
+            onClick={handleSubmitNews}
+            disabled={!newsTitle.trim() || !newsHTML.trim()}
+          >
+            Save News
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 }

@@ -7,12 +7,14 @@ const { SitemapStream, streamToPromise } = require("sitemap");
 const { createGzip } = require("zlib");
 const sitemap = require("./routes/sitemap");
 const htmlSnippetRoutes = require("./routes/htmlSnippet");
+const newsRoutes = require("./routes/newsRoutes.js");
 const app = express();
 const PORT = process.env.PORT || 8080;
+// const PORT = process.env.PORT || 5000;
 // app.use(cors());
 // app.use(
 //   cors({
-//     origin: ["http://localhost:5173", "http://skd-production.up.railway.app"],
+//     origin: ["http://localhost:5000", "http://skd-production.up.railway.app"],
 //     credentials: true,
 //   })
 // );
@@ -55,7 +57,7 @@ app.use("/api/snippet", htmlSnippetRoutes);
 //   });
 // }
 app.use("/", sitemap); // <-- mount it
-app.use("/api", require("./routes/htmlSnippet"));
+// app.use("/api", require("./routes/htmlSnippet"));
 
 console.log("→ Mounting /api/admin");
 app.use("/api/admin", require("./routes/adminRoutes"));
@@ -68,6 +70,9 @@ app.use("/api", require("./routes/visitorRoutes"));
 
 console.log("→ Mounting /api/admin/projects");
 app.use("/api/admin/projects", require("./routes/projectRoutes"));
+
+console.log("→ Mounting /api/admin/news");
+app.use("/api/admin/news", newsRoutes); // ✅ CORRECT
 
 console.log("→ Mounting /api/project-enquiry");
 app.use("/api/project-enquiry", require("./routes/projectEnquiryRoutes"));

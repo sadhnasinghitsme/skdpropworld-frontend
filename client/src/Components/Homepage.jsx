@@ -28,6 +28,7 @@ import axios from "axios";
 
 import "./Homepage.css";
 import Stats from "./Stats";
+import NewsScroller from "./NewsScroller";
 
 const Homepage = () => {
   const counterRef = useRef(null);
@@ -553,10 +554,15 @@ const Homepage = () => {
       <ViewYouTubeSeries />
       <OfficeBearers />
       <Collaborators />
+
       <GlobalPresence />
+      <NewsScroller />
       <PrimeWorkLocations />
+
       <Testimonials />
+
       <Stats />
+
       <LeadForm />
 
       <Footer />
