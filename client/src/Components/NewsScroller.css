@@ -36,7 +36,7 @@
   animation-timing-function: linear;
   animation-name: scrollNews;
   animation-iteration-count: infinite;
-  animation: scrollNews ease-in-out;
+  /* animation: scrollNews ease-in-out; */
 }
 
 .news-scroller:hover .scrolling-content {
