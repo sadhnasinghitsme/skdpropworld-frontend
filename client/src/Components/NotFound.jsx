@@ -46,19 +46,20 @@ const NotFound = () => {
         </div>
         <div>
           <h1>
-            <b>404</b>
+            <b>ERROR 404</b>
           </h1>
+          <h2>If it takes too long, kindly check the URL</h2>
           आप जिस पेज़ को देखना चाहते है वो उपलब्ध नहीं है, होम पेज पर वापस जाइए!
           <br />
           The page you requested to view is not available, go back to the SKD
-          PropWorld home page! <br />
+          PropWorld home page! <br /> <br />
           <Link to="/">
-            <button className="btn btn-success">Go Home </button>
+            <button className="btn btn-info">Go Home </button>
           </Link>
         </div>
         {/* Oops! It seems like something went wrong — we're on it. <br />
         <div>
-          If it takes too long, kindly check the URL or &nbsp;
+           or &nbsp;
           <Link to="/">Go Home</Link>
         </div> */}
         <br /> <br />
