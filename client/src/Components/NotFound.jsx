@@ -66,7 +66,9 @@ const NotFound = () => {
         <div>
           {/* <i className="fa fa-copyright" aria-hidden="true"></i>
         &nbsp;SKD PropWorld */}
-          <p className="small text-muted mb-0">&copy; SKD PropWorld</p>
+          <p className="small text-muted mb-0">
+            &copy; SKD PropWorld Private Limited
+          </p>
         </div>
       </div>
     </>
