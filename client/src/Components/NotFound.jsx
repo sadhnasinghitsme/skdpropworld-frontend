@@ -51,9 +51,7 @@ const NotFound = () => {
           <h4>If it takes too long, kindly check the URL</h4> <br />
           <p>
             आप जिस पेज़ को देखना चाहते है वो उपलब्ध नहीं है, होम पेज पर वापस
-            जाइए!
-          </p>
-          <p>
+            जाइए! <br />
             Requested page is not available, go back to the SKD PropWorld's home
             page!
           </p>
