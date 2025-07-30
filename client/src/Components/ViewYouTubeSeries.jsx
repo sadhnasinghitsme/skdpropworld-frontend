@@ -100,7 +100,7 @@ const ViewYouTubeSeries = () => {
                     <iframe
                       src={v.url}
                       title={v.title}
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; "
                       loading="lazy"
                       allowFullScreen
                     ></iframe>
