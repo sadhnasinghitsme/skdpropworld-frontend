@@ -38,7 +38,6 @@
   animation-iteration-count: infinite;
   /* animation: scrollNews ease-in-out; */
 }
-
 .news-scroller:hover .scrolling-content {
   animation-play-state: paused;
 }
