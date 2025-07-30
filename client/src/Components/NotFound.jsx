@@ -44,11 +44,22 @@ const NotFound = () => {
         <div className="spinner-container">
           <div className="custom-spinner"></div>
         </div>
-        Oops! It seems like something went wrong — we're on it. <br />
+        <h1>
+          <b>404</b>
+        </h1>
+        <div>
+          आप जिस पेज़ को देखना चाहते है वो उपलब्ध नहीं है, होम पेज पर वापस जाइए!
+          The page you want to view is not available, go back to the home page!
+        </div>
+        <Link to="/">
+          {" "}
+          <button className="btn-primary">Go Home </button>
+        </Link>
+        {/* Oops! It seems like something went wrong — we're on it. <br />
         <div>
           If it takes too long, kindly check the URL or &nbsp;
           <Link to="/">Go Home</Link>
-        </div>
+        </div> */}
         <br /> <br />
         <div>
           {/* <i className="fa fa-copyright" aria-hidden="true"></i>
