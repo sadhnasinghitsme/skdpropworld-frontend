@@ -48,7 +48,7 @@ const NotFound = () => {
           <h1>
             <b>ERROR 404</b>
           </h1>
-          <h2>If it takes too long, kindly check the URL</h2>
+          <h3>If it takes too long, kindly check the URL</h3> <br />
           आप जिस पेज़ को देखना चाहते है वो उपलब्ध नहीं है, होम पेज पर वापस जाइए!
           <br />
           The page you requested to view is not available, go back to the SKD
