@@ -197,8 +197,29 @@ const Homepage = () => {
         />
         <meta
           name="keywords"
-          content="property dealer in Noida, YEIDA, Yamuna Expressway Industrial Development Area,YEIDA Authority, real estate Delhi NCR, flats for sale Noida, Ghaziabad plots, Greater Noida commercial space, property agent Delhi, real estate broker NCR, land for sale Noida Extension, apartment near metro, 2BHK flat Noida, 3BHK apartment Ghaziabad, investment property Noida, buy rent sell Noida, property consultant Delhi NCR"
+          content="property dealer in Noida, YEIDA, Yamuna Expressway Industrial Development Area, Real Estate Agents, Real Estate Consultant, Real Estate, RealEstateAgent, Real Estate Agent Near me, real estate agent in noida, YEIDA Authority, real estate Delhi NCR, flats for sale Noida, Ghaziabad plots, Greater Noida commercial space, property agent Delhi, real estate broker NCR, land for sale Noida Extension, apartment near metro, 2BHK flat Noida, 3BHK apartment Ghaziabad, investment property Noida, buy rent sell Noida, property consultant Delhi NCR"
         />
+        <link
+          rel="icon"
+          type="image/x-icon"
+          href="https://www.skdpropworld.com/favicon.ico"
+        />
+        <meta name="msapplication-TileImage" content="/favicon.ico" />
+        <link
+          rel="icon"
+          type="image/png"
+          href="/favicon-96x96.png"
+          sizes="96x96"
+        />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
+        />
+        <meta name="apple-mobile-web-app-title" content="SKDPropWorld" />
+        <link rel="manifest" href="/site.webmanifest" />
         <meta name="robots" content="index, follow" />
         <meta httpEquiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="language" content="English" />
@@ -222,10 +243,7 @@ const Homepage = () => {
           content="Search residential, commercial and rental properties in YEIDA, Yamuna Expressway, Noida, Delhi, Ghaziabad. Verified listings. Expert consultants."
         />
         "image": "https://via.placeholder.com/1200x630.png?text=SKD+PropWorld"
-        <meta
-          property="og:image"
-          content="https://via.placeholder.com/1200x630.png?text=SKD+PropWorld"
-        />
+        <meta property="og:image" content="/favicon.ico" />
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="https://x.com/skd_propworld" />
@@ -268,8 +286,8 @@ const Homepage = () => {
             "@type": "RealEstateAgent",
             name: "SKD PropWorld Private Limited",
             url: "https://skdpropworld.com/",
-            logo: "https://skdpropworld.com/Skd%20Propworld%20Logo4.png",
-            // image: "https://skdpropworld.com/og-image.jpg",
+            logo: "https://www.skdpropworld.com/favicon.ico",
+            image: "https://www.skdpropworld.com/og-image.png",
             description:
               "We help you buy, sell, and rent property in YEIDA (Yamuna Expressway Industrial Development Area), Delhi NCR, Noida, Ghaziabad, and Greater Noida.",
             address: {
@@ -298,7 +316,7 @@ const Homepage = () => {
           })}
         </script>
         {/* Favicon */}
-        <link rel="icon" href="/TitleLogo.ico" />
+        {/* <link rel="icon" href="/TitleLogo.ico" /> */}
       </Helmet>
       {/* **************************************** */}
       {/* the text above is for SEO */}
@@ -556,7 +574,7 @@ const Homepage = () => {
       <Collaborators />
 
       <GlobalPresence />
-      
+
       <PrimeWorkLocations />
 
       <Testimonials />

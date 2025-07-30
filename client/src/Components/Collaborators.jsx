@@ -35,7 +35,7 @@ const Collaborators = () => {
           name="keywords"
           content="real estate collaborators, top builders in Noida, trusted developers, YEIDA partners, Greater Noida builders, Delhi NCR real estate"
         />
-        {/* <link rel="canonical" href="https://www.yoursite.com/collaborators" /> */}
+        {/* <link rel="canonical" href="https://www.skdpropworld.com/collaborators" /> */}
 
         {/* Open Graph Tags */}
         <meta
@@ -49,11 +49,11 @@ const Collaborators = () => {
         <meta property="og:type" content="website" />
         <meta
           property="og:url"
-          content="https://www.yoursite.com/collaborators"
+          content="https://www.skdpropworld.com/collaborators"
         />
         <meta
           property="og:image"
-          content="https://www.yoursite.com/placeholder.png"
+          content="https://www.skdpropworld.com/placeholder.png"
         />
 
         {/* Twitter Card */}
@@ -68,7 +68,7 @@ const Collaborators = () => {
         />
         <meta
           name="twitter:image"
-          content="https://www.yoursite.com/placeholder.png"
+          content="https://www.skdpropworld.com/placeholder.png"
         />
       </Helmet>
       <div className="collaborators-section">
