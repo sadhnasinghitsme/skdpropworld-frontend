@@ -36,6 +36,7 @@
   animation-timing-function: linear;
   animation-name: scrollNews;
   animation-iteration-count: infinite;
+  animation: scrollNews ease-in-out;
 }
 
 .news-scroller:hover .scrolling-content {
@@ -44,7 +45,7 @@
 
 @keyframes scrollNews {
   0% {
-    transform: translateY(0%);
+    transform: translateY(20%);
   }
   100% {
     transform: translateY(-100%);
