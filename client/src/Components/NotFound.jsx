@@ -8,13 +8,13 @@ const NotFound = () => {
   return (
     <>
       <Helmet>
-        <title>404 Not Found | SKD Propworld</title>
+        <title>404 Error | SKD PropWorld Private Limited</title>
         <meta
           name="description"
           content="The page you're looking for isn't available. SKD Propworld helps you explore top real estate projects in Noida, Greater Noida, YEIDA, and NCR."
         />
         <meta name="robots" content="noindex, follow" />
-        <link rel="canonical" href="https://skdpropworld.com/404" />
+        {/* <link rel="canonical" href="https://skdpropworld.com/404" /> */}
 
         {/* Open Graph */}
         <meta property="og:type" content="website" />
@@ -46,31 +46,25 @@ const NotFound = () => {
         </div>
         <div>
           <h1>
-            <b>ERROR 404</b>
+            <b>404</b>
           </h1>
           <h4>If it takes too long, kindly check the URL</h4> <br />
           <p>
             आप जिस पेज़ को देखना चाहते है वो उपलब्ध नहीं है, होम पेज पर वापस
-            जाइए!{" "}
+            जाइए!
           </p>
           <p>
-            The page you requested to view is not available, go back to the SKD
-            PropWorld home page!
+            Requested page is not available, go back to the SKD PropWorld's home
+            page!
           </p>
-          <br /> <br />
+          <br />
           <Link to="/">
             <button className="btn btn-info">Go Home </button>
           </Link>
         </div>
-        {/* Oops! It seems like something went wrong — we're on it. <br />
-        <div>
-           or &nbsp;
-          <Link to="/">Go Home</Link>
-        </div> */}
+        {/* Oops! It seems like something went wrong — we're on it. <br /> */}
         <br /> <br />
         <div>
-          {/* <i className="fa fa-copyright" aria-hidden="true"></i>
-        &nbsp;SKD PropWorld */}
           <p className="small text-muted mb-0">
             &copy; SKD PropWorld Private Limited
           </p>
