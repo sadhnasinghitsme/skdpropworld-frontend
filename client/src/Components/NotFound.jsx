@@ -44,17 +44,18 @@ const NotFound = () => {
         <div className="spinner-container">
           <div className="custom-spinner"></div>
         </div>
-        <h1>
-          <b>404</b>
-        </h1>
         <div>
+          <h1>
+            <b>404</b>
+          </h1>
           आप जिस पेज़ को देखना चाहते है वो उपलब्ध नहीं है, होम पेज पर वापस जाइए!
-          The page you want to view is not available, go back to the home page!
+          <br />
+          The page you requested to view is not available, go back to the SKD
+          PropWorld home page!
+          <Link to="/">
+            <button className="btn">Go Home </button>
+          </Link>
         </div>
-        <Link to="/">
-          {" "}
-          <button className="btn-primary">Go Home </button>
-        </Link>
         {/* Oops! It seems like something went wrong — we're on it. <br />
         <div>
           If it takes too long, kindly check the URL or &nbsp;
