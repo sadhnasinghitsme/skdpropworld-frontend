@@ -30,7 +30,7 @@ function NewsScroller() {
     if (!container) return;
 
     let animationFrameId;
-    const speed = 1.2;
+    const speed = 0.6;
 
     const scrollStep = () => {
       const maxScroll = container.scrollHeight - container.clientHeight;
