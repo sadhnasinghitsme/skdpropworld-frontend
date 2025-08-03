@@ -118,9 +118,7 @@ function NewsScroller() {
         </div>
 
         <div
-          className={`news-scroller p-3 ${
-            isDark ? "dark-scroll" : "light-scroll"
-          }`}
+          className={`news-scroller p-3 ${isDark ? "dark-mode" : "light-mode"}`}
           ref={scrollRef}
         >
           {newsList.length === 0 ? (
