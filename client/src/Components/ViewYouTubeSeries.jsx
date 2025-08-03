@@ -105,13 +105,6 @@ const ViewYouTubeSeries = () => {
                       allowFullScreen
                     ></iframe>
                     {/* <iframe
-                      src={v.url.replace("youtube.com", "youtube-nocookie.com")}
-                      title={v.title}
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      loading="lazy"
-                    /> */}
-                    {/* <iframe
                       src={
                         v.url
                           .replace("youtube.com", "www.youtube-nocookie.com")
