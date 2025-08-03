@@ -6,7 +6,6 @@ function NewsScroller() {
   const [newsList, setNewsList] = useState([]);
   const [isDark, setIsDark] = useState(false);
   const scrollRef = useRef(null);
-  const contentRef = useRef(null); // for height of 1st copy
 
   useEffect(() => {
     const fetchNews = async () => {
@@ -28,25 +27,29 @@ function NewsScroller() {
 
   useEffect(() => {
     const container = scrollRef.current;
-    const content = contentRef.current;
-    if (!container || !content) return;
+    if (!container) return;
 
-    let scrollInterval = null;
-    const speed = 1;
-    const delay = 16;
+    let animationFrameId;
+    const speed = 0.5;
+
+    const scrollStep = () => {
+      if (
+        container.scrollTop + container.clientHeight >=
+        container.scrollHeight
+      ) {
+        container.scrollTop = 0; // reset to top
+      } else {
+        container.scrollTop += speed;
+      }
+      animationFrameId = requestAnimationFrame(scrollStep);
+    };
 
     const startScroll = () => {
-      if (scrollInterval) return;
-      scrollInterval = setInterval(() => {
-        container.scrollTop =
-          (container.scrollTop + speed) % content.scrollHeight;
-      }, delay);
+      cancelAnimationFrame(animationFrameId);
+      animationFrameId = requestAnimationFrame(scrollStep);
     };
 
-    const stopScroll = () => {
-      clearInterval(scrollInterval);
-      scrollInterval = null;
-    };
+    const stopScroll = () => cancelAnimationFrame(animationFrameId);
 
     startScroll();
     container.addEventListener("mouseenter", stopScroll);
@@ -116,10 +119,7 @@ function NewsScroller() {
           {newsList.length === 0 ? (
             <p className="text-muted">No news found.</p>
           ) : (
-            <div>
-              <div ref={contentRef}>{renderNews()}</div>
-              <div>{renderNews()}</div>
-            </div>
+            renderNews()
           )}
         </div>
       </div>
