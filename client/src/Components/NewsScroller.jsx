@@ -29,7 +29,7 @@ function NewsScroller() {
     if (!el) return;
 
     let scrollInterval = null;
-    const speed = 1; // pixels per step
+    const speed = 2; // pixels per step
     const delay = 16; // ~60fps
 
     const startScroll = () => {
