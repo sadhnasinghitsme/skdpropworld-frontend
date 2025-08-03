@@ -20,13 +20,27 @@
   scrollbar-width: thin;
 }
 
+/* Base scrollbar */
 .news-scroller::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 
-.news-scroller::-webkit-scrollbar-thumb {
-  background-color: #aaa;
-  border-radius: 4px;
+.news-scroller::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Thumb styling for light theme */
+.light-scroll::-webkit-scrollbar-thumb {
+  background-color: #c1c1c1;
+  border-radius: 6px;
+  border: 2px solid #ffffff;
+}
+
+/* Thumb styling for dark theme */
+.dark-scroll::-webkit-scrollbar-thumb {
+  background-color: #555555;
+  border-radius: 6px;
+  border: 2px solid #1e1e1e;
 }
 
 /* Fade animation for break */
