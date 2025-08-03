@@ -4,6 +4,7 @@ import "./NewsScroller.css";
 
 function NewsScroller() {
   const [newsList, setNewsList] = useState([]);
+  const [isDark, setIsDark] = useState(false); // 🌙 theme toggle
   const scrollRef = useRef(null);
 
   useEffect(() => {
@@ -29,14 +30,14 @@ function NewsScroller() {
     if (!el) return;
 
     let scrollInterval = null;
-    const speed = 4; // pixels per step
+    const speed = 1; // smooth speed
     const delay = 16; // ~60fps
 
     const startScroll = () => {
       if (scrollInterval) return;
       scrollInterval = setInterval(() => {
-        if (el.scrollTop + el.clientHeight >= el.scrollHeight) {
-          el.scrollTop = 0; // reset to top
+        if (el.scrollTop >= el.scrollHeight / 2) {
+          el.scrollTop = 0;
         } else {
           el.scrollTop += speed;
         }
@@ -48,10 +49,7 @@ function NewsScroller() {
       scrollInterval = null;
     };
 
-    // Start scrolling
     startScroll();
-
-    // Pause on hover
     el.addEventListener("mouseenter", stopScroll);
     el.addEventListener("mouseleave", startScroll);
 
@@ -62,54 +60,66 @@ function NewsScroller() {
     };
   }, [newsList]);
 
+  const renderNews = (copyIndex = 0) =>
+    [...newsList, { isBreak: true }].map((news, idx) =>
+      news.isBreak ? (
+        <div
+          key={`break-${copyIndex}-${idx}`}
+          className="news-break text-center text-muted py-4"
+        >
+          <p className="fw-semibold fs-5">
+            📢 News coming up... <br /> ↓
+          </p>
+        </div>
+      ) : (
+        <div key={`${copyIndex}-${idx}`} className="mb-4 border-bottom pb-3">
+          <div className="d-flex justify-content-between align-items-center mb-1">
+            <h6 className="fw-bold mb-0">{news.title}</h6>
+            {news.ribbon && (
+              <span className="badge bg-warning text-dark ms-2">
+                {news.ribbon}
+              </span>
+            )}
+          </div>
+          {news.tags?.length > 0 && (
+            <p className="text small mb-1">Tags: {news.tags.join(", ")}</p>
+          )}
+          <p className="publish-date">
+            📅 Published: {new Date(news.createdAt).toLocaleDateString()}
+          </p>
+          <div
+            className="news-html-content"
+            dangerouslySetInnerHTML={{ __html: news.htmlContent }}
+          ></div>
+        </div>
+      )
+    );
+
   return (
-    <div className="bg-white bg-light p-3">
+    <div className={`p-3 ${isDark ? "dark-mode" : "light-mode"}`}>
       <div className="container my-4 news-scroller-wrapper w-100 border rounded">
-        <h5 className="p-1 bg-dark text-white mb-0 mt-0">
-          🗞️ Latest Real Estate News
-        </h5>
-        <div className="news-scroller p-3" ref={scrollRef}>
+        <div className="d-flex justify-content-between align-items-center px-2 py-1 bg-dark text-white">
+          <h5 className="mb-0">🗞️ Latest Real Estate News</h5>
+          <button
+            className="btn btn-sm btn-light"
+            onClick={() => setIsDark(!isDark)}
+          >
+            {isDark ? "🌞 Light" : "🌙 Dark"}
+          </button>
+        </div>
+
+        <div
+          className={`news-scroller p-3 ${
+            isDark ? "dark-scroll" : "light-scroll"
+          }`}
+          ref={scrollRef}
+        >
           {newsList.length === 0 ? (
             <p className="text-muted">No news found.</p>
           ) : (
             <>
-              {[...newsList, { isBreak: true }].map((news, idx) =>
-                news.isBreak ? (
-                  <div
-                    key={`break-${idx}`}
-                    className="news-break text-center text-muted py-4"
-                  >
-                    <p className="fw-semibold fs-5">
-                      📢 News coming up... <br /> ↓
-                    </p>
-                  </div>
-                ) : (
-                  <div key={idx} className="mb-4 border-bottom pb-3">
-                    <div className="d-flex justify-content-between align-items-center mb-1">
-                      <h6 className="fw-bold mb-0">{news.title}</h6>
-                      {news.ribbon && (
-                        <span className="badge bg-warning text-dark ms-2">
-                          {news.ribbon}
-                        </span>
-                      )}
-                    </div>
-                    {news.tags?.length > 0 && (
-                      <p className="text small mb-1">
-                        Tags: {news.tags.join(", ")}
-                      </p>
-                    )}
-                    <p className="publish-date">
-                      📅 Published:{" "}
-                      {new Date(news.createdAt).toLocaleDateString()}
-                    </p>
-                    <div
-                      className="news-html-content"
-                      dangerouslySetInnerHTML={{ __html: news.htmlContent }}
-                    ></div>
-                  </div>
-                )
-              )}
-              <div style={{ height: "30px" }}></div>
+              {renderNews(0)}
+              {renderNews(1)}
             </>
           )}
         </div>

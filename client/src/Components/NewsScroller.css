@@ -1,21 +1,17 @@
+/* Wrapper Styles */
 .news-scroller-wrapper {
   height: 400px;
   width: 100%;
   overflow: hidden;
-  background-color: #ffffff;
   position: relative;
   border-radius: 6px;
 }
 
-.news-scroller-wrapper:hover {
-  background-color: #ececeb;
-}
-
+/* Scroll Area */
 .news-scroller {
   height: 100%;
   width: 100%;
   overflow-y: auto;
-  position: relative;
   scroll-behavior: smooth;
   scrollbar-width: thin;
 }
@@ -29,6 +25,7 @@
   border-radius: 4px;
 }
 
+/* Fade animation for break */
 .news-break {
   height: 80px;
   animation: fadeIn 1s ease-in-out;
@@ -52,4 +49,30 @@
 .publish-date {
   font-size: 0.8rem;
   color: #6c757d;
+}
+
+/* Light/Dark Themes */
+.light-mode {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.dark-mode {
+  background-color: #1e1e1e;
+  color: #f5f5f5;
+}
+
+.light-scroll {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.dark-scroll {
+  background-color: #1e1e1e;
+  color: #f5f5f5;
+}
+
+.dark-scroll .text-muted,
+.dark-mode .text-muted {
+  color: #cccccc !important;
 }
