@@ -38,11 +38,8 @@ function NewsScroller() {
     const startScroll = () => {
       if (scrollInterval) return;
       scrollInterval = setInterval(() => {
-        if (container.scrollTop >= content.scrollHeight) {
-          container.scrollTop = 0;
-        } else {
-          container.scrollTop += speed;
-        }
+        container.scrollTop =
+          (container.scrollTop + speed) % content.scrollHeight;
       }, delay);
     };
 
