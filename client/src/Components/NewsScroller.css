@@ -6,45 +6,23 @@
   position: relative;
   border-radius: 6px;
 }
+
+/* Light/Dark Mode Transitions */
 .light-mode,
 .dark-mode {
   transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 /* Scroll Area */
-/* .news-scroller {
-  height: 100%;
-  width: 100%;
-  overflow-y: auto;
-  scroll-behavior: smooth;
-  scrollbar-width: thin;
-} */
-
-/* Base scrollbar */
-.news-scroller::-webkit-scrollbar {
-  width: 8px;
-}
-
-.news-scroller::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-/* Thumb styling for light theme */
-/* .news-scroller.light-mode::-webkit-scrollbar-thumb {
-  background-color: #c1c1c1;
-  border-radius: 6px;
-  border: 2px solid #ffffff;
-} */
-
-/* SCROLLBAR STYLES */
 .news-scroller {
   height: 100%;
   width: 100%;
   overflow-y: auto;
   scroll-behavior: smooth;
-  scrollbar-width: thin;
+  scrollbar-width: thin; /* Firefox support */
 }
 
+/* WebKit Base Scrollbar */
 .news-scroller::-webkit-scrollbar {
   width: 8px;
 }
@@ -53,26 +31,30 @@
   background: transparent;
 }
 
+/* Light Theme Scrollbar Thumb */
 .news-scroller.scroll-light::-webkit-scrollbar-thumb {
   background-color: #c1c1c1;
   border-radius: 6px;
   border: 2px solid #ffffff;
 }
 
+/* Dark Theme Scrollbar Thumb */
 .news-scroller.scroll-dark::-webkit-scrollbar-thumb {
   background-color: #555555;
   border-radius: 6px;
   border: 2px solid #1e1e1e;
 }
 
-/* Thumb styling for dark theme */
-/* .news-scroller.dark-mode::-webkit-scrollbar-thumb {
-  background-color: #555555;
-  border-radius: 6px;
-  border: 2px solid #1e1e1e;
-} */
+/* Optional: Firefox scrollbar coloring */
+.news-scroller.scroll-light {
+  scrollbar-color: #c1c1c1 #ffffff;
+}
 
-/* Fade animation for break */
+.news-scroller.scroll-dark {
+  scrollbar-color: #555555 #1e1e1e;
+}
+
+/* News Section Break Animation */
 .news-break {
   height: 80px;
   animation: fadeIn 1s ease-in-out;
@@ -89,36 +71,32 @@
   }
 }
 
+/* News Content Paragraph Spacing */
 .news-html-content p {
   margin: 0 0 6px;
 }
 
+/* Publish Date Styling */
 .publish-date {
   font-size: 0.8rem;
   color: #6c757d;
 }
 
-/* Light/Dark Themes */
-.light-mode {
-  background-color: #ffffff;
-  color: #000000;
-}
-
-.dark-mode {
-  background-color: #1e1e1e;
-  color: #f5f5f5;
-}
-
+/* Light Theme Colors */
+.light-mode,
 .light-scroll {
   background-color: #ffffff;
   color: #000000;
 }
 
+/* Dark Theme Colors */
+.dark-mode,
 .dark-scroll {
   background-color: #1e1e1e;
   color: #f5f5f5;
 }
 
+/* Muted Text Override for Dark Mode */
 .dark-scroll .text-muted,
 .dark-mode .text-muted {
   color: #cccccc !important;
