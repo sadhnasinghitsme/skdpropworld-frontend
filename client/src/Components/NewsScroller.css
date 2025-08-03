@@ -1,69 +1,10 @@
-/* .news-scroller-wrapper {
-  height: 400px;
-  width: 100%;
-  overflow: hidden;
-  position: relative;
-  background-color: rgb(255, 255, 255);
-}
-.news-scroller-wrapper:hover {
-  background-color: rgb(236, 236, 235);
-}
-.news-break {
-  height: 80px;
-  animation: fadeIn 1s ease-in-out;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20%);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.news-scroller {
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-  position: relative;
-}
-
-.scrolling-content {
-  animation-timing-function: linear;
-  animation-name: scrollNews;
-  animation-iteration-count: infinite;
-}
-.news-scroller:hover .scrolling-content {
-  animation-play-state: paused;
-}
-
-@keyframes scrollNews {
-  0% {
-    transform: translateY(10%);
-  }
-  100% {
-    transform: translateY(-100%);
-  }
-}
-
-.news-html-content p {
-  margin: 0 0 6px;
-}
-
-.publish-date {
-  font-size: 0.8rem;
-  color: #6c757d;
-} */
-
 .news-scroller-wrapper {
   height: 400px;
   width: 100%;
   overflow: hidden;
-  position: relative;
   background-color: #ffffff;
+  position: relative;
+  border-radius: 6px;
 }
 
 .news-scroller-wrapper:hover {
@@ -73,29 +14,19 @@
 .news-scroller {
   height: 100%;
   width: 100%;
-  overflow-y: auto; /* ✅ This enables manual scrolling */
+  overflow-y: auto;
   position: relative;
   scroll-behavior: smooth;
+  scrollbar-width: thin;
 }
 
-/* ✅ Enable auto-scroll via animation */
-.scrolling-content {
-  animation: scrollNews linear infinite;
+.news-scroller::-webkit-scrollbar {
+  width: 6px;
 }
 
-/* ⏸️ Pause on hover */
-.news-scroller:hover .scrolling-content {
-  animation-play-state: paused;
-}
-
-/* 🌀 Auto scroll upward */
-@keyframes scrollNews {
-  0% {
-    transform: translateY(0%);
-  }
-  100% {
-    transform: translateY(-100%);
-  }
+.news-scroller::-webkit-scrollbar-thumb {
+  background-color: #aaa;
+  border-radius: 4px;
 }
 
 .news-break {
