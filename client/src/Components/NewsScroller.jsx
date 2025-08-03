@@ -33,14 +33,14 @@ function NewsScroller() {
     const speed = 0.5;
 
     const scrollStep = () => {
-      if (
-        container.scrollTop + container.clientHeight >=
-        container.scrollHeight
-      ) {
-        container.scrollTop = 0; // reset to top
+      const maxScroll = container.scrollHeight - container.clientHeight;
+
+      if (Math.floor(container.scrollTop) >= Math.floor(maxScroll)) {
+        container.scrollTop = 0; // clean reset
       } else {
         container.scrollTop += speed;
       }
+
       animationFrameId = requestAnimationFrame(scrollStep);
     };
 
