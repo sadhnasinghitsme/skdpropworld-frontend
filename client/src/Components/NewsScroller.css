@@ -1,4 +1,4 @@
-.news-scroller-wrapper {
+/* .news-scroller-wrapper {
   height: 400px;
   width: 100%;
   overflow: hidden;
@@ -7,7 +7,6 @@
 }
 .news-scroller-wrapper:hover {
   background-color: rgb(236, 236, 235);
-  /* color: white; */
 }
 .news-break {
   height: 80px;
@@ -47,6 +46,71 @@
   }
   100% {
     transform: translateY(-100%);
+  }
+}
+
+.news-html-content p {
+  margin: 0 0 6px;
+}
+
+.publish-date {
+  font-size: 0.8rem;
+  color: #6c757d;
+} */
+
+.news-scroller-wrapper {
+  height: 400px;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  background-color: #ffffff;
+}
+
+.news-scroller-wrapper:hover {
+  background-color: #ececeb;
+}
+
+.news-scroller {
+  height: 100%;
+  width: 100%;
+  overflow-y: auto; /* ✅ This enables manual scrolling */
+  position: relative;
+  scroll-behavior: smooth;
+}
+
+/* ✅ Enable auto-scroll via animation */
+.scrolling-content {
+  animation: scrollNews linear infinite;
+}
+
+/* ⏸️ Pause on hover */
+.news-scroller:hover .scrolling-content {
+  animation-play-state: paused;
+}
+
+/* 🌀 Auto scroll upward */
+@keyframes scrollNews {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+.news-break {
+  height: 80px;
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
