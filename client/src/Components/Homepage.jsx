@@ -1,4 +1,3 @@
-// src/components/Homepage.jsx
 import React, { useEffect, useRef, useState } from "react";
 import {
   Container,
@@ -48,6 +47,12 @@ const Homepage = () => {
   const [seasonalHtml, setSeasonalHtml] = useState("");
   const searchAreaRef = useRef(null);
 
+  const [length, setLength] = useState("");
+  const [breadth, setBreadth] = useState("");
+  const [unit, setUnit] = useState("feet");
+  const [ratePerSqFt, setRatePerSqFt] = useState("");
+  const [areaResult, setAreaResult] = useState(null);
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -76,6 +81,39 @@ const Homepage = () => {
       setEmi(null);
     }
   };
+
+  const convertToSqFt = (value, fromUnit) => {
+    switch (fromUnit) {
+      case "meters":
+        return value * 10.7639;
+      case "yards":
+        return value * 9;
+      default:
+        return value;
+    }
+  };
+
+  const handleAreaCalculation = () => {
+    const L = parseFloat(length);
+    const B = parseFloat(breadth);
+
+    if (L && B) {
+      let areaInSqFt = convertToSqFt(L, unit) * convertToSqFt(B, unit);
+      const totalCost = ratePerSqFt
+        ? areaInSqFt * parseFloat(ratePerSqFt)
+        : null;
+
+      setAreaResult({
+        sqFt: areaInSqFt.toFixed(2),
+        sqM: (areaInSqFt * 0.092903).toFixed(2),
+        sqYd: (areaInSqFt / 9).toFixed(2),
+        totalCost: totalCost?.toFixed(0),
+      });
+    } else {
+      setAreaResult(null);
+    }
+  };
+
   useEffect(() => {
     const fetchPropertyTypes = async () => {
       try {
@@ -256,11 +294,6 @@ const Homepage = () => {
           property="twitter:description"
           content="Buy, sell, or rent properties in YEIDA, Noida, Greater Noida, Delhi NCR with top real estate consultants. Affordable pricing, verified listings, easy process."
         />
-        {/* <meta
-          property="twitter:image"
-          content="https://skdpropworld.com/twitter-image.jpg"
-        /> */}
-        {/* Geo Tags */}
         <meta name="geo.region" content="IN-UP" />
         <meta
           name="geo.placename"
@@ -316,8 +349,6 @@ const Homepage = () => {
             },
           })}
         </script>
-        {/* Favicon */}
-        {/* <link rel="icon" href="/TitleLogo.ico" /> */}
       </Helmet>
       {/* **************************************** */}
       {/* the text above is for SEO */}
@@ -379,6 +410,12 @@ const Homepage = () => {
 
                 <Nav.Item>
                   <Nav.Link eventKey="emi">EMI Calculator</Nav.Link>
+                </Nav.Item>
+
+                <Nav.Item>
+                  <Nav.Link eventKey="area-calculator">
+                    📐 Area Calculator
+                  </Nav.Link>
                 </Nav.Item>
 
                 <Nav.Item>
@@ -462,6 +499,75 @@ const Homepage = () => {
                   {emi && (
                     <div className="mt-3 fs-5 text-dark">
                       <strong>Monthly EMI:</strong> ₹{emi}
+                    </div>
+                  )}
+                </Form>
+              )}
+
+              {activeTab === "area-calculator" && (
+                <Form className="mt-3 text-center text-dark">
+                  <Row className="justify-content-center g-2">
+                    <Col md={2}>
+                      <Form.Control
+                        type="number"
+                        placeholder="Length"
+                        value={length}
+                        onChange={(e) => setLength(e.target.value)}
+                      />
+                    </Col>
+                    <Col md={2}>
+                      <Form.Control
+                        type="number"
+                        placeholder="Breadth"
+                        value={breadth}
+                        onChange={(e) => setBreadth(e.target.value)}
+                      />
+                    </Col>
+                    <Col md={2}>
+                      <Form.Select
+                        value={unit}
+                        onChange={(e) => setUnit(e.target.value)}
+                      >
+                        <option value="feet">Feet</option>
+                        <option value="meters">Meters</option>
+                        <option value="yards">Yards</option>
+                      </Form.Select>
+                    </Col>
+                    <Col md={2}>
+                      <Form.Control
+                        type="number"
+                        placeholder="₹ / sq.ft (optional)"
+                        value={ratePerSqFt}
+                        onChange={(e) => setRatePerSqFt(e.target.value)}
+                      />
+                    </Col>
+                    <Col md="auto">
+                      <Button variant="warning" onClick={handleAreaCalculation}>
+                        Calculate
+                      </Button>
+                    </Col>
+                  </Row>
+
+                  {areaResult && (
+                    <div className="mt-4 text-start bg-light p-3 border rounded w-75 mx-auto">
+                      <p className="mb-1">
+                        <strong>📏 Area in Sq. Ft:</strong> {areaResult.sqFt}{" "}
+                        sq.ft
+                      </p>
+                      <p className="mb-1">
+                        <strong>📐 Area in Sq. Meters:</strong> {areaResult.sqM}{" "}
+                        m²
+                      </p>
+                      <p className="mb-1">
+                        <strong>🏡 Area in Sq. Yards:</strong> {areaResult.sqYd}{" "}
+                        yd²
+                      </p>
+                      {areaResult.totalCost && (
+                        <p className="mb-0 text-success">
+                          <strong>💰 Total Cost:</strong> ₹
+                          {areaResult.totalCost}
+                        </p>
+                      )}
                     </div>
                   )}
                 </Form>
@@ -563,13 +669,7 @@ const Homepage = () => {
           </Container>
         </Container>
       </div>
-      {/* Rest of the site */}
-      {/* <SupportWidget /> */}
-      {/* <Stats /> */}
-      {/* <div style={{ marginTop: "10px" }}> */}
-
       <AllProjects />
-      {/* </div> */}
       <ViewYouTubeSeries />
       <OfficeBearers />
       <Collaborators />

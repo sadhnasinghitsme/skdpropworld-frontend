@@ -60,6 +60,7 @@ import LoadingSpinner from "./Components/LoadingSpinner.jsx"; // your custom spi
 
 // 🟢 Critical for App Shell and Routing – Eagerly Loaded
 import Homepage from "./Components/Homepage";
+// import Homepage from "./Components/Homepage.jsx";
 import ProtectedRoute from "./Components/ProtectedRoute";
 import ProtectedAdminRoute from "./Components/Admin Pages/ProtectedAdminRoute";
 import NotFound from "./Components/NotFound";
