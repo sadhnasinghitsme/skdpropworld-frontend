@@ -146,17 +146,18 @@ const Homepage = () => {
   }, []);
 
   const keywords = [
-    "Flats & Apartments",
+    "Flats or Luxury Apartments",
     "Houses",
-    "Plots",
+    "Residential Plots",
     "Office Space",
     "Commercial Properties",
     "Industrial Properties",
+    "Institutional & Agricultural Space",
     "Dream Homes",
     "Luxury Villas",
     "Affordable Apartments",
     "Prime Locations",
-    "everything right here with SKD",
+    "everything right here with SKD PropWorld",
   ];
 
   const goToProjects = (term) => {

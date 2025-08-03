@@ -145,7 +145,6 @@ const Navbar = () => {
                   Home
                 </Link>
               </li>
-
               {/* Projects – grouped */}
               <li className="nav-item dropdown">
                 <a
@@ -220,16 +219,16 @@ const Navbar = () => {
                   })}
                 </ul>
               </li>
-
-              {/* Other quick links */}
+              {/* ------------- */}
               {[
                 ["Maps", "/maps"],
                 // ["Services", "/services"],
                 ["Blogs", "/all-blogs"],
-                ["About Us", "/about-us"],
+
                 ["Gallery", "/view-gallery"],
-                ["Career@ SKD", "/career@skd"],
-                ["Contact Us", "/contact-us"],
+                ["About Us", "/about-us"],
+                // ["Career@ SKD", "/career@skd"],
+                // ["Contact Us", "/contact-us"],
               ].map(([label, path]) => (
                 <li key={path} className="nav-item">
                   <Link className="nav-link skd-menu-item" to={path}>
@@ -237,9 +236,7 @@ const Navbar = () => {
                   </Link>
                 </li>
               ))}
-
-              {/* Office Bearers */}
-              {/* Office Bearers */}
+              {/* ---- */}
               <li className="nav-item dropdown">
                 <a
                   className="nav-link dropdown-toggle skd-menu-item"
@@ -272,16 +269,33 @@ const Navbar = () => {
                   </li>
                 </ul>
               </li>
+              {/* Other quick links */}
+              {[
+                // ["About Us", "/about-us"],
+                // ["Maps", "/maps"],
+                // ["Services", "/services"],
+                // ["Blogs", "/all-blogs"],
 
+                // ["Gallery", "/view-gallery"],
+                ["Career@ SKD", "/career@skd"],
+                ["Contact Us", "/contact-us"],
+              ].map(([label, path]) => (
+                <li key={path} className="nav-item">
+                  <Link className="nav-link skd-menu-item" to={path}>
+                    {label}
+                  </Link>
+                </li>
+              ))}
+              {/* Office Bearers */}
               {/* Admin */}
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <Link
                   className="nav-link skd-menu-item skd-admin-link"
                   to="/admin/login"
                 >
                   Admin
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
         </div>
