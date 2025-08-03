@@ -36,7 +36,7 @@ function NewsScroller() {
     const startScroll = () => {
       if (scrollInterval) return;
       scrollInterval = setInterval(() => {
-        if (el.scrollTop >= el.scrollHeight / 2) {
+        if (el.scrollTop + el.clientHeight >= el.scrollHeight) {
           el.scrollTop = 0;
         } else {
           el.scrollTop += speed;
