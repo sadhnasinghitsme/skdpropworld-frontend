@@ -30,7 +30,7 @@ function NewsScroller() {
     if (!el) return;
 
     let scrollInterval = null;
-    const speed = 4; // smooth speed
+    const speed = 8; // smooth speed
     const delay = 16; // ~60fps
 
     const startScroll = () => {
