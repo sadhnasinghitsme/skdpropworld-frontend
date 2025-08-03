@@ -36,7 +36,14 @@ function NewsScroller() {
       const maxScroll = container.scrollHeight - container.clientHeight;
 
       if (Math.floor(container.scrollTop) >= Math.floor(maxScroll)) {
-        container.scrollTop = 0; // clean reset
+        // 🔧 Disable smooth behavior temporarily
+        container.style.scrollBehavior = "auto";
+        container.scrollTop = 0;
+
+        // ✅ Re-enable smooth scrolling after reset
+        setTimeout(() => {
+          container.style.scrollBehavior = "smooth";
+        }, 50);
       } else {
         container.scrollTop += speed;
       }
