@@ -12,13 +12,13 @@
 }
 
 /* Scroll Area */
-.news-scroller {
+/* .news-scroller {
   height: 100%;
   width: 100%;
   overflow-y: auto;
   scroll-behavior: smooth;
   scrollbar-width: thin;
-}
+} */
 
 /* Base scrollbar */
 .news-scroller::-webkit-scrollbar {
@@ -53,15 +53,13 @@
   background: transparent;
 }
 
-/* ✅ Light scrollbar thumb */
-.scroll-light::-webkit-scrollbar-thumb {
+.news-scroller.scroll-light::-webkit-scrollbar-thumb {
   background-color: #c1c1c1;
   border-radius: 6px;
   border: 2px solid #ffffff;
 }
 
-/* ✅ Dark scrollbar thumb */
-.scroll-dark::-webkit-scrollbar-thumb {
+.news-scroller.scroll-dark::-webkit-scrollbar-thumb {
   background-color: #555555;
   border-radius: 6px;
   border: 2px solid #1e1e1e;
