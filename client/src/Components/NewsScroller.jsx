@@ -4,8 +4,9 @@ import "./NewsScroller.css";
 
 function NewsScroller() {
   const [newsList, setNewsList] = useState([]);
-  const [isDark, setIsDark] = useState(false); // 🌙 theme toggle
+  const [isDark, setIsDark] = useState(false);
   const scrollRef = useRef(null);
+  const contentRef = useRef(null); // for height of 1st copy
 
   useEffect(() => {
     const fetchNews = async () => {
@@ -26,20 +27,21 @@ function NewsScroller() {
   }, []);
 
   useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return;
+    const container = scrollRef.current;
+    const content = contentRef.current;
+    if (!container || !content) return;
 
     let scrollInterval = null;
-    const speed = 1; // smooth speed
-    const delay = 16; // ~60fps
+    const speed = 1;
+    const delay = 16;
 
     const startScroll = () => {
       if (scrollInterval) return;
       scrollInterval = setInterval(() => {
-        if (el.scrollTop + el.clientHeight >= el.scrollHeight) {
-          el.scrollTop = 0;
+        if (container.scrollTop >= content.scrollHeight) {
+          container.scrollTop = 0;
         } else {
-          el.scrollTop += speed;
+          container.scrollTop += speed;
         }
       }, delay);
     };
@@ -50,21 +52,21 @@ function NewsScroller() {
     };
 
     startScroll();
-    el.addEventListener("mouseenter", stopScroll);
-    el.addEventListener("mouseleave", startScroll);
+    container.addEventListener("mouseenter", stopScroll);
+    container.addEventListener("mouseleave", startScroll);
 
     return () => {
       stopScroll();
-      el.removeEventListener("mouseenter", stopScroll);
-      el.removeEventListener("mouseleave", startScroll);
+      container.removeEventListener("mouseenter", stopScroll);
+      container.removeEventListener("mouseleave", startScroll);
     };
   }, [newsList]);
 
-  const renderNews = (copyIndex = 0) =>
+  const renderNews = () =>
     [...newsList, { isBreak: true }].map((news, idx) =>
       news.isBreak ? (
         <div
-          key={`break-${copyIndex}-${idx}`}
+          key={`break-${idx}`}
           className="news-break text-center text-muted py-4"
         >
           <p className="fw-semibold fs-5">
@@ -72,7 +74,7 @@ function NewsScroller() {
           </p>
         </div>
       ) : (
-        <div key={`${copyIndex}-${idx}`} className="mb-4 border-bottom pb-3">
+        <div key={idx} className="mb-4 border-bottom pb-3">
           <div className="d-flex justify-content-between align-items-center mb-1">
             <h6 className="fw-bold mb-0">{news.title}</h6>
             {news.ribbon && (
@@ -117,10 +119,10 @@ function NewsScroller() {
           {newsList.length === 0 ? (
             <p className="text-muted">No news found.</p>
           ) : (
-            <>
-              {renderNews(0)}
-              {renderNews(1)}
-            </>
+            <div>
+              <div ref={contentRef}>{renderNews()}</div>
+              <div>{renderNews()}</div>
+            </div>
           )}
         </div>
       </div>
