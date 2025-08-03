@@ -88,6 +88,7 @@ const Homepage = () => {
         return value * 10.7639;
       case "yards":
         return value * 9;
+      case "feet":
       default:
         return value;
     }
@@ -96,12 +97,24 @@ const Homepage = () => {
   const handleAreaCalculation = () => {
     const L = parseFloat(length);
     const B = parseFloat(breadth);
+    const rate = parseFloat(ratePerSqFt);
 
-    if (L && B) {
-      let areaInSqFt = convertToSqFt(L, unit) * convertToSqFt(B, unit);
-      const totalCost = ratePerSqFt
-        ? areaInSqFt * parseFloat(ratePerSqFt)
-        : null;
+    if (!isNaN(L) && !isNaN(B)) {
+      const areaInOriginalUnit = L * B;
+
+      let areaInSqFt;
+      switch (unit) {
+        case "meters":
+          areaInSqFt = areaInOriginalUnit * 10.7639;
+          break;
+        case "yards":
+          areaInSqFt = areaInOriginalUnit * 9;
+          break;
+        default:
+          areaInSqFt = areaInOriginalUnit; // already in sq.ft
+      }
+
+      const totalCost = !isNaN(rate) ? areaInSqFt * rate : null;
 
       setAreaResult({
         sqFt: areaInSqFt.toFixed(2),
@@ -281,8 +294,11 @@ const Homepage = () => {
           property="og:description"
           content="Search residential, commercial and rental properties in YEIDA, Yamuna Expressway, Noida, Delhi, Ghaziabad. Verified listings. Expert consultants."
         />
-        "image": "https://via.placeholder.com/1200x630.png?text=SKD+PropWorld"
-        <meta property="og:image" content="/favicon.ico" />
+        <meta
+          property="og:image"
+          content="https://www.skdpropworld.com/og-image.png"
+        />
+
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="https://x.com/skd_propworld" />
