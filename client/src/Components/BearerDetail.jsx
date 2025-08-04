@@ -66,11 +66,7 @@ const BearerDetail = () => {
           content="SKD Propworld, Pawan Mishra, Aarti Mishra, Managing Director, Real Estate Delhi NCR, Yamuna Expressway Property, Greater Noida Plots, Real Estate Experts"
         />
 
-        {/* Canonical URL */}
-        <link
-          rel="canonical"
-          href="https://www.skdpropworld.com/office-bearers"
-        />
+      
 
         {/* Open Graph / Facebook */}
         <meta

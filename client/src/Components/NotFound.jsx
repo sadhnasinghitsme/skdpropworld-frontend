@@ -14,8 +14,7 @@ const NotFound = () => {
           content="The page you're looking for isn't available. SKD Propworld helps you explore top real estate projects in Noida, Greater Noida, YEIDA, and NCR."
         />
         <meta name="robots" content="noindex, follow" />
-        {/* <link rel="canonical" href="https://skdpropworld.com/404" /> */}
-
+       
         {/* Open Graph */}
         <meta property="og:type" content="website" />
         <meta

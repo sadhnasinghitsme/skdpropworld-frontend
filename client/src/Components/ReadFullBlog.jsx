@@ -80,10 +80,7 @@ const ReadFullBlog = () => {
           }`}
         />
         <meta name="author" content={blog.author || "SKD PropWorld"} />
-        <link
-          rel="canonical"
-          href={`https://skdpropworld.com/read-blog/${blog._id}`}
-        />
+       
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="article" />

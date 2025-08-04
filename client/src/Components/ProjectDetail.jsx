@@ -151,12 +151,7 @@ const ProjectDetail = () => {
           content={`Real Estate, ${project?.location} property, ${project?.heading}, YEIDA, Noida plots, SKD PropWorld projects`}
         />
         <meta name="author" content="SKD PropWorld" />
-        <link
-          rel="canonical"
-          href={`https://skdpropworld.com/projects/${
-            project?.slug || project?._id
-          }`}
-        />
+        
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="article" />

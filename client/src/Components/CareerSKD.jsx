@@ -145,9 +145,7 @@ const CareerSKD = () => {
           content="career, SKD Propworld, job openings, sales executive, real estate jobs, join SKD, career in Delhi NCR, hiring now"
         />
 
-        {/* Canonical */}
-        <link rel="canonical" href="https://www.skdpropworld.com/careers" />
-
+       
         {/* Open Graph */}
         <meta
           property="og:title"

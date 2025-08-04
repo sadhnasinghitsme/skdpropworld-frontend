@@ -326,7 +326,6 @@ const Homepage = () => {
           name="address"
           content="7th & 8th Floor,Kaisons, Alpha Square, Alpha 1 Commercial Belt, Greater Noida, Uttar Pradesh, 201308, India"
         />
-        <link rel="canonical" href="https://skdpropworld.com/" />
         {/* Schema.org */}
         <script type="application/ld+json">
           {JSON.stringify({

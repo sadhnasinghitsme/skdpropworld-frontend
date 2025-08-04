@@ -90,7 +90,7 @@ const MapBrowser = () => {
           name="keywords"
           content="Noida maps, Greater Noida map, YEIDA pocket layout, sector-wise real estate, property map viewer"
         />
-        <link rel="canonical" href="https://skdpropworld.com/maps" />
+        
 
         {/* Open Graph Tags */}
         <meta property="og:type" content="website" />

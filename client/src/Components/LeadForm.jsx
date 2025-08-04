@@ -107,7 +107,7 @@ const LeadForm = () => {
           name="keywords"
           content="real estate updates form, property interest form, Noida leads, Greater Noida real estate, YEIDA property deals"
         />
-        {/* <link rel="canonical" href="https://skdpropworld.com/#lead-form" /> */}
+       
 
         {/* Open Graph Tags */}
         <meta property="og:type" content="website" />

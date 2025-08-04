@@ -78,7 +78,7 @@ const Navbar = () => {
           name="keywords"
           content="SKD Propworld, Noida properties, Greater Noida real estate, YEIDA projects, Delhi NCR real estate"
         />
-        <link rel="canonical" href="https://skdpropworld.com/" />
+      
 
         {/* Open Graph for branding */}
         <meta property="og:type" content="website" />

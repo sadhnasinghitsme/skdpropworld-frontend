@@ -228,7 +228,6 @@ const AllProjectsPage = () => {
           name="description"
           content="Explore a wide range of residential, commercial, and industrial property projects in YEIDA, Noida, Greater Noida, Delhi, and Ghaziabad."
         />
-        <link rel="canonical" href="https://www.skdpropworld.com/projects" />
         <meta
           property="og:title"
           content="All Property Projects in Delhi NCR"
