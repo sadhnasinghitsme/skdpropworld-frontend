@@ -400,7 +400,7 @@ const Homepage = () => {
 
             <div className="container-fluid">
               <div className="row">
-                <div className="col-sm-6">
+                <div className="col-sm-4">
                   <section className="homepage-content container-fluid my-1 mb-2 pb-2 text-start">
                     <h2 className="mb-3">Why SKD?</h2>
                     <p>
@@ -425,7 +425,7 @@ const Homepage = () => {
                     </ul>
                   </section>
                 </div>
-                <div className="col-sm-6">
+                <div className="col-sm-8">
                   {/* Search Card */}
                   <div className="search-card mx-auto " ref={searchAreaRef}>
                     <Nav
