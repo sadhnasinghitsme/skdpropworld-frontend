@@ -400,7 +400,7 @@ const Homepage = () => {
 
             <div className="container-fluid">
               <div className="row">
-                <div className="col-sm-4">
+                <div className="col-sm-5">
                   <section className="homepage-content container-fluid my-1 mb-2 pb-2 text-start">
                     <h2 className="mb-3">Why SKD?</h2>
                     <p>
@@ -425,7 +425,7 @@ const Homepage = () => {
                     </ul>
                   </section>
                 </div>
-                <div className="col-sm-8">
+                <div className="col-sm-7">
                   {/* Search Card */}
                   <div className="search-card mx-auto " ref={searchAreaRef}>
                     <Nav
@@ -690,43 +690,37 @@ const Homepage = () => {
 
                     {activeTab === "top-picks" && (
                       <>
-                        <h3 className="mt-4 mb-3">Top SKD Picks</h3>
-                        <div className="picks-wrapper">
-                          {topPicks.length === 0 ? (
-                            <p className="text-muted">
-                              No SKD Picks available right now.
-                            </p>
-                          ) : (
-                            topPicks.map((project) => (
-                              <div
-                                key={project.slug}
-                                className="project-card border rounded shadow-sm"
-                                onClick={() =>
-                                  navigate(`/projects/${project.slug}`)
-                                }
-                                style={{ cursor: "pointer" }}
-                              >
-                                <img
-                                  src={project?.bannerImage?.url}
-                                  alt={project.heading}
-                                  className="w-100"
-                                  loading="lazy"
-                                  style={{
-                                    height: "200px",
-                                    objectFit: "cover",
-                                  }}
-                                />
-                                <div className="p-3">
-                                  <h5 className="mb-1 text-dark">
-                                    {project.heading}
-                                  </h5>
-                                  <p className="text-muted mb-0">
-                                    {project.location}
-                                  </p>
-                                </div>
+                        <h3 className="mt-4 mb-3 text-dark">Top SKD Picks</h3>
+                        <div className="top-picks-grid">
+                          {topPicks.map((project) => (
+                            <div
+                              key={project.slug}
+                              className="project-card border rounded shadow-sm"
+                              onClick={() =>
+                                navigate(`/projects/${project.slug}`)
+                              }
+                              style={{ cursor: "pointer" }}
+                            >
+                              <img
+                                src={project?.bannerImage?.url}
+                                alt={project.heading}
+                                className="w-100"
+                                loading="lazy"
+                                style={{
+                                  height: "200px",
+                                  objectFit: "cover",
+                                }}
+                              />
+                              <div className="p-3">
+                                <h5 className="mb-1 text-dark">
+                                  {project.heading}
+                                </h5>
+                                <p className="text-muted mb-0">
+                                  {project.location}
+                                </p>
                               </div>
-                            ))
-                          )}
+                            </div>
+                          ))}
                         </div>
                       </>
                     )}

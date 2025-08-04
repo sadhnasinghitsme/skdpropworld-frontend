@@ -40,6 +40,13 @@
   }
 }
 
+.top-picks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
 .custom-navbar {
   background-color: transparent !important;
   transition: background-color 0.4s ease, box-shadow 0.4s ease;
