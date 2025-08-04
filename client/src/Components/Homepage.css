@@ -2,6 +2,44 @@
   --yellow: #ffc107;
   --nav-blue: #002d62;
 }
+
+.top-picks-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.top-picks-wrapper .project-card {
+  flex: 1 1 calc(100% - 2rem);
+  max-width: 100%;
+}
+
+/* Tablets: 2 per row */
+@media (min-width: 576px) {
+  .top-picks-wrapper .project-card {
+    flex: 1 1 calc(50% - 1rem);
+    max-width: calc(50% - 1rem);
+  }
+}
+
+/* Desktop: 3 per row */
+@media (min-width: 992px) {
+  .top-picks-wrapper .project-card {
+    flex: 1 1 calc(33.333% - 1rem);
+    max-width: calc(33.333% - 1rem);
+  }
+}
+
+/* XL screens: 4 per row */
+@media (min-width: 1200px) {
+  .top-picks-wrapper .project-card {
+    flex: 1 1 calc(25% - 1rem);
+    max-width: calc(25% - 1rem);
+  }
+}
+
 .custom-navbar {
   background-color: transparent !important;
   transition: background-color 0.4s ease, box-shadow 0.4s ease;

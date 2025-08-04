@@ -689,54 +689,46 @@ const Homepage = () => {
                     )}
 
                     {activeTab === "top-picks" && (
-                      <Container className="mt-4">
-                        <h3 className="mb-3">Top SKD Picks</h3>
-                        <Row className="gx-4 gy-4">
+                      <>
+                        <h3 className="mt-4 mb-3">Top SKD Picks</h3>
+                        <div className="picks-wrapper">
                           {topPicks.length === 0 ? (
-                            <Col className="text-center text-dark">
-                              <p>No SKD Picks available right now.</p>
-                            </Col>
+                            <p className="text-muted">
+                              No SKD Picks available right now.
+                            </p>
                           ) : (
                             topPicks.map((project) => (
-                              <Col
+                              <div
                                 key={project.slug}
-                                xs={12}
-                                sm={6}
-                                md={4}
-                                lg={3}
-                                className="d-flex align-items-stretch"
+                                className="project-card border rounded shadow-sm"
+                                onClick={() =>
+                                  navigate(`/projects/${project.slug}`)
+                                }
+                                style={{ cursor: "pointer" }}
                               >
-                                <div
-                                  className="project-card border rounded shadow-sm w-100"
-                                  onClick={() =>
-                                    navigate(`/projects/${project.slug}`)
-                                  }
-                                  style={{ cursor: "pointer" }}
-                                >
-                                  <img
-                                    src={project?.bannerImage?.url}
-                                    alt={project.heading}
-                                    className="w-100"
-                                    loading="lazy"
-                                    style={{
-                                      height: "200px",
-                                      objectFit: "cover",
-                                    }}
-                                  />
-                                  <div className="p-3">
-                                    <h5 className="mb-1 text-dark">
-                                      {project.heading}
-                                    </h5>
-                                    <p className="text-muted mb-0">
-                                      {project.location}
-                                    </p>
-                                  </div>
+                                <img
+                                  src={project?.bannerImage?.url}
+                                  alt={project.heading}
+                                  className="w-100"
+                                  loading="lazy"
+                                  style={{
+                                    height: "200px",
+                                    objectFit: "cover",
+                                  }}
+                                />
+                                <div className="p-3">
+                                  <h5 className="mb-1 text-dark">
+                                    {project.heading}
+                                  </h5>
+                                  <p className="text-muted mb-0">
+                                    {project.location}
+                                  </p>
                                 </div>
-                              </Col>
+                              </div>
                             ))
                           )}
-                        </Row>
-                      </Container>
+                        </div>
+                      </>
                     )}
                   </div>
                 </div>
