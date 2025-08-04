@@ -401,7 +401,7 @@ const Homepage = () => {
             <div className="container-fluid">
               <div className="row">
                 <div className="col-sm-6">
-                  <section className="homepage-content container-fluid my-2 mb-2 pb-2 text-start">
+                  <section className="homepage-content container-fluid my-1 mb-2 pb-2 text-start">
                     <h2 className="mb-3">Why SKD?</h2>
                     <p>
                       SKD PropWorld Pvt. Ltd. is a trusted real estate
@@ -696,7 +696,13 @@ const Homepage = () => {
                           </Col>
                         ) : (
                           topPicks.map((project) => (
-                            <Col key={project.slug} md={4} className="mb-4">
+                            <Col
+                              key={project.slug}
+                              xs={12}
+                              sm={6}
+                              md={4}
+                              className="mb-4"
+                            >
                               <div
                                 className="project-card border rounded shadow-sm h-100"
                                 onClick={() =>
