@@ -689,7 +689,7 @@ const Homepage = () => {
                     )}
 
                     {activeTab === "top-picks" && (
-                      <Row className="mt-4">
+                      <Row className="mt-4 g-3">
                         {topPicks.length === 0 ? (
                           <Col className="text-center text-dark">
                             <p>No SKD Picks available right now.</p>
@@ -698,10 +698,11 @@ const Homepage = () => {
                           topPicks.map((project) => (
                             <Col
                               key={project.slug}
-                              xs={12}
-                              sm={6}
-                              md={4}
-                              className="mb-4"
+                              xs={12} // Full width on mobile
+                              sm={6} // 2 cards per row on small screens
+                              md={4} // 3 cards per row on medium+
+                              lg={4} // Maintain 3 cards on large screens
+                              xl={3} // Optional: 4 cards per row on extra large screens
                             >
                               <div
                                 className="project-card border rounded shadow-sm h-100"
