@@ -50,6 +50,22 @@ const AllProjects = () => {
   const animationRef = useRef();
   const pausedRef = useRef(false);
 
+  // useEffect(() => {
+  //   const fetchProjects = async () => {
+  //     try {
+  //       const { data } = await axios.get(`${API_BASE}/api/admin/projects`);
+  //       const visible = data.filter((p) => p.visible);
+  //       setProjects(visible);
+  //       setFiltered(visible);
+  //     } catch (err) {
+  //       console.error("Failed to fetch projects", err);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+  //   fetchProjects();
+  // }, [API_BASE]);
+
   useEffect(() => {
     const fetchProjects = async () => {
       try {
@@ -57,8 +73,14 @@ const AllProjects = () => {
         const visible = data.filter((p) => p.visible);
         setProjects(visible);
         setFiltered(visible);
+
+        // 👇 Mark prerender ready once important content is set
+        if (window.prerenderReady !== undefined) {
+          window.prerenderReady = true;
+        }
       } catch (err) {
         console.error("Failed to fetch projects", err);
+        window.prerenderReady = true; // still mark ready to avoid stalling
       } finally {
         setLoading(false);
       }
