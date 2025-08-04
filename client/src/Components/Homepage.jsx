@@ -401,8 +401,8 @@ const Homepage = () => {
             <div className="container-fluid">
               <div className="row">
                 <div className="col-sm-5">
-                  <section className="homepage-content container-fluid my-1 mb-2 pb-2 text-start">
-                    <h2 className="mb-3">Why SKD?</h2>
+                  <section className="homepage-content container-fluid mb-2 pb-2 text-start">
+                    <h2 className="mb-3 shadow">Why SKD?</h2>
                     <p>
                       SKD PropWorld Pvt. Ltd. is a trusted real estate
                       consultancy serving Noida, Greater Noida, YEIDA, and Delhi
