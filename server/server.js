@@ -42,6 +42,9 @@ app.use(
 );
 
 // app.use(express.json());
+const prerender = require("prerender-node");
+prerender.set("prerenderToken", "QHhhrvIPvM5gm4fHnmaT");
+app.use(prerender);
 
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
