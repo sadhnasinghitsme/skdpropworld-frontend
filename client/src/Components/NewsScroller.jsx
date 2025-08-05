@@ -59,13 +59,20 @@ function NewsScroller() {
     const stopScroll = () => cancelAnimationFrame(animationFrameId);
 
     startScroll();
+    // Desktop hover support
     container.addEventListener("mouseenter", stopScroll);
     container.addEventListener("mouseleave", startScroll);
+
+    // Mobile touch support
+    container.addEventListener("touchstart", stopScroll, { passive: true });
+    container.addEventListener("touchend", startScroll, { passive: true });
 
     return () => {
       stopScroll();
       container.removeEventListener("mouseenter", stopScroll);
       container.removeEventListener("mouseleave", startScroll);
+      container.removeEventListener("touchstart", stopScroll);
+      container.removeEventListener("touchend", startScroll);
     };
   }, [newsList]);
 
