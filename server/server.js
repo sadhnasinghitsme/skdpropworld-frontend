@@ -17,14 +17,14 @@ app.use(prerender);
 console.log("✅ Prerender middleware loaded");
 
 // Uncomment this for local-run
-const PORT = process.env.PORT || 5000;
-app.use(cors());
-app.use(
-  cors({
-    origin: ["http://localhost:5000", "http://skd-production.up.railway.app"],
-    credentials: true,
-  })
-);
+// const PORT = process.env.PORT || 5000;
+// app.use(cors());
+// app.use(
+//   cors({
+//     origin: ["http://localhost:5000", "http://skd-production.up.railway.app"],
+//     credentials: true,
+//   })
+// );
 
 // app.use(
 //   cors({
@@ -38,16 +38,16 @@ app.use(
 // );
 
 // Uncomment this for production build
-// app.use(
-//   cors({
-//     origin: [
-//       "http://localhost:5173",
-//       "https://skd-testmode.vercel.app",
-//       "https://www.skdpropworld.com", // ✅ Now it's correct
-//     ],
-//     credentials: true,
-//   })
-// );
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://skd-testmode.vercel.app",
+      "https://www.skdpropworld.com", // ✅ Now it's correct
+    ],
+    credentials: true,
+  })
+);
 
 // app.use(express.json());
 
