@@ -6,6 +6,8 @@ import "react-toastify/dist/ReactToastify.css";
 import AdminSidebar from "./Components/AdminSidebar";
 import confetti from "canvas-confetti";
 import "./AdminDashboard.css";
+// import { Link } from "react-router-dom";
+
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom"; // Make sure this is imported
@@ -445,6 +447,16 @@ function AdminDashboard() {
                 🗞️ Add Breaking Real Estate News
               </button>
             </div>
+
+            {/* 👇 Add Inventory Button - paste below this */}
+            <div className="my-4">
+              <Link to="/admin/add-inventory">
+                <button className="btn btn-lg btn-info fw-bold w-100 shadow">
+                  📦 Add Inventory
+                </button>
+              </Link>
+            </div>
+
             <div
               className="my-4 position-relative festival-button-wrapper"
               ref={confettiRef}

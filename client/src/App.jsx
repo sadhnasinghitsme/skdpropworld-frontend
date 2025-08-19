@@ -71,6 +71,7 @@ import MaintenancePage from "./Components/Admin Pages/MaintenancePage";
 import AdminLoginForm from "./AdminLoginForm.jsx";
 import AllProjects from "./Components/AllProjects.jsx";
 import AllProjectsPage from "./Components/AllProjectsPage";
+import AdminInventory from "./Components/Admin Pages/AdminInventory.jsx";
 
 // 🟡 Heavy & Admin Pages – Lazy Loaded
 const AdminDashboard = lazy(() => import("./AdminDashboard"));
@@ -325,6 +326,20 @@ function App() {
                 <AdminLayout>
                   <Suspense fallback={<LoadingSpinner />}>
                     <ImageGalleryManager />
+                  </Suspense>
+                </AdminLayout>
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Inventory Manager */}
+          <Route
+            path="/admin/add-inventory"
+            element={
+              <ProtectedRoute>
+                <AdminLayout>
+                  <Suspense fallback={<LoadingSpinner />}>
+                    <AdminInventory />
                   </Suspense>
                 </AdminLayout>
               </ProtectedRoute>

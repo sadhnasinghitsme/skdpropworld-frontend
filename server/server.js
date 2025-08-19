@@ -8,21 +8,23 @@ const { createGzip } = require("zlib");
 const sitemap = require("./routes/sitemap");
 const htmlSnippetRoutes = require("./routes/htmlSnippet");
 const newsRoutes = require("./routes/newsRoutes.js");
+const inventoryRoutes = require("./routes/inventoryRoutes.js");
 const app = express();
-const PORT = process.env.PORT || 8080;
+// const PORT = process.env.PORT || 8080;
 const prerender = require("prerender-node");
 prerender.set("prerenderToken", "QHhhrvIPvM5gm4fHnmaT");
 app.use(prerender);
 console.log("✅ Prerender middleware loaded");
 
-// const PORT = process.env.PORT || 5000;
-// app.use(cors());
-// app.use(
-//   cors({
-//     origin: ["http://localhost:5000", "http://skd-production.up.railway.app"],
-//     credentials: true,
-//   })
-// );
+// Uncomment this for local-run
+const PORT = process.env.PORT || 5000;
+app.use(cors());
+app.use(
+  cors({
+    origin: ["http://localhost:5000", "http://skd-production.up.railway.app"],
+    credentials: true,
+  })
+);
 
 // app.use(
 //   cors({
@@ -35,16 +37,17 @@ console.log("✅ Prerender middleware loaded");
 //   })
 // );
 
-app.use(
-  cors({
-    origin: [
-      "http://localhost:5173",
-      "https://skd-testmode.vercel.app",
-      "https://www.skdpropworld.com", // ✅ Now it's correct
-    ],
-    credentials: true,
-  })
-);
+// Uncomment this for production build
+// app.use(
+//   cors({
+//     origin: [
+//       "http://localhost:5173",
+//       "https://skd-testmode.vercel.app",
+//       "https://www.skdpropworld.com", // ✅ Now it's correct
+//     ],
+//     credentials: true,
+//   })
+// );
 
 // app.use(express.json());
 
@@ -69,6 +72,9 @@ app.use("/api/admin", require("./routes/adminRoutes"));
 
 console.log("→ Mounting /api/lead");
 app.use("/api/lead", require("./routes/leadRoutes"));
+
+console.log("→ Mounting /api/inventories");
+app.use("/api/admin/inventories", require("./routes/inventoryRoutes"));
 
 console.log("→ Mounting /api");
 app.use("/api", require("./routes/visitorRoutes"));
