@@ -7,7 +7,20 @@
       type="image/x-icon"
       href="https://www.skdpropworld.com/favicon.ico"
     />
-    <meta name="msapplication-TileImage" content="/favicon.ico" />
+    <meta
+      name="msapplication-TileImage"
+      content="https://www.skdpropworld.com/favicon.ico"
+    />
+
+    <!-- <meta
+      property="og:logo"
+      content="https://www.skdpropworld.com/skd-logo.png"
+    /> -->
+    <link
+      rel="logo"
+      href="https://www.skdpropworld.com/skd-logo.png"
+      type="image/png"
+    />
 
     <!-- Favicons and PWA Support -->
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
@@ -36,16 +49,12 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Title & Meta Description -->
-    <!-- <title>
-      SKD PropWorld Pvt. Ltd. | Real Estate Experts in Noida, YEIDA, Greater
-      Noida & Delhi NCR
-    </title> -->
     <title>
-      Best Real Estate Agent in Greater Noida, Noida, YEIDA & Delhi NCR | SKD PropWorld
+      Best Real Estate Agent in Greater Noida, Noida, YEIDA & Delhi NCR | SKD
+      PropWorld
     </title>
 
-    <link rel="canonical" href="https://www.skdpropworld.com/" />
+    <link rel="canonical" href="https://www.skdpropworld.com" />
     <link
       rel="sitemap"
       type="application/xml"
@@ -53,21 +62,14 @@
       href="https://www.skdpropworld.com/sitemap.xml"
     />
     <meta
-  name="keywords"
-  content="property dealer in Noida, real estate agents in Noida, real estate consultant Noida, real estate agent near me, property agent in Noida Extension, best property dealers in Greater Noida, property agent Ghaziabad, Yamuna Expressway Industrial Development Authority, YEIDA plots, YEIDA authority, Yamuna Expressway real estate, real estate broker Delhi NCR, real estate Delhi NCR, property consultant Delhi NCR, land for sale in Noida, plots in Greater Noida, residential property Noida, commercial property Greater Noida, investment property Noida, flats for sale in Noida, 2BHK flat in Noida, 3BHK apartment in Delhi NCR, apartments near metro station Noida, office space in Noida, shops for sale in Greater Noida, buy rent sell property Noida, property investment Delhi NCR, housing projects in Noida, upcoming projects in YEIDA, resale flats Noida, builder floor Noida, luxury apartments Noida, affordable housing Delhi NCR, property consultant in Greater Noida West, Noida Extension real estate agents, real estate brokers Ghaziabad, farmhouse land near Yamuna Expressway, industrial plots YEIDA, commercial space Delhi NCR, residential plots Greater Noida West, best real estate company in Noida, property buying consultant Noida, property selling agent Noida, trusted property dealer NCR"
-/>
-
+      name="keywords"
+      content="property dealer in Noida, real estate agents in Noida, real estate consultant Noida, real estate agent near me, property agent in Noida Extension, best property dealers in Greater Noida, property agent Ghaziabad, Yamuna Expressway Industrial Development Authority, YEIDA plots, YEIDA authority, Yamuna Expressway real estate, real estate broker Delhi NCR, real estate Delhi NCR, property consultant Delhi NCR, land for sale in Noida, plots in Greater Noida, residential property Noida, commercial property Greater Noida, investment property Noida, flats for sale in Noida, 2BHK flat in Noida, 3BHK apartment in Delhi NCR, apartments near metro station Noida, office space in Noida, shops for sale in Greater Noida, buy rent sell property Noida, property investment Delhi NCR, housing projects in Noida, upcoming projects in YEIDA, resale flats Noida, builder floor Noida, luxury apartments Noida, affordable housing Delhi NCR, property consultant in Greater Noida West, Noida Extension real estate agents, real estate brokers Ghaziabad, farmhouse land near Yamuna Expressway, industrial plots YEIDA, commercial space Delhi NCR, residential plots Greater Noida West, best real estate company in Noida, property buying consultant Noida, property selling agent Noida, trusted property dealer NCR"
+    />
 
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#3a3a3b" />
     <meta property="og:locale" content="en_IN" />
     <meta name="twitter:card" content="summary_large_image" />
-    <!-- 
-    <meta
-      name="description"
-      content="Best real estate consultants for residential, commercial, and industrial flat, apartments, plots, villa, house, and industrial as well as commercial properties in YEIDA, Noida, Delhi, Greater Noida & Ghaziabad. Trusted property dealers and agents for buying or selling plots, flats, and commercial spaces."
-    /> -->
-    <html lang="en">
 
     <meta
       name="description"
@@ -112,30 +114,121 @@
     />
 
     <!-- Schema Markup (Social Media Links) -->
+
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "RealEstateAgent",
-        "name": "SKD PropWorld Pvt. Ltd.",
-        "image": "https://www.skdpropworld.com/og-image.png",
-        "url": "https://www.skdpropworld.com",
-        "logo": "https://www.skdpropworld.com/skd-logo.png",
-        "telephone": "+919091010909",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "7th & 8th Floor, Kaisons Alpha Square, Alpha 1 Commercial Belt, Greater Noida, Uttar Pradesh, 201308, India",
-          "addressLocality": "Greater Noida",
-          "addressRegion": "UP",
-          "postalCode": "201308",
-          "addressCountry": "IN"
-        },
-        "sameAs": [
-          "https://www.facebook.com/skdprp/",
-          "https://www.instagram.com/official.skdpropworld/",
-          "https://x.com/skd_propworld",
-          "https://wa.me/919091010909",
-          "https://www.linkedin.com/company/skd-propworld/",
-          "https://www.youtube.com/@skdpropworld2011"
+        "@graph": [
+          {
+            "@type": "RealEstateAgent",
+            "name": "SKD PropWorld Private Limited",
+            "url": "https://www.skdpropworld.com",
+            "logo": "https://www.skdpropworld.com/skd-logo.png",
+            "image": "https://www.skdpropworld.com/skd-logo.png",
+            "description": "SKD PropWorld is the most trusted real estate agent & consultant in Noida, Greater Noida, YEIDA & Delhi NCR. We help clients buy, sell and invest in residential plots, luxury apartments, commercial spaces and industrial properties with expert guidance.",
+            "telephone": "+919091010909",
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": 28.470602,
+              "longitude": 77.509825
+            },
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "7th & 8th Floor, Kaisons Alpha Square, Alpha 1 Commercial Belt, Greater Noida",
+              "addressLocality": "Greater Noida",
+              "addressRegion": "Uttar Pradesh",
+              "postalCode": "201308",
+              "addressCountry": "IN"
+            },
+            "openingHoursSpecification": [
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday",
+                  "Saturday",
+                  "Sunday"
+                ],
+                "opens": "00:00",
+                "closes": "23:59"
+              }
+            ],
+            "areaServed": [
+              { "@type": "City", "name": "Noida" },
+              { "@type": "City", "name": "Greater Noida" },
+              {
+                "@type": "AdministrativeArea",
+                "name": "YEIDA (Yamuna Expressway Industrial Development Authority)"
+              },
+              { "@type": "AdministrativeArea", "name": "Delhi NCR" }
+            ],
+            "contactPoint": [
+              {
+                "@type": "ContactPoint",
+                "telephone": "+919091010909",
+                "contactType": "customer service",
+                "areaServed": "IN",
+                "availableLanguage": ["English", "Hindi"]
+              }
+            ],
+            "sameAs": [
+              "https://www.facebook.com/skdprp/",
+              "https://www.instagram.com/official.skdpropworld/",
+              "https://x.com/skd_propworld",
+              "https://wa.me/919091010909",
+              "https://www.linkedin.com/company/skd-propworld/",
+              "https://www.youtube.com/@skdpropworld2011"
+            ],
+            "hasMap": "https://maps.app.goo.gl/A66qJa7zBS8n8iQh7"
+          },
+          {
+            "@type": "LocalBusiness",
+            "name": "SKD PropWorld Private Limited",
+            "logo": "https://www.skdpropworld.com/skd-logo.png",
+            "image": "https://www.skdpropworld.com/skd-logo.png",
+            "url": "https://www.skdpropworld.com",
+            "telephone": "+919091010909",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "7th & 8th Floor, Kaisons Alpha Square, Alpha 1 Commercial Belt, Greater Noida",
+              "addressLocality": "Greater Noida",
+              "addressRegion": "Uttar Pradesh",
+              "postalCode": "201308",
+              "addressCountry": "IN"
+            },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": 28.470602,
+              "longitude": 77.509825
+            },
+            "openingHoursSpecification": [
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday",
+                  "Saturday",
+                  "Sunday"
+                ],
+                "opens": "00:00",
+                "closes": "23:59"
+              }
+            ],
+            "sameAs": [
+              "https://www.facebook.com/skdprp/",
+              "https://www.instagram.com/official.skdpropworld/",
+              "https://x.com/skd_propworld",
+              "https://wa.me/919091010909",
+              "https://www.linkedin.com/company/skd-propworld/",
+              "https://www.youtube.com/@skdpropworld2011"
+            ]
+          }
         ]
       }
     </script>
@@ -168,9 +261,8 @@
     />
 
     <script>
-  window.prerenderReady = false;
-</script>
-
+      window.prerenderReady = false;
+    </script>
   </head>
 
   <body>
