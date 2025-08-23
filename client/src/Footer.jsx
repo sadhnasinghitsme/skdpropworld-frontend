@@ -122,7 +122,24 @@ const Footer = () => {
                 real estate solutions in key Indian cities and abroad. We are
                 committed to delivering transparency, trust, and tailored real
                 estate services to meet every client’s unique needs serving
-                since 2011.
+                since 2011. <br /> <br />
+                <div
+                  className="trustpilot-widget ps-0"
+                  data-locale="en-US"
+                  data-template-id="56278e9abfbbba0bdcd568bc"
+                  data-businessunit-id="68a9acb36ad677c356e7e972"
+                  data-style-height="52px"
+                  data-style-width="100%"
+                  data-token="d6d286ba-6e93-4ebb-aa8d-d97b5f87f330"
+                >
+                  <a
+                    href="https://www.trustpilot.com/review/skdpropworld.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Trustpilot
+                  </a>
+                </div>
               </p>
             </div>
 
@@ -176,6 +193,7 @@ const Footer = () => {
                 <i className="bi bi-geo-alt me-1" />
                 View On Google Map
               </a>
+              <br />
             </div>
 
             <div className="col-md-3 mb-4">
