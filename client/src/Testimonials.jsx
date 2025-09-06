@@ -12,12 +12,12 @@ import { Helmet } from "react-helmet-async";
 
 const reviews = [
   {
-    name: "Pushpa Rajput",
-    time: "5 days Ago",
+    name: "Harshit Singh",
+    time: "15 days Ago",
     rating: 5,
-    title: "As good as advertised",
+    title: "Amazing experience.",
     content:
-      "SKD PROPWORLD PVT. LTD .One of the best Real Estate consultant . #Yeida #greaternoida #realestate",
+      "Amazing experience. They are both supportive and positive environment all around us for realstate in greater noida",
   },
   {
     name: "Shailendra Kumar",
@@ -36,11 +36,11 @@ const reviews = [
       "Experts in yamuna expressway authority plots….Gives great deals 👍🏻👍🏻",
   },
   {
-    name: "Mahesh Bidhuri",
+    name: "Anchal Rai",
     time: "a months ago",
     rating: 5,
     title: "Best in business",
-    content: "SKD Propworld is one the finest real estate companies.",
+    content: "YEIDA sector me ek residential plot ke liye consult kiya tha. Team ne har step clearly samjhaya. Good experience. Thanks to pawan sir",
   },
   {
     name: "Priya Gupta",
@@ -50,11 +50,46 @@ const reviews = [
     content: "Customer rated 5 star",
   },
   {
-    name: "Sumant Rai",
+    name: "Akanksha",
     time: "15 days ago",
-    rating: 4,
+    rating: 5,
     title: "Supportive",
-    content: "was a decent experience taking the service.",
+    content: "SKD Propworld ke saath experience bahut hi smooth aur genuine tha. Team helpful hai, guidance clear thi, aur sab kuch transparent tha. Property lene ke liye highly recommended!",
+  },
+   {
+    name: "Adarsh Chouhan",
+    time: "15 days ago",
+    rating: 5,
+    title: "Best",
+    content: "Best real estate agents in greater noida",
+  },
+  {
+    name: "Anju Pal",
+    time: "27 days ago",
+    rating: 5,
+    title: "Very Professional",
+    content: "Best real estate agent #skd",
+  },
+  {
+    name: "Upendra Sharma",
+    time: "2 months ago",
+    rating: 5,
+    title: "Gave me clarity",
+    content: "Happy with the real estate services they provided.",
+  },
+  {
+    name: "Piyush Gautam",
+    time: "1 month ago",
+    rating: 5,
+    title: "The team is good",
+    content: "Here we get the best deals and best investment opportunities",
+  },
+  {
+    name: "Arunima Singh",
+    time: "45 days ago",
+    rating: 5,
+    title: "recommended",
+    content: "recommended this business",
   },
 ];
 
