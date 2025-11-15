@@ -134,6 +134,11 @@ const ProjectSchema = new mongoose.Schema(
       enum: ["Residential", "Commercial", "Industrial"],
       default: "Residential",
     },
+    registrationStatus: {
+      type: String,
+      enum: ["Registered" , "Unregistered"],
+      default: undefined,
+    }
   },
   { timestamps: true }
 );

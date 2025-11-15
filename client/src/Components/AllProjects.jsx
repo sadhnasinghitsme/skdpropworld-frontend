@@ -65,28 +65,57 @@ const AllProjects = () => {
   //   };
   //   fetchProjects();
   // }, [API_BASE]);
-
-  useEffect(() => {
+useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const { data } = await axios.get(`${API_BASE}/api/admin/projects`);
-        const visible = data.filter((p) => p.visible);
-        setProjects(visible);
-        setFiltered(visible);
-
-        // 👇 Mark prerender ready once important content is set
+        const response = await fetch(`${API_BASE}/api/admin/projects/search`);
+        const data = await response.json();
+        if (data && Array.isArray(data)) {
+          setProjects(data);
+          setFiltered(data);
+        }
+        
         if (window.prerenderReady !== undefined) {
           window.prerenderReady = true;
         }
-      } catch (err) {
-        console.error("Failed to fetch projects", err);
-        window.prerenderReady = true; // still mark ready to avoid stalling
+      } catch (error) {
+        console.error('Error fetching projects:', error);
+        window.prerenderReady = true;
       } finally {
         setLoading(false);
       }
     };
     fetchProjects();
   }, [API_BASE]);
+
+  // Add this function inside your component
+const createYeidaProject = async () => {
+  try {
+    const response = await fetch(`${API_BASE}/api/admin/projects/create-yeida`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    
+    if (response.ok) {
+      // Refresh the projects list after creating YEIDA project
+      const newProject = await response.json();
+      setProjects(prev => [...prev, newProject]);
+      setFiltered(prev => [...prev, newProject]);
+    }
+  } catch (error) {
+    console.error('Error creating YEIDA project:', error);
+  }
+};
+
+
+<button 
+  onClick={createYeidaProject}
+  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+>
+  Add YEIDA Project
+</button>
 
   useEffect(() => {
     const result = projects.filter(

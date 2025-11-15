@@ -67,6 +67,7 @@ const AllProjectsPage = () => {
 
   const [selectedSKD, setSelectedSKD] = useState("");
   const [selectedStatus, setSelectedStatus] = useState("");
+  const [selectedRegistration, setSelectedRegistration] = useState("");
 
   const [allLocations, setAllLocations] = useState([]);
   const [allTypes, setAllTypes] = useState([]);
@@ -169,6 +170,13 @@ const AllProjectsPage = () => {
         : true
     )
 
+    // 📋 Registration Status filter
+    .filter((p) =>
+      selectedRegistration
+        ? p.type?.toLowerCase() === selectedRegistration.toLowerCase()
+        : true
+    )
+
     // 🏷️ Ribbon tag filter
     .filter((p) =>
       selectedRibbon
@@ -214,6 +222,7 @@ const AllProjectsPage = () => {
     setSelectedStatus("");
     setSortBy("date");
     setSelectedNature("");
+    setSelectedRegistration("");
   };
 
   /* ──────────── render ──────────── */
@@ -308,6 +317,19 @@ const AllProjectsPage = () => {
                 </Form.Select>
               </Form.Group>
 
+              {/* Registration Status */}
+              <Form.Group className="mb-3">
+                <Form.Label>Registration Status</Form.Label>
+                <Form.Select
+                  value={selectedRegistration}
+                  onChange={(e) => setSelectedRegistration(e.target.value)}
+                >
+                  <option value="">All Properties</option>
+                  <option value="Registered">Registered</option>
+                  <option value="Unregistered">Unregistered</option>
+                </Form.Select>
+              </Form.Group>
+
               {/* Ribbon */}
               <Form.Group className="mb-3">
                 <Form.Label>Speciality</Form.Label>
@@ -373,14 +395,18 @@ const AllProjectsPage = () => {
 
           {/* Grid */}
           <div className="col-md-9">
-            <h2 className="text-center mb-4 text-white">
-              All Running Projects
-            </h2>
-
-            <div className="row">
-              {filtered.length ? (
-                filtered.map((p) => (
-                  <div className="col-lg-4 col-md-6 mb-4" key={p._id}>
+            {/* Registered Properties Section */}
+            {filtered.filter(p => p.type?.toLowerCase() === 'registered').length > 0 && (
+              <>
+                <h2 className="text-center mb-4 text-white">
+                  <i className="fas fa-check-circle text-success me-2"></i>
+                  Registered Properties
+                </h2>
+                <div className="row mb-5">
+                  {filtered
+                    .filter(p => p.type?.toLowerCase() === 'registered')
+                    .map((p) => (
+                      <div className="col-lg-4 col-md-6 mb-4" key={p._id}>
                     <Card className="h-100 app-project-card position-relative">
                       {/* Badge */}
                       {p.ribbonTag &&
@@ -501,13 +527,154 @@ const AllProjectsPage = () => {
                       </Card.Body>
                     </Card>
                   </div>
-                ))
-              ) : (
-                <p className="text-light text-center w-100">
-                  No matching projects found.
-                </p>
-              )}
-            </div>
+                    ))}
+                </div>
+              </>
+            )}
+
+            {/* Unregistered Properties Section */}
+            {filtered.filter(p => p.type?.toLowerCase() === 'unregistered').length > 0 && (
+              <>
+                <h2 className="text-center mb-4 text-white mt-5">
+                  <i className="fas fa-clock text-warning me-2"></i>
+                  Unregistered Properties
+                </h2>
+                <div className="row mb-5">
+                  {filtered
+                    .filter(p => p.type?.toLowerCase() === 'unregistered')
+                    .map((p) => (
+                      <div className="col-lg-4 col-md-6 mb-4" key={p._id}>
+                        <Card className="h-100 app-project-card position-relative">
+                          {/* Badge */}
+                          {p.ribbonTag &&
+                            (() => {
+                              const { cls, icon } = TAG_META[p.ribbonTag] || {
+                                cls: "app-tag-default",
+                                icon: "fa-tag",
+                              };
+                              return (
+                                <span className={`app-tag-badge ${cls}`}>
+                                  <i className={`fas ${icon}`} /> {p.ribbonTag}
+                                </span>
+                              );
+                            })()}
+
+                          {/* SKD Top Pick */}
+                          {p.isSKDPick === "YES" && (
+                            <div className="app-skd-badge">
+                              <i className="fas fa-crown"></i> SKD Top Pick
+                            </div>
+                          )}
+
+                          <Card.Img
+                            variant="top"
+                            src={p.bannerImage?.url}
+                            className="app-project-img"
+                            loading="lazy"
+                            alt="project-photos"
+                          />
+
+                          <Card.Body className="d-flex flex-column">
+                            <h5 className="fw-bold">{p.heading}</h5>
+
+                            <Card.Text className="mb-1">
+                              📍 <strong>Location:</strong> {p.location}
+                            </Card.Text>
+                            <Card.Text className="mb-1">
+                              <strong>Property Type:</strong> {p.propertyType}
+                            </Card.Text>
+                            {p.type && (
+                              <Card.Text className="mb-1">
+                                <strong>Type:</strong> {p.type}
+                              </Card.Text>
+                            )}
+                            {p.reraNumber && (
+                              <Card.Text className="mb-1">
+                                <strong>RERA No.:</strong> {p.reraNumber}
+                              </Card.Text>
+                            )}
+
+                            {/* Status */}
+                            {p.projectStatus && (
+                              <div className="mb-2">
+                                <strong>Status:</strong>&nbsp;&nbsp;
+                                <Button
+                                  variant={
+                                    p.projectStatus === "READY_TO_MOVE"
+                                      ? "success"
+                                      : p.projectStatus === "UNDER_CONSTRUCTION"
+                                      ? "warning"
+                                      : "secondary"
+                                  }
+                                  size="sm"
+                                  className="rounded-pill text-uppercase fw-bold"
+                                  disabled
+                                >
+                                  {p.projectStatus.replace(/_/g, " ")}
+                                </Button>
+                              </div>
+                            )}
+
+                            {/* USP */}
+                            {p.usp && (
+                              <Card.Text className="small text-muted mb-1 project-usp">
+                                <strong>USP:</strong>{" "}
+                                {Array.isArray(p.usp) ? p.usp.join(", ") : p.usp}
+                              </Card.Text>
+                            )}
+
+                            {/* About */}
+                            {p.aboutContent && (
+                              <div className="small text-secondary mb-2">
+                                <h6 className="mb-1 mt-2">
+                                  <strong>About:</strong>
+                                </h6>
+                                <div
+                                  dangerouslySetInnerHTML={{
+                                    __html:
+                                      p.aboutContent.length > 160
+                                        ? p.aboutContent.slice(0, 160) + "..."
+                                        : p.aboutContent,
+                                  }}
+                                />
+                              </div>
+                            )}
+
+                            {/* Price */}
+                            <Card.Text className="text-success fw-semibold">
+                              💰 <strong>Starting from:</strong>
+                              {formatIndianPrice(
+                                p.pricingPlans?.[0]?.price ?? 0
+                              )}*{" "}
+                              {p.pricingPlans?.[0]?.priceType === "PER_UNIT" && (
+                                <span className="text-muted small">
+                                  (per {p.pricingPlans?.[0]?.unit || "unit"})
+                                </span>
+                              )}
+                            </Card.Text>
+
+                            <Link to={`/projects/${p.slug}`}>
+                              <Button
+                                variant="warning"
+                                className="w-100 fw-bold mt-2"
+                              >
+                                View in Detail
+                              </Button>
+                            </Link>
+                          </Card.Body>
+                        </Card>
+                      </div>
+                    ))}
+                </div>
+              </>
+            )}
+
+            {/* No Results Message */}
+            {filtered.length === 0 && (
+              <p className="text-light text-center w-100">
+                No matching projects found.
+              </p>
+            )}
           </div>
         </div>
       </div>

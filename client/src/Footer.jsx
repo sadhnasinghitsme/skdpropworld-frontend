@@ -118,12 +118,15 @@ const Footer = () => {
                 SKD PROPWORLD PRIVATE LIMITED
               </h4>
               <p className="text-light">
-                SKD PropWorld Pvt. Ltd. is a trusted real estate company in
-                India, specializing in residential, commercial, and industrial
-                properties across Noida, Greater Noida, YEIDA, Delhi, and
-                Ghaziabad. We offer expert guidance for buying, selling, and
-                investing in premium apartments, luxury villas, commercial
-                office spaces, and residential plots.
+               SKD PropWorld Pvt. Ltd. is a trusted real estate consultancy specializing 
+               exclusively in residential plots under YEIDA (Yamuna Expressway Industrial 
+               Development Authority).With over a decade of experience, we are committed to 
+               helping clients make informed investment decisions in the most promising sectors 
+               of YEIDA. Our team offers expert guidance, transparent dealings, and end-to-end
+                support — ensuring a seamless property-buying experience.
+                Since 2011, SKD PropWorld has built its reputation on trust, integrity, and customer 
+                satisfaction, making us a reliable name for genuine residential plots along the 
+                Yamuna Expressway
               </p>
               <p className="text-light">
                 With over a decade of experience and a growing international

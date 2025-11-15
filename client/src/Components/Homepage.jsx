@@ -17,8 +17,8 @@ import SupportWidget from "./SupportWidget";
 import AllProjects from "./AllProjects";
 import ViewYouTubeSeries from "./ViewYouTubeSeries";
 import OfficeBearers from "./OfficeBearers";
-import Collaborators from "./Collaborators";
-import GlobalPresence from "../GlobalPresence";
+
+
 import PrimeWorkLocations from "../PrimeWorkLocations";
 import Testimonials from "../Testimonials";
 import LeadForm from "./LeadForm";
@@ -28,6 +28,7 @@ import axios from "axios";
 import "./Homepage.css";
 import Stats from "./Stats";
 import NewsScroller from "./NewsScroller";
+import YeidaNews from "./YeidaNews";
 
 const Homepage = () => {
   const counterRef = useRef(null);
@@ -52,6 +53,21 @@ const Homepage = () => {
   const [unit, setUnit] = useState("feet");
   const [ratePerSqFt, setRatePerSqFt] = useState("");
   const [areaResult, setAreaResult] = useState(null);
+  const [showNewYearPopup, setShowNewYearPopup] = useState(false);
+  const [expandedSector, setExpandedSector] = useState(null);
+  const [selectedCity, setSelectedCity] = useState("");
+
+  // New Year Popup - Show once after 3 seconds
+  useEffect(() => {
+    const hasSeenPopup = sessionStorage.getItem('newYearPopupSeen');
+    if (!hasSeenPopup) {
+      const timer = setTimeout(() => {
+        setShowNewYearPopup(true);
+        sessionStorage.setItem('newYearPopupSeen', 'true');
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -196,19 +212,53 @@ const Homepage = () => {
     }
   }, []);
 
+  // Scroll event listener to show enquiry form
+  useEffect(() => {
+    let hasShown = false;
+    let scrollTimeout;
+
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPercent = (scrollTop / docHeight) * 100;
+      const enquiryForm = document.getElementById("enquiryForm");
+      
+      if (enquiryForm && !hasShown) {
+        // Show popup at 50% scroll with a 2-second delay
+        if (scrollPercent > 50) {
+          clearTimeout(scrollTimeout);
+          scrollTimeout = setTimeout(() => {
+            enquiryForm.style.display = "block";
+            hasShown = true;
+          }, 2000); // 2 second delay
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      clearTimeout(scrollTimeout);
+    };
+  }, []);
+
   const keywords = [
-    "Flats or Luxury Apartments",
-    "Houses",
-    "Residential Plots",
-    "Office Space",
-    "Commercial Properties",
-    "Industrial Properties",
-    "Institutional & Agricultural Space",
-    "Dream Homes",
-    "Luxury Villas",
-    "Affordable Apartments",
-    "Prime Locations",
-    "everything right here with SKD PropWorld",
+  "YEIDA Approved Residential Plots",
+  "Residential Land near Jewar Airport",
+  "Affordable Plots in YEIDA Region",
+  "Invest Smartly with YEIDA Plots",
+  "Premium Properties along Yamuna Expressway",
+  "Future-Ready Plots in YEIDA Sectors 18 & 20",
+  "Residential Properties in YEIDA",
+  "Plots with Great Connectivity to Noida & Delhi",
+  "Jewar Airport Investment Opportunities",
+  "YEIDA Plots for Home & Business",
+  "Modern Infrastructure with YEIDA Projects",
+  "Secure Your Future with YEIDA Property",
+  "Dream Homes near Jewar Airport",
+  "Luxury Living in YEIDA Smart City",
+  "Everything you need, right here with SKD PropWorld",
   ];
 
   const goToProjects = (term) => {
@@ -236,16 +286,16 @@ const Homepage = () => {
       <Helmet>
         {/* Primary Meta Tags */}
         <title>
-          Home | SKD PropWorld | Top Property Dealer in Noida, YEIDA (Yamuna
+          Home | SKD PropWorld | Top Property Dealer in  Greater Noida, YEIDA (Yamuna
           Authority), Greater Noida, Delhi
         </title>
         <meta
           name="title"
-          content="Top Property Dealer in YEIDA, Noida, Delhi, NCR | Buy, Sell, Rent Real Estate Plots, House, Villa, Flat, Commercial, Studio Apartments"
+          content="Top Property Dealer in YEIDA, GreaterNoida, Delhi, NCR | Buy, Sell, Rent Real Estate Plots, House, Villa, Flat, Commercial, Studio Apartments"
         />
         <meta
           name="description"
-          content="Looking for trusted property dealers in YEIDA, Noida, Ghaziabad, Delhi, or Greater Noida? We offer best deals in flats, plots, commercial & residential properties."
+          content="Looking for trusted property dealers in YEIDA, Greater Noida, Ghaziabad, Delhi, or Greater Noida? We offer best deals in flats, plots, commercial & residential properties."
         />
         <meta
           name="keywords"
@@ -370,6 +420,359 @@ const Homepage = () => {
 
       <div className="homepage-hero">
         <Navbar />
+        
+        {/* YEIDA Hero Section with Video Background */}
+        <section className="hero"> 
+          {/* Background Video */}
+          <video autoPlay loop muted playsInline className="hero-video-bg">
+            <source src="/hero-video.mp4.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          
+          {/* Dark Overlay */}
+          <div className="hero-video-overlay"></div>
+          
+          {/* Content */}
+          <div className="hero-content">
+            <h1>Explore Government-Approved YEIDA Residential  Plots</h1> 
+            <p>Find Residential Plots and investments near Noida International Airport.</p> 
+            <a href="/projects" className="btn">View Project</a>
+          </div>
+        </section>
+
+
+
+                 <section id="yeida-projects">
+  <h2>YEIDA Project Highlights</h2>
+  <div className="yeida-project-list">
+
+    <div className="yeida-project">
+      <div 
+        className="project-header"
+        onClick={() => setExpandedSector(expandedSector === 'sector18' ? null : 'sector18')}
+        style={{ cursor: 'pointer' }}
+      >
+        <h3>Sector 18 Residential Plots {expandedSector === 'sector18' ? '▼' : '▶'}</h3>
+        <p>Plots available near Jewar Airport with clear titles and modern infrastructure.</p>
+        <span className="click-hint">Click to {expandedSector === 'sector18' ? 'hide' : 'view'} details</span>
+      </div>
+      
+      {/* Detailed Sector 18 Information - Shows only when clicked */}
+      {expandedSector === 'sector18' && (
+        <div className="sector-details">
+          <h4>📍 About YEIDA Sector 18</h4>
+          <p className="sector-description">
+            YEIDA Sector 18 is one of the most sought-after residential zones in the Yamuna Expressway region. 
+            Located strategically near the upcoming Noida International Airport (Jewar Airport), this sector offers 
+            excellent connectivity and modern infrastructure.
+          </p>
+          
+          <div className="sector-features">
+            <div className="feature-item">
+              <span className="feature-icon">🏗️</span>
+              <strong>Plot Sizes:</strong> 60 to 300 sq.m
+            </div>
+            <div className="feature-item">
+              <span className="feature-icon">💰</span>
+              <strong>Price Range:</strong> ₹75 Lakh to ₹2.50 Cr
+            </div>
+            <div className="feature-item">
+              <span className="feature-icon">✈️</span>
+              <strong>Distance from Airport:</strong> 15 to 18km
+            </div>
+            <div className="feature-item">
+              <span className="feature-icon">🛣️</span>
+              <strong>Connectivity:</strong> Direct access to Yamuna Expressway
+            </div>
+            <div className="feature-item">
+              <span className="feature-icon">⚡</span>
+              <strong>Infrastructure:</strong> Power, Water, Sewage System
+            </div>
+            <div className="feature-item">
+              <span className="feature-icon">🏫</span>
+              <strong>Nearby:</strong> Schools, Hospitals, Shopping Centers
+            </div>
+          </div>
+          
+          <div className="sector-highlights">
+            <h5>✨ Key Highlights:</h5>
+            <ul>
+              <li>YEIDA Approved & Registered Plots</li>
+              <li>Clear Land Titles with No Legal Issues</li>
+              <li>Wide Roads (60-100 m)</li>
+              <li>Green Belt & Parks</li>
+              <li>High ROI Potential (15-20% annually)</li>
+            </ul>
+          </div>
+        </div>
+      )}
+    </div>
+
+    {/* Sector 20 */}
+    <div className="yeida-project">
+      <div 
+        className="project-header"
+        onClick={() => setExpandedSector(expandedSector === 'sector20' ? null : 'sector20')}
+        style={{ cursor: 'pointer' }}
+      >
+        <h3>Sector 20 Residential Plots {expandedSector === 'sector20' ? '▼' : '▶'}</h3>
+        <p>Affordable residential plots approved by YEIDA — perfect for long-term investment.</p>
+        <span className="click-hint">Click to {expandedSector === 'sector20' ? 'hide' : 'view'} details</span>
+      </div>
+      
+      {expandedSector === 'sector20' && (
+        <div className="sector-details">
+          <h4>📍 About YEIDA Sector 20</h4>
+          <p className="sector-description">
+            YEIDA Sector 20 offers affordable residential plots with excellent investment potential. 
+            This sector is ideal for first-time buyers and long-term investors looking for steady appreciation.
+          </p>
+          
+          <div className="sector-features">
+            <div className="feature-item">
+              <span className="feature-icon">🏗️</span>
+              <strong>Plot Sizes:</strong> 300 sq.m to 4000 sq.m
+            </div>
+            <div className="feature-item">
+              <span className="feature-icon">💰</span>
+              <strong>Price Range:</strong> ₹60,000 per sq.m. to ₹80,000 per sq.m.
+            </div>
+            <div className="feature-item">
+              <span className="feature-icon">✈️</span>
+              <strong>Distance from Airport:</strong> 12 to 15 km
+            </div>
+            <div className="feature-item">
+              <span className="feature-icon">🛣️</span>
+              <strong>Connectivity:</strong> Well-connected to Yamuna Expressway
+            </div>
+            <div className="feature-item">
+              <span className="feature-icon">⚡</span>
+              <strong>Infrastructure:</strong> Developing Infrastructure
+            </div>
+            <div className="feature-item">
+              <span className="feature-icon">🏫</span>
+              <strong>Nearby:</strong> Upcoming Schools & Markets,Filmcity
+            </div>
+          </div>
+          
+          <div className="sector-highlights">
+            <h5>✨ Key Highlights:</h5>
+            <ul>
+              <li>Most Affordable YEIDA Sector</li>
+              <li>High Growth Potential</li>
+              <li>Ideal for Long-term Investment</li>
+              <li>Peaceful Residential Environment</li>
+              <li>Easy Payment Plans Available</li>
+              <li>Expected ROI: 18-25% annually</li>
+            </ul>
+          </div>
+        </div>
+      )}
+    </div>
+
+    {/* Sector 22D */}
+    <div className="yeida-project">
+      <div 
+        className="project-header"
+        onClick={() => setExpandedSector(expandedSector === 'sector22d' ? null : 'sector22d')}
+        style={{ cursor: 'pointer' }}
+      >
+        <h3>Sector 22D Residential Plots {expandedSector === 'sector22d' ? '▼' : '▶'}</h3>
+        <p>Upcoming mid-rise apartment blocks with great connectivity to Yamuna Expressway.</p>
+        <span className="click-hint">Click to {expandedSector === 'sector22d' ? 'hide' : 'view'} details</span>
+      </div>
+      
+      {expandedSector === 'sector22d' && (
+        <div className="sector-details">
+          <h4>📍 About YEIDA Sector 22D</h4>
+          <p className="sector-description">
+            YEIDA Sector 22D is planned for modern apartment living with mid-rise buildings. 
+            Perfect for those looking for ready-to-move with modern amenities.
+          </p>
+          
+          <div className="sector-features">
+            <div className="feature-item">
+              <span className="feature-icon">🏗️</span>
+              <strong>Plot Sizes:</strong> 120 sq.m to 162 sq.m
+            </div>
+            <div className="feature-item">
+              <span className="feature-icon">💰</span>
+              <strong>Price Range:</strong> ₹1.10 Cr to ₹1.60 Cr
+            </div>
+            <div className="feature-item">
+              <span className="feature-icon">✈️</span>
+              <strong>Distance from Airport:</strong> 15km
+            </div>
+            <div className="feature-item">
+              <span className="feature-icon">🛣️</span>
+              <strong>Connectivity:</strong> Direct Yamuna Expressway Access
+            </div>
+            <div className="feature-item">
+              <span className="feature-icon">⚡</span>
+              <strong>Infrastructure:</strong> Modern Amenities
+            </div>
+            <div className="feature-item">
+              <span className="feature-icon">🏫</span>
+              <strong>Nearby:</strong> Schools, Malls, Hospitals,Formula Racing
+            </div>
+          </div>
+          
+          <div className="sector-highlights">
+            <h5>✨ Key Highlights:</h5>
+            <ul>
+              <li>Modern Apartment Complex</li>
+              <li>Clubhouse & Swimming Pool</li>
+              <li>Kids Play Area & Parks</li>
+              <li>Gym & Sports Facilities</li>
+              <li>Ready-to-Move Options Available</li>
+            </ul>
+          </div>
+        </div>
+      )}
+    </div>
+
+    {/* Sector 16 */}
+    <div className="yeida-project">
+      <div 
+        className="project-header"
+        onClick={() => setExpandedSector(expandedSector === 'sector16' ? null : 'sector16')}
+        style={{ cursor: 'pointer' }}
+      >
+        <h3>Sector 16 Residential Plots {expandedSector === 'sector16' ? '▼' : '▶'}</h3>
+        <p>Modern residential plots planned for upcoming enterprises near Yamuna Expressway.</p>
+        <span className="click-hint">Click to {expandedSector === 'sector16' ? 'hide' : 'view'} details</span>
+      </div>
+      
+      {expandedSector === 'sector16' && (
+        <div className="sector-details">
+          <h4>📍 About YEIDA Sector 16</h4>
+          <p className="sector-description">
+            YEIDA Sector 16 is designated for residential purposes. 
+            Good for investors who can wait long-term and are banking
+             on big appreciation
+          </p>
+          
+          <div className="sector-features">
+            <div className="feature-item">
+              <span className="feature-icon">🏗️</span>
+              <strong>Plot Sizes:</strong> 120 sq.m to 300 sq.m
+            </div>
+            <div className="feature-item">
+              <span className="feature-icon">💰</span>
+              <strong>Price Range:</strong> ₹1.10 Cr to ₹1.60 Cr
+            </div>
+            <div className="feature-item">
+              <span className="feature-icon">✈️</span>
+              <strong>Distance from Airport:</strong> 18 km
+            </div>
+            <div className="feature-item">
+              <span className="feature-icon">🛣️</span>
+              <strong>Connectivity:</strong> Prime Location on Expressway
+            </div>
+            <div className="feature-item">
+              <span className="feature-icon">⚡</span>
+              <strong>Infrastructure:</strong> Commercial Grade Facilities
+            </div>
+            <div className="feature-item">
+              <span className="feature-icon">🏫</span>
+              <strong>Nearby:</strong> Business Hubs & Hotels
+            </div>
+          </div>
+          
+          <div className="sector-highlights">
+            <h5>✨ Key Highlights:</h5>
+            <ul>
+              <li>Prime Residential Location</li>
+              <li>High Footfall Area</li>
+              <li>Near to Institutional sector</li>
+              <li>Wide Road Frontage</li>
+              <li>Excellent Visibility</li>
+              <li>High Rental Yield Potential</li>
+            </ul>
+          </div>
+        </div>
+      )}
+    </div>
+
+    {/* Sector 17 */}
+    <div className="yeida-project">
+      <div 
+        className="project-header"
+        onClick={() => setExpandedSector(expandedSector === 'sector17' ? null : 'sector17')}
+        style={{ cursor: 'pointer' }}
+      >
+        <h3>Sector 17 Residential Plots {expandedSector === 'sector17' ? '▼' : '▶'}</h3>
+        <p>Dedicated residential area approved by YEIDA — ideal for manufacturing units, logistics, and startups.</p>
+        <span className="click-hint">Click to {expandedSector === 'sector17' ? 'hide' : 'view'} details</span>
+      </div>
+      
+      {expandedSector === 'sector17' && (
+        <div className="sector-details">
+          <h4>📍 About YEIDA Sector 17</h4>
+          <p className="sector-description">
+            Located along Yamuna Expressway, which is a major corridor. 
+            The land is acquired by the authority for development. 
+          </p>
+          
+          <div className="sector-features">
+            <div className="feature-item">
+              <span className="feature-icon">🏗️</span>
+              <strong>Plot Sizes:</strong> 120 sq.m to 300 sq.m
+            </div>
+            <div className="feature-item">
+              <span className="feature-icon">💰</span>
+              <strong>Price Range:</strong> ₹1.10 Cr – ₹1.60 Cr
+            </div>
+            <div className="feature-item">
+              <span className="feature-icon">✈️</span>
+              <strong>Distance from Airport:</strong> 15-18 km
+            </div>
+            <div className="feature-item">
+              <span className="feature-icon">🛣️</span>
+              <strong>Connectivity:</strong> Good Road Network
+            </div>
+            <div className="feature-item">
+              <span className="feature-icon">⚡</span>
+              <strong>Infrastructure:</strong> Industrial Grade Power Supply
+            </div>
+            <div className="feature-item">
+              <span className="feature-icon">🏫</span>
+              <strong>Nearby:</strong> Logistics Parks & Warehouses
+            </div>
+          </div>
+          
+          <div className="sector-highlights">
+            <h5>✨ Key Highlights:</h5>
+            <ul>
+             <li>Proximity to Jewar (Noida) International Airport could boost future value.</li>
+              <li>Residential Plots Available</li>
+              <li>Good for Warehouse & Logistics</li>
+              <li>Growing Residential Hub</li>
+              <li>Dual Investment Opportunity</li>
+              <li>Long Term Investment</li>
+            </ul>
+          </div>
+        </div>
+      )}
+    </div>
+
+  </div>
+</section>
+
+
+
+        <section id="map">
+    <h2>YEIDA Map Overview</h2>
+    <iframe
+      src="https://www.google.com/maps/embed?...YEIDA+Sectors+Noida..."
+      width="100%"
+      height="400"
+      style={{ border: 0 }}
+      allowFullScreen
+      loading="lazy"
+    ></iframe>
+  </section>
+
         {/* Inject dynamic seasonal background */}
         <div
           className="seasonal-background-wrapper"
@@ -401,12 +804,16 @@ const Homepage = () => {
               <div className="row">
                 <div className="col-sm-5">
                   <section className="homepage-content container-fluid mb-2 pb-2 text-start">
-                    <h2 className="mb-3 ">Why SKD?</h2>
+                    <h2 className="mb-3 ">Why Invest in YEIDA</h2>
                     <p>
-                      SKD PropWorld Pvt. Ltd. is a trusted real estate
-                      consultancy serving Noida, Greater Noida, YEIDA, and Delhi
-                      NCR. We specialize in residential plots, flats, villas,
-                      commercial spaces, and industrial properties.
+                      YEIDA (Yamuna Expressway Industrial Development Authority) is one of
+                       the fastest-growing and most promising real estate regions in North India. 
+                      Strategically located along the Yamuna Expressway, YEIDA offers
+                       excellent connectivity to Noida, Greater Noida, Agra,
+                        and the upcoming Noida International Airport (Jewar Airport).
+                      With world-class infrastructure, planned townships,
+                       and upcoming projects such as Film City and logistics parks,
+                        YEIDA promises immense growth potential and high returns on investment.
                     </p>
                     <p>
                       With deep local expertise and honest advice, we help
@@ -445,13 +852,7 @@ const Homepage = () => {
                         </Nav.Link>
                       </Nav.Item>
 
-                      <Nav.Item>
-                        <Nav.Link eventKey="commercial">Commercial</Nav.Link>
-                      </Nav.Item>
-
-                      <Nav.Item>
-                        <Nav.Link eventKey="industrial">Industrial</Nav.Link>
-                      </Nav.Item>
+                     
 
                       <Nav.Item>
                         <Nav.Link eventKey="top-picks">
@@ -486,18 +887,14 @@ const Homepage = () => {
                             onChange={(e) => setSelectedType(e.target.value)}
                           >
                             <option value="">Property Types</option>
-                            {Array.isArray(propertyTypes) &&
-                              propertyTypes.map((type, idx) => (
-                                <option key={idx} value={type}>
-                                  {type}
-                                </option>
-                              ))}
+                            <option value="Registered">Registered</option>
+                            <option value="Unregistered">Unregistered</option>
                           </Form.Select>
                         )}
 
                         <Form.Control
                           type="text"
-                          className="skd-search-input"
+                          className="form-control"
                           placeholder="Search by city or project name"
                           value={searchText}
                           onChange={(e) => setSearchText(e.target.value)}
@@ -513,6 +910,8 @@ const Homepage = () => {
                         </Button>
                       </InputGroup>
                     )}
+
+                    
 
                     {activeTab === "emi" && (
                       <Form className="mt-3 text-center">
@@ -730,12 +1129,11 @@ const Homepage = () => {
           </Container>
         </Container>
       </div>
-      <AllProjects />
       <ViewYouTubeSeries />
       <OfficeBearers />
-      <Collaborators />
+      
 
-      <GlobalPresence />
+      
 
       <PrimeWorkLocations />
 
@@ -743,9 +1141,74 @@ const Homepage = () => {
 
       <Stats />
 
+      <YeidaNews />
+
       <LeadForm />
 
       <Footer />
+
+      {/* Popup Enquiry Form */}
+      <div id="enquiryForm" className="enquiry-popup-overlay" style={{ display: 'none' }}>
+        <div className="enquiry-popup-content">
+          <button 
+            className="close-popup-btn"
+            onClick={() => {
+              document.getElementById('enquiryForm').style.display = 'none';
+            }}
+          >
+            ✕
+          </button>
+          <h3 className="popup-title">Quick Enquiry</h3>
+          <p className="popup-subtitle">Get in touch with us for the best deals!</p>
+          <form className="popup-form">
+            <input type="text" placeholder="Your Name" required />
+            <input type="email" placeholder="Your Email" required />
+            <input type="tel" placeholder="Phone Number" required />
+            <select required>
+              <option value="">Select Property Type</option>
+              <option value="Registered">Registered</option>
+              <option value="Unregistered">Unregistered</option>
+            </select>
+            <textarea placeholder="Your Message" rows="3"></textarea>
+            <button type="submit" className="popup-submit-btn">Submit Enquiry</button>
+          </form>
+        </div>
+      </div>
+
+      {/* New Year 2025 Popup */}
+      {showNewYearPopup && (
+        <div className="newyear-popup-overlay">
+          <div className="newyear-popup-content">
+            <button 
+              className="newyear-close-btn"
+              onClick={() => setShowNewYearPopup(false)}
+            >
+              ✕
+            </button>
+            <div className="fireworks"></div>
+            <div className="newyear-text">
+              <h1 className="newyear-title">🎉 New Year 2026 Special Offer! 🎊</h1>
+              <p className="newyear-subtitle">Get ready to start the year with your dream property!</p>
+              <div className="newyear-offer">
+                <h2>🎁 Special New Year Offer</h2>
+                <p>Get <span className="highlight-text">Exclusive Deals</span> on YEIDA Properties</p>
+                <p className="offer-details">✨ Zero Registration Fees on Select Plots</p>
+                <p className="offer-details">✨ Special Discounts on Residential Properties</p>
+                <p className="offer-details">✨ Limited Time Offer - Valid Till Jan 15, 2025</p>
+              </div>
+              <button 
+                className="newyear-cta-btn"
+                onClick={() => {
+                  setShowNewYearPopup(false);
+                  document.querySelector('.lead-form-section').scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
+                Claim Your Offer Now! 🎯
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };

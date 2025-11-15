@@ -17,37 +17,37 @@ app.use(prerender);
 console.log("✅ Prerender middleware loaded");
 
 // Uncomment this for local-run
-// const PORT = process.env.PORT || 5000;
-// app.use(cors());
-// app.use(
-//   cors({
-//     origin: ["http://localhost:5000", "http://skd-production.up.railway.app"],
-//     credentials: true,
-//   })
-// );
+const PORT = process.env.PORT || 5000;
+app.use(cors());
+app.use(
+  cors({
+    origin: ["http://localhost:5000", "http://skd-production.up.railway.app"],
+    credentials: true,
+  })
+);
 
-// app.use(
-//   cors({
-//     origin: [
-//       "http://localhost:5173",
-//       "https://skd-test.vercel.app", // frontend domain on Vercel
-//       "https://skd-production.up.railway.app", // backend self-origin (optional but safe)
-//     ],
-//     credentials: true,
-//   })
-// );
-
-// Uncomment this for production build
 app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://skd-testmode.vercel.app",
-      "https://www.skdpropworld.com", // ✅ Now it's correct
+      "https://skd-test.vercel.app", // frontend domain on Vercel
+      "https://skd-production.up.railway.app", // backend self-origin (optional but safe)
     ],
     credentials: true,
   })
 );
+
+// Uncomment this for production build
+// app.use(
+//   cors({
+//     origin: [
+//       "http://localhost:5173",
+//       "https://skd-testmode.vercel.app",
+//       "https://www.skdpropworld.com", // ✅ Now it's correct
+//     ],
+//     credentials: true,
+//   })
+// );
 
 // app.use(express.json());
 
@@ -82,8 +82,8 @@ app.use("/api", require("./routes/visitorRoutes"));
 console.log("→ Mounting /api/admin/projects");
 app.use("/api/admin/projects", require("./routes/projectRoutes"));
 
-console.log("→ Mounting /api/admin/news");
-app.use("/api/admin/news", newsRoutes); // ✅ CORRECT
+console.log("→ Mounting /api/news");
+app.use("/api/news", require("./routes/news"));
 
 console.log("→ Mounting /api/project-enquiry");
 app.use("/api/project-enquiry", require("./routes/projectEnquiryRoutes"));

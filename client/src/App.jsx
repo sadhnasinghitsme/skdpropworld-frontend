@@ -72,6 +72,7 @@ import AdminLoginForm from "./AdminLoginForm.jsx";
 import AllProjects from "./Components/AllProjects.jsx";
 import AllProjectsPage from "./Components/AllProjectsPage";
 import AdminInventory from "./Components/Admin Pages/AdminInventory.jsx";
+import AdminNewsManager from "./Components/Admin Pages/AdminNewsManager.jsx";
 
 // 🟡 Heavy & Admin Pages – Lazy Loaded
 const AdminDashboard = lazy(() => import("./AdminDashboard"));
@@ -341,6 +342,18 @@ function App() {
                   <Suspense fallback={<LoadingSpinner />}>
                     <AdminInventory />
                   </Suspense>
+                </AdminLayout>
+              </ProtectedRoute>
+            }
+          />
+
+          {/* News Manager */}
+          <Route
+            path="/admin/news-manager"
+            element={
+              <ProtectedRoute>
+                <AdminLayout>
+                  <AdminNewsManager />
                 </AdminLayout>
               </ProtectedRoute>
             }

@@ -258,11 +258,11 @@ function AdminDashboard() {
               great.”
             </blockquote>
 
-            {/* Dashboard Summary Cards */}
-            <div className="row mb-4">
-              {/* Leads */}
-              <div className="col-md-3 mb-3">
-                <div className="card text-white bg-primary h-100 shadow">
+            {/* Dashboard Summary Cards - Centered Layout */}
+            <div className="row mb-4 justify-content-center dashboard-cards-row">
+              {/* Leads - Left Side */}
+              <div className="col-md-4 mb-3">
+                <div className="card text-white bg-primary h-100 shadow dashboard-card">
                   <div className="card-body">
                     <h6 className="card-title">Customer Leads</h6>
                     <h3 className="card-text">{stats.leads}</h3>
@@ -290,45 +290,29 @@ function AdminDashboard() {
                 </div>
               </div>
 
-              {/* Projects */}
-              <div className="col-md-3 mb-3">
+              {/* Projects - Center (Highlighted) */}
+              <div className="col-md-4 mb-3">
                 <Link
                   to="/admin/control-projects"
                   className="text-decoration-none"
                 >
-                  <div className="card text-white bg-success h-100 shadow">
+                  <div className="card text-white bg-success h-100 shadow dashboard-card projects-card" style={{transform: 'scale(1.05)', border: '3px solid #28a745'}}>
                     <div className="card-body">
-                      <h6 className="card-title">Projects</h6>
+                      <h6 className="card-title">🎯 Projects</h6>
                       <h3 className="card-text">{stats.projects}</h3>
-                      <p className="small">View Projects →</p>
+                      <p className="small">Manage Projects →</p>
                     </div>
                   </div>
                 </Link>
               </div>
 
-              {/* Blogs */}
-              <div className="col-md-3 mb-3">
-                <Link
-                  to="/admin/blogs-manager"
-                  className="text-decoration-none"
-                >
-                  <div className="card text-white bg-warning h-100 shadow">
-                    <div className="card-body">
-                      <h6 className="card-title">Blog Posts</h6>
-                      <h3 className="card-text">{stats.blogs}</h3>
-                      <p className="small">Edit Blogs →</p>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-
-              {/* Career Applications (replaces Gallery) */}
-              <div className="col-md-3 mb-3">
+              {/* Career Applications - Right Side */}
+              <div className="col-md-4 mb-3">
                 <Link
                   to="/admin/career-applications"
                   className="text-decoration-none"
                 >
-                  <div className="card text-white bg-danger h-100 shadow">
+                  <div className="card text-white bg-danger h-100 shadow dashboard-card">
                     <div className="card-body">
                       <h6 className="card-title">Career Applications</h6>
                       <h3 className="card-text">{stats.careers}</h3>
@@ -337,6 +321,25 @@ function AdminDashboard() {
                       </p>
 
                       <p className="small">Track Applicants →</p>
+                    </div>
+                  </div>
+                </Link>
+              </div>
+            </div>
+
+            {/* Second Row for Blogs */}
+            <div className="row mb-4 justify-content-center dashboard-cards-row">
+              {/* Blogs - Centered Below */}
+              <div className="col-md-6 mb-3">
+                <Link
+                  to="/admin/blogs-manager"
+                  className="text-decoration-none"
+                >
+                  <div className="card text-white bg-warning h-100 shadow dashboard-card">
+                    <div className="card-body">
+                      <h6 className="card-title">Blog Posts</h6>
+                      <h3 className="card-text">{stats.blogs}</h3>
+                      <p className="small">Edit Blogs →</p>
                     </div>
                   </div>
                 </Link>
@@ -453,6 +456,15 @@ function AdminDashboard() {
               <Link to="/admin/add-inventory">
                 <button className="btn btn-lg btn-info fw-bold w-100 shadow">
                   📦 Add Inventory
+                </button>
+              </Link>
+            </div>
+
+            {/* News Manager Button */}
+            <div className="my-4">
+              <Link to="/admin/news-manager">
+                <button className="btn btn-lg btn-primary fw-bold w-100 shadow">
+                  📰 Manage YEIDA News
                 </button>
               </Link>
             </div>

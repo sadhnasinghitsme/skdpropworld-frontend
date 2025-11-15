@@ -50,33 +50,34 @@ const AboutUs = () => {
         </section>
 
         {/* Who We Are */}
-        <section className="py-5 bg-white">
-          <div className="container">
-            <h2 className="mb-4 text-center fw-bold">Who We Are</h2>
-            <p className="lead text-justify">
-              At <strong>SKD Propworld</strong>, we redefine excellence in the
-              real estate industry by delivering comprehensive and innovative
-              property solutions tailored to meet the evolving needs of our
-              clients. With a strong presence in{" "}
-              <strong>India, USA, UK, UAE, Singapore, and Canada</strong>, we
-              specialize in{" "}
-              <em>
-                Property Acquisitions and Sales, Real Estate Investment
-                Advisory, Luxury Property Marketing,
-              </em>{" "}
-              and <em>Relocation Services</em>.
+        <section className="py-5 who-we-are-section">
+          <div className="who-we-are-slideshow">
+            <div className="slide slide1"></div>
+            <div className="slide slide2"></div>
+            <div className="slide slide3"></div>
+          </div>
+          <div className="who-we-are-overlay"></div>
+          <div className="container position-relative">
+            <h2 className="mb-4 text-center fw-bold text-white">Who We Are</h2>
+            <p className="lead text-justify text-white">
+              At <strong>SKD Propworld</strong>, we specialize exclusively in <strong>YEIDA (Yamuna Expressway Industrial Development Authority)</strong> projects. Our goal is to provide clear, trustworthy, and professional real estate services for buyers and investors interested in YEIDA Residential Plots. We focus on delivering accurate information, smooth documentation support, and personalized guidance to help clients make confident decisions in the YEIDA region.
               <br />
               <br />
-              Our mission is to empower clients with unparalleled expertise,
-              state-of-the-art technology, and personalized service. Whether
-              it’s acquiring a dream property or maximizing returns on
-              investment, SKD Propworld is your trusted partner in navigating
-              the global real estate landscape.
+              Our goal is to provide clear, trustworthy, and professional real estate
+               services for buyers and investors interested in YEIDA Residential Plots.
+               We focus on delivering accurate information, smooth documentation support,
+                and personalized guidance to help clients make confident decisions in the 
+                YEIDA region.Our mission is to empower clients with transparent advice,
+                 expert knowledge of YEIDA sectors, and hassle-free assistance—whether you’re
+                  looking to buy a residential plot, secure an industrial space, or invest in 
+                  high-growth YEIDA zones near the upcoming Noida International Airport.
+                  SKD has been established since 2011, continues to deliver excellence.
+
               <br />
               <br />
-              With over two decades of experience, we take pride in being a
-              trusted name for clients seeking transparency, innovation, and
-              superior value in their real estate journeys.
+              With years of experience dedicated to YEIDA projects, SKD Propworld takes pride
+               in being a trusted name for anyone seeking reliability, clarity, and real value
+                in the Yamuna Expressway real estate market.
             </p>
           </div>
         </section>
@@ -112,6 +113,50 @@ const AboutUs = () => {
           </div>
         </section>
 
+        {/* Stats Section */}
+        <section className="aboutus-stats-section py-5">
+          <div className="container">
+            <div className="row g-4 text-center">
+              <div className="col-md-3 col-6">
+                <div className="stat-card">
+                  <div className="stat-icon">
+                    <i className="fas fa-users"></i>
+                  </div>
+                  <h3 className="stat-number">500+</h3>
+                  <p className="stat-label">Happy Clients</p>
+                </div>
+              </div>
+              <div className="col-md-3 col-6">
+                <div className="stat-card">
+                  <div className="stat-icon">
+                    <i className="fas fa-building"></i>
+                  </div>
+                  <h3 className="stat-number">100+</h3>
+                  <p className="stat-label">YEIDA Projects</p>
+                </div>
+              </div>
+              <div className="col-md-3 col-6">
+                <div className="stat-card">
+                  <div className="stat-icon">
+                    <i className="fas fa-award"></i>
+                  </div>
+                  <h3 className="stat-number">15+</h3>
+                  <p className="stat-label">Years Experience</p>
+                </div>
+              </div>
+              <div className="col-md-3 col-6">
+                <div className="stat-card">
+                  <div className="stat-icon">
+                    <i className="fas fa-handshake"></i>
+                  </div>
+                  <h3 className="stat-number">100%</h3>
+                  <p className="stat-label">Client Satisfaction</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Mission & Vision */}
         <section className="pb-5 aboutus-mission-section">
           <div className="container">
@@ -119,24 +164,64 @@ const AboutUs = () => {
             <div className="row gx-4 gy-4">
               <div className="col-md-6">
                 <div className="aboutus-mission-box h-100">
+                  <div className="mission-icon">
+                    <i className="fas fa-bullseye"></i>
+                  </div>
                   <h4 className="fw-semibold mb-3">Our Mission</h4>
                   <p>
-                    To revolutionize the real estate industry by providing
-                    innovative, technology-driven solutions that empower
-                    individuals and businesses to achieve their property goals
-                    with confidence, trust, and maximum value.
+                    To empower clients with transparent advice, expert knowledge of YEIDA sectors, 
+                    and hassle-free assistance in finding the perfect residential plot or investment 
+                    opportunity in the Yamuna Expressway region.
                   </p>
                 </div>
               </div>
               <div className="col-md-6">
                 <div className="aboutus-vision-box h-100">
+                  <div className="vision-icon">
+                    <i className="fas fa-eye"></i>
+                  </div>
                   <h4 className="fw-semibold mb-3">Our Vision</h4>
                   <p>
-                    To be a globally recognized leader in real estate solutions,
-                    setting industry benchmarks for innovation, integrity, and
-                    client satisfaction, while transforming the way people buy,
-                    sell, and invest in properties.
+                    To be the most trusted and reliable name in YEIDA real estate, known for 
+                    integrity, professionalism, and delivering exceptional value to every client 
+                    in the Yamuna Expressway market.
                   </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Core Values */}
+        <section className="aboutus-values-section py-5">
+          <div className="container">
+            <h2 className="mb-5 text-center fw-bold">Our Core Values</h2>
+            <div className="row g-4">
+              <div className="col-md-4">
+                <div className="value-card">
+                  <div className="value-icon">
+                    <i className="fas fa-shield-alt"></i>
+                  </div>
+                  <h5 className="fw-bold mb-3">Transparency</h5>
+                  <p>Clear, honest communication and complete disclosure in every transaction.</p>
+                </div>
+              </div>
+              <div className="col-md-4">
+                <div className="value-card">
+                  <div className="value-icon">
+                    <i className="fas fa-certificate"></i>
+                  </div>
+                  <h5 className="fw-bold mb-3">Trust</h5>
+                  <p>Building long-term relationships based on reliability and integrity.</p>
+                </div>
+              </div>
+              <div className="col-md-4">
+                <div className="value-card">
+                  <div className="value-icon">
+                    <i className="fas fa-lightbulb"></i>
+                  </div>
+                  <h5 className="fw-bold mb-3">Expertise</h5>
+                  <p>Deep knowledge of YEIDA sectors and market trends to guide your decisions.</p>
                 </div>
               </div>
             </div>

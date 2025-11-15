@@ -17,11 +17,8 @@ const LeadForm = () => {
   });
 
   const propertyOptions = [
-    "Flat",
-    "House",
-    "Plot",
-    "Commercial Space",
-    "Villa",
+    "Registered",
+    "Unregistered",
   ];
 
   const handleChange = (e) => {
