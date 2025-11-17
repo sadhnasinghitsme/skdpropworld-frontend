@@ -36,3 +36,4 @@ Thumbs.db
 # Misc
 .cache/
 coverage/
+node_modules/
