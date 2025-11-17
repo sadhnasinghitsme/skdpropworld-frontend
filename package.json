@@ -1,0 +1,13 @@
+{
+  "name": "yeida-property-portal",
+  "version": "1.0.0",
+  "description": "YEIDA Property Management Portal",
+  "scripts": {
+    "start": "cd server && npm start",
+    "install": "cd server && npm install",
+    "build": "cd server && npm run build"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
