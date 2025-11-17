@@ -420,86 +420,6 @@ router.put("/project-id/:id", async (req, res) => {
     ) {
       await deleteFromCloudinary(existingProject.logoImage.publicId);
     }
-    // ...existing code...
-
-/**
- * GET /api/admin/projects/search
- * Search projects by query
- */
-router.get("/search", async (req, res) => {
-  try {
-    const { query } = req.query;
-    
-    // If no query provided, return all visible projects
-    const searchCriteria = query 
-      ? {
-          visible: true,
-          $or: [
-            { heading: { $regex: query, $options: 'i' } },
-            { location: { $regex: query, $options: 'i' } },
-            { propertyType: { $regex: query, $options: 'i' } }
-          ]
-        }
-      : { visible: true };
-
-    const projects = await Project.find(searchCriteria)
-      .select("heading slug location bannerImage propertyType projectStatus")
-      .sort({ createdAt: -1 });
-
-    // If no projects exist, create a default YEIDA project
-    if (projects.length === 0) {
-      const defaultProject = new Project({
-        heading: "YEIDA Authority Residential Plots",
-        location: "Yamuna Expressway (YEIDA)",
-        propertyType: "Plot",
-        projectStatus: "LAUNCHED",
-        reraNumber: "Authority Approved",
-        visible: true,
-        usp: "Noida International Airport, International Film City, Industrial Hub, Sports City, Educational Hub",
-        isSKDPick: "YES",
-        propertyNature: "Residential",
-        slug: "yeida-authority-residential-plots"
-      });
-
-      await defaultProject.save();
-      return res.json([defaultProject]);
-    }
-
-    return res.json(projects);
-  } catch (error) {
-    console.error("Error searching projects:", error);
-    return res.status(500).json({ message: "Failed to search projects" });
-  }
-});
-    const projects = await Project.find(searchCriteria)
-      .select("heading slug location bannerImage propertyType projectStatus")
-      .sort({ createdAt: -1 });
-
-    // If no projects found, create default YEIDA project
-    if (projects.length === 0) {
-      const defaultProject = new Project({
-        heading: "YEIDA Authority Residential Plots",
-        location: "Yamuna Expressway (YEIDA)",
-        propertyType: "Plot",
-        projectStatus: "LAUNCHED",
-        reraNumber: "Authority Approved",
-        visible: true,
-        usp: "Noida International Airport, International Film City, Industrial Hub, Sports City, Educational Hub",
-        isSKDPick: "YES",
-        propertyNature: "Residential",
-        slug: "yeida-authority-residential-plots"
-      });
-
-      await defaultProject.save();
-      return res.json([defaultProject]);
-    }
-
-    return res.json(projects);
-  } catch (error) {
-    console.error("Error searching projects:", error);
-    return res.status(500).json({ message: "Failed to search projects" });
-  }
-});
 
     // 🧹 Cloudinary cleanup for replaced aboutImage
     if (
@@ -568,6 +488,37 @@ router.delete("/project-id/:id", async (req, res) => {
   } catch (err) {
     console.error("Error deleting project:", err);
     return res.status(500).json({ message: "Failed to delete project" });
+  }
+});
+
+/**
+ * GET /api/admin/projects/search
+ * Search projects by query
+ */
+router.get("/search", async (req, res) => {
+  try {
+    const { query } = req.query;
+    
+    // If no query provided, return all visible projects
+    const searchCriteria = query 
+      ? {
+          visible: true,
+          $or: [
+            { heading: { $regex: query, $options: 'i' } },
+            { location: { $regex: query, $options: 'i' } },
+            { propertyType: { $regex: query, $options: 'i' } }
+          ]
+        }
+      : { visible: true };
+
+    const projects = await Project.find(searchCriteria)
+      .select("heading slug location bannerImage propertyType projectStatus")
+      .sort({ createdAt: -1 });
+
+    return res.json(projects);
+  } catch (error) {
+    console.error("Error searching projects:", error);
+    return res.status(500).json({ message: "Failed to search projects" });
   }
 });
 
