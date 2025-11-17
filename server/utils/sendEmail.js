@@ -6,10 +6,7 @@ const EMAIL_PASS = process.env.EMAIL_PASS;
 const NOTIFY_RECEIVER = process.env.NOTIFY_RECEIVER;
 
 if (!EMAIL_USER || !EMAIL_PASS) {
-  console.error("❌ EMAIL_USER or EMAIL_PASS is missing in .env");
-}
-if (!EMAIL_USER || !EMAIL_PASS) {
-  throw new Error("❌ EMAIL credentials are missing. Check .env");
+  console.warn("⚠️ EMAIL_USER or EMAIL_PASS is missing in .env - Email functionality will be disabled");
 }
 
 const transporter = nodemailer.createTransport({
@@ -21,6 +18,10 @@ const transporter = nodemailer.createTransport({
 });
 
 const sendEmail = async (leadData) => {
+  if (!EMAIL_USER || !EMAIL_PASS) {
+    console.warn("⚠️ Email not sent - credentials missing");
+    return;
+  }
   const { name, email, phone, propertyType, message } = leadData;
 
   const adminMailOptions = {
@@ -116,6 +117,10 @@ const sendProjectEnquiryEmail = async ({
   projectId,
   projectName,
 }) => {
+  if (!EMAIL_USER || !EMAIL_PASS) {
+    console.warn("⚠️ Email not sent - credentials missing");
+    return;
+  }
   const adminMailOptions = {
     from: `"SKD Propworld Project Enquiry" <${process.env.EMAIL_USER}>`,
     to: process.env.NOTIFY_RECEIVER,
