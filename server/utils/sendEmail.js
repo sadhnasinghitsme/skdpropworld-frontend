@@ -9,13 +9,17 @@ if (!EMAIL_USER || !EMAIL_PASS) {
   console.warn("⚠️ EMAIL_USER or EMAIL_PASS is missing in .env - Email functionality will be disabled");
 }
 
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
+let transporter = null;
+
+if (EMAIL_USER && EMAIL_PASS) {
+  transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
+    },
+  });
+}
 
 const sendEmail = async (leadData) => {
   if (!EMAIL_USER || !EMAIL_PASS) {
