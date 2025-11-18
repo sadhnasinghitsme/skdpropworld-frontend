@@ -29,7 +29,7 @@ app.use(
 app.use(
   cors({
     origin: [
-      "http://localhost:5173",
+      "www-skdpropworld-com.onrender.com"
       "https://skd-test.vercel.app", // frontend domain on Vercel
       "https://skd-production.up.railway.app", // backend self-origin (optional but safe)
     ],
