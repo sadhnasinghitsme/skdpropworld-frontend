@@ -426,7 +426,7 @@ const Homepage = () => {
         <section className="hero"> 
           {/* Background Video */}
           <video autoPlay loop muted playsInline className="hero-video-bg">
-            <source src="/hero-video.mp4.mp4" type="video/mp4" />
+            <source src="/hero-video.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
           
