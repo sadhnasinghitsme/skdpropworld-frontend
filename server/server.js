@@ -27,6 +27,7 @@ app.use(
       "https://skd-production.up.railway.app",
       "https://www-skdpropworld-com.onrender.com",
       "https://skd-test.vercel.app",
+      "https://skdpropworld.com",
       "https://www.skdpropworld.com",
       "https://https-www-skdpropworld-com.vercel.app"
     ],
