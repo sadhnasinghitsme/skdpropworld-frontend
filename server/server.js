@@ -127,21 +127,19 @@ app.get("/api", (req, res) => {
 
 // Start MongoDB + Server
 async function startServer() {
-  try {
-    await mongoose.connect(process.env.MONGO_URI, {
-      dbName: "SkdData",
-    });
+  await mongoose.connect(process.env.MONGO_URI, {
+    dbName: "SkdData",
+  });
 
-    console.log("✅ MongoDB connected successfully.");
+  console.log("MongoDB connected successfully.");
 
-    app.listen(PORT, "0.0.0.0", () => {
-      console.log(`🚀 Server running on port ${PORT}`);
-    });
-
-  } catch (err) {
-    console.error("❌ MongoDB connection error:", err.message);
-    process.exit(1);
-  }
+  app.listen(PORT, "0.0.0.0", () => {
+    console.log(`🚀 Server running on port ${PORT}`);
+  });
 }
 
-startServer();
+startServer().catch(err => {
+  console.error("❌ MongoDB connection error:", err);
+  process.exit(1);
+});
+
