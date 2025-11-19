@@ -21,17 +21,14 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(
   cors({
-    origin: ["http://localhost:5000", "http://skd-production.up.railway.app"],
-    credentials: true,
-  })
-);
-
-app.use(
-  cors({
     origin: [
-      "www-skdpropworld-com.onrender.com"
-      "https://skd-test.vercel.app", // frontend domain on Vercel
-      "https://skd-production.up.railway.app", // backend self-origin (optional but safe)
+      "http://localhost:5000",
+      "http://localhost:5173",
+      "https://skd-production.up.railway.app",
+      "https://www-skdpropworld-com.onrender.com",
+      "https://skd-test.vercel.app",
+      "https://www.skdpropworld.com",
+      "https://https-www-skdpropworld-com.vercel.app"
     ],
     credentials: true,
   })
