@@ -158,7 +158,7 @@ const Navbar = () => {
                 <ul className="dropdown-menu skd-menu">
                   {/* View All Projects Link */}
                   <li>
-                    <Link className="dropdown-item fw-bold" to="/all-projects">
+                    <Link className="dropdown-item fw-bold" to="/projects">
                       View All Projects
                     </Link>
                   </li>
