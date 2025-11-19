@@ -156,10 +156,10 @@ const Navbar = () => {
                 </a>
 
                 <ul className="dropdown-menu skd-menu">
-                  {/* View Projects Link */}
+                  {/* View Project Link */}
                   <li>
                     <Link className="dropdown-item fw-bold" to="/projects">
-                      View Projects
+                      View Project
                     </Link>
                   </li>
                   <li><hr className="dropdown-divider" /></li>
