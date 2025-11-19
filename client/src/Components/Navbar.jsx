@@ -156,6 +156,14 @@ const Navbar = () => {
                 </a>
 
                 <ul className="dropdown-menu skd-menu">
+                  {/* View All Projects Link */}
+                  <li>
+                    <Link className="dropdown-item fw-bold" to="/all-projects">
+                      View All Projects
+                    </Link>
+                  </li>
+                  <li><hr className="dropdown-divider" /></li>
+                  
                   {Object.entries(grouped).map(([type, list]) => {
                     const safeId = `submenu-${type
                       .toLowerCase()
