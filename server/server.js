@@ -120,20 +120,28 @@ app.use("/api/admin/youtube", require("./routes/youtubeVideos"));
 //     app.listen(5000, () => console.log("Server running on port 5000"));
 //   })
 //   .catch((err) => console.error("MongoDB connection error:", err));
+// Simple test route
 app.get("/api", (req, res) => {
   res.send("✅ API is working fine!");
 });
-mongoose
-  .connect(process.env.MONGO_URI, {
-    dbName: "SkdData",
-  })
-  .then(() => {
+
+// Start MongoDB + Server
+async function startServer() {
+  try {
+    await mongoose.connect(process.env.MONGO_URI, {
+      dbName: "SkdData",
+    });
+
     console.log("✅ MongoDB connected successfully.");
-    app.listen(PORT, "0.0.0.0", () =>
-      console.log(`🚀 Server running on port ${PORT}`)
-    );
-  })
-  .catch((err) => {
+
+    app.listen(PORT, "0.0.0.0", () => {
+      console.log(`🚀 Server running on port ${PORT}`);
+    });
+
+  } catch (err) {
     console.error("❌ MongoDB connection error:", err.message);
-    process.exit(1); // Exit the process if DB fails to connect
-  });
+    process.exit(1);
+  }
+}
+
+startServer();
