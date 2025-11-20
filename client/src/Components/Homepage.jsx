@@ -33,6 +33,7 @@ import YeidaNews from "./YeidaNews";
 
 const Homepage = () => {
   const counterRef = useRef(null);
+  const videoRef = useRef(null);
   const navigate = useNavigate();
   const [searchText, setSearchText] = useState("");
   const [activeTab, setActiveTab] = useState("residential");
@@ -57,6 +58,46 @@ const Homepage = () => {
   const [showNewYearPopup, setShowNewYearPopup] = useState(false);
   const [expandedSector, setExpandedSector] = useState(null);
   const [selectedCity, setSelectedCity] = useState("");
+
+  // Video autoplay handler
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      console.log('Video element mounted');
+      
+      video.load();
+      video.play().catch(err => {
+        console.log('Video autoplay failed:', err);
+      });
+
+      // Ensure video loops properly
+      const handleEnded = () => {
+        console.log('Video ended, restarting...');
+        video.currentTime = 0;
+        video.play();
+      };
+
+      const handlePause = () => {
+        console.log('Video paused, resuming...');
+        video.play();
+      };
+
+      const handleError = (e) => {
+        console.error('Video error:', e);
+      };
+
+      video.addEventListener('ended', handleEnded);
+      video.addEventListener('pause', handlePause);
+      video.addEventListener('error', handleError);
+
+      return () => {
+        console.log('Video element unmounting');
+        video.removeEventListener('ended', handleEnded);
+        video.removeEventListener('pause', handlePause);
+        video.removeEventListener('error', handleError);
+      };
+    }
+  }, []);
 
   // New Year Popup - Show once after 3 seconds
   useEffect(() => {
@@ -425,12 +466,15 @@ const Homepage = () => {
         {/* YEIDA Hero Section with Video Background */}
         <section className="hero"> 
           {/* Background Video */}
-          <video autoPlay loop muted playsInline className="hero-video-bg">
+          <video 
+            ref={videoRef}
+            autoPlay 
+            loop 
+            muted 
+            playsInline 
+            className="hero-video-bg"
+          >
             <source src="/videos/hero-video.mp4" type="video/mp4" />
-
-
-
-
             Your browser does not support the video tag.
           </video>
           
