@@ -312,8 +312,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /* Fallback background in case video doesn't load */
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+  /* Fallback background - always show this */
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.5)), 
               url('/slide1.jpg.JPG') center/cover no-repeat;
 }
 
