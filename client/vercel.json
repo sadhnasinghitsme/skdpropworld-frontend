@@ -29,10 +29,15 @@
         }
       ],
       "destination": "https://service.prerender.io/https://www.skdpropworld.com/:1"
+    }
+  ],
+  "routes": [
+    {
+      "handle": "filesystem"
     },
     {
-      "source": "/(.*)",
-      "destination": "/index.html"
+      "src": "/(.*)",
+      "dest": "/index.html"
     }
   ]
 }
