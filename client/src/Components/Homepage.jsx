@@ -466,17 +466,25 @@ const Homepage = () => {
         {/* YEIDA Hero Section with Video Background */}
         <section className="hero"> 
           {/* Background Video */}
-          <video 
-            ref={videoRef}
-            autoPlay 
-            loop 
-            muted 
-            playsInline 
-            className="hero-video-bg"
-          >
-            <source src="/videos/hero-video.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
+        <video
+  autoPlay
+  muted
+  loop
+  playsInline
+  className="hero-video-bg"
+  style={{
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+    position: "absolute",
+    top: 0,
+    left: 0,
+    zIndex: -1
+  }}
+>
+  <source src="/videos/hero-video.mp4" type="video/mp4" />
+</video>
+
           
           {/* Dark Overlay */}
           <div className="hero-video-overlay"></div>
