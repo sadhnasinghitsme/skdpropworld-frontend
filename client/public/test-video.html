@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Video Test</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #000;
+        }
+        video {
+            width: 100%;
+            max-width: 800px;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="color: white;">Video Test</h1>
+    <video controls autoplay muted loop>
+        <source src="/videos/hero-video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <script>
+        const video = document.querySelector('video');
+        video.addEventListener('loadstart', () => console.log('Load started'));
+        video.addEventListener('loadedmetadata', () => console.log('Metadata loaded'));
+        video.addEventListener('loadeddata', () => console.log('Data loaded'));
+        video.addEventListener('canplay', () => console.log('Can play'));
+        video.addEventListener('error', (e) => console.error('Error:', e));
+    </script>
+</body>
+</html>
