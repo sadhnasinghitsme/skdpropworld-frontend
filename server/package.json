@@ -5,8 +5,10 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
-    "build": "echo \"No build step needed\""
-  },
+ "build": "echo 'No build step needed'" 
+ },
+  "license": "MIT",
+  "description": "YEIDA Property Portal Backend",
   "dependencies": {
     "axios": "^1.10.0",
     "cloudinary": "^1.36.0",
@@ -17,10 +19,6 @@
     "mongoose": "^7.0.0",
     "multer": "1.4.5-lts.1",
     "multer-storage-cloudinary": "^4.0.0",
-    "nodemailer": "^7.0.10",
-    "prerender-node": "^3.8.3",
-    "sitemap": "^9.0.0",
-    "streamifier": "^0.1.1",
-    "uuid": "^9.0.0"
+    "nodemailer": "^7.0.10"
   }
 }
