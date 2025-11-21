@@ -170,8 +170,9 @@ router.post("/delete-image", async (req, res) => {
       return res.status(400).json({ message: "Public ID is required" });
     }
 
-    // 1. Delete from Cloudinary
-    await deleteFromCloudinary(publicId);
+  router.put("/update", async (req, res) => {
+    await deleteFromCloudinary(id);
+});
 
     // 2. Remove matching image from the appropriate field
     await Project.updateMany(
