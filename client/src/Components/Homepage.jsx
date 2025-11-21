@@ -440,27 +440,33 @@ const Homepage = () => {
               position: "absolute",
               top: 0,
               left: 0,
-              zIndex: 0,
+              zIndex: -1
             }}
           >
-            <source src="/videos/hero-video.mp4" type="video/mp4" />
+            <source src="/videos/background-video.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
           
           {/* Dark Overlay */}
-          <div className="hero-video-overlay"></div>
+          <div className="hero-video-overlay" style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            background: 'rgba(0, 0, 0, 0.5)',
+            zIndex: 1
+          }}></div>
           
-          {/* Content */}
-          <div className="hero-content">
-            <h1>Explore Government-Approved YEIDA Residential  Plots</h1> 
+          {/* Hero Content */}
+          <div className="hero-content" style={{ position: 'relative', zIndex: 2 }}>
+            <h1>Explore Government-Approved YEIDA Residential Plots</h1> 
             <p>Find Residential Plots and investments near Noida International Airport.</p> 
             <a href="/projects" className="btn">View Project</a>
           </div>
         </section>
 
-
-
-                 <section id="yeida-projects">
+        <section id="yeida-projects">
   <h2>YEIDA Project Highlights</h2>
   <div className="yeida-project-list">
 
