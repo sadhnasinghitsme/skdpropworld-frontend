@@ -355,16 +355,16 @@ router.put("/project-id/:id", async (req, res) => {
     if (updateData.heading) {
       let newSlug = slugify(updateData.slug || updateData.heading);
       let suffix = 1;
-      let existingProject;
+      let conflictingProject;
       do {
-        existingProject = await Project.findOne({ 
+        conflictingProject = await Project.findOne({ 
           slug: newSlug, 
           _id: { $ne: req.params.id } 
         });
-        if (existingProject) {
+        if (conflictingProject) {
           newSlug = `${slugify(updateData.heading)}-${suffix++}`;
         }
-      } while (existingProject);
+      } while (conflictingProject);
       updateData.slug = newSlug;
     }
 
@@ -411,46 +411,38 @@ router.put("/project-id/:id", async (req, res) => {
       delete updateData.aboutImage;
     }
 
-    // 🧹 Cloudinary cleanup for replaced bannerImage
-    if (
-      existingProject.bannerImage?.publicId &&
-      updateData.bannerImage?.publicId &&
-      updateData.bannerImage.publicId !== existingProject.bannerImage.publicId
-    ) {
-      try {
-        await deleteFromCloudinary(existingProject.bannerImage.publicId);
-      } catch (error) {
-        console.error("Error deleting old banner image from Cloudinary:", error);
-        // Continue with the update even if Cloudinary deletion fails
+    const cleanupTasks = [];
+    const queueCloudinaryCleanup = (currentImage, nextImage, label) => {
+      const currentId = currentImage?.publicId;
+      const nextId = nextImage?.publicId;
+      if (!currentId || !nextId || currentId === nextId) {
+        return;
       }
-    }
+      cleanupTasks.push(
+        deleteFromCloudinary(currentId).catch((error) => {
+          console.error(`Error deleting old ${label} from Cloudinary:`, error);
+        })
+      );
+    };
 
-    // 🧹 Cloudinary cleanup for replaced logoImage
-    if (
-      existingProject.logoImage?.publicId &&
-      updateData.logoImage?.publicId &&
-      updateData.logoImage.publicId !== existingProject.logoImage.publicId
-    ) {
-      try {
-        await deleteFromCloudinary(existingProject.logoImage.publicId);
-      } catch (error) {
-        console.error("Error deleting old logo image from Cloudinary:", error);
-        // Continue with the update even if Cloudinary deletion fails
-      }
-    }
+    queueCloudinaryCleanup(
+      existingProject.bannerImage,
+      updateData.bannerImage,
+      "banner image"
+    );
+    queueCloudinaryCleanup(
+      existingProject.logoImage,
+      updateData.logoImage,
+      "logo image"
+    );
+    queueCloudinaryCleanup(
+      existingProject.aboutImage,
+      updateData.aboutImage,
+      "about image"
+    );
 
-    // Cloudinary cleanup for replaced aboutImage
-    if (
-      existingProject.aboutImage?.publicId &&
-      updateData.aboutImage?.publicId &&
-      updateData.aboutImage.publicId !== existingProject.aboutImage.publicId
-    ) {
-      try {
-        await deleteFromCloudinary(existingProject.aboutImage.publicId);
-      } catch (error) {
-        console.error("Error deleting old about image from Cloudinary:", error);
-        // Continue with the update even if Cloudinary deletion fails
-      }
+    if (cleanupTasks.length) {
+      await Promise.allSettled(cleanupTasks);
     }
 
     // Ensure we have a valid project ID

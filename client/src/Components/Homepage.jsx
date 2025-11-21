@@ -446,6 +446,7 @@ const Homepage = () => {
       src="https://www.skdpropworld.com/videos/hero-video.mp4"
       type="video/mp4"
     />
+    Your browser does not support the video tag.
     </video>
     </section>
           
