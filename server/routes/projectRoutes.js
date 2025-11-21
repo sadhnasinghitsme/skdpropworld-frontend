@@ -474,14 +474,11 @@ router.put("/project-id/:id", async (req, res) => {
       });
     }
   } catch (error) {
-    console.error("Error updating project:", error);
-    return res.status(500).json({ 
-      message: "Error updating project", 
-      error: error.message 
+    console.error("❌ Error in project update route:", error);
     return res.status(500).json({
-      message: "Validation failed",
-      error: err.message,
-      details: err.errors,
+      message: "Error updating project",
+      error: error.message,
+      details: error.errors || {}
     });
   }
 });
