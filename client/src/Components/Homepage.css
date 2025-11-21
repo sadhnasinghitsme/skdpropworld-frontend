@@ -338,7 +338,7 @@
     rgba(0, 0, 0, 0.2) 100%
   );
 
-  z-index: -1;        /* overlay must be BELOW the video */
+  z-index: 1;        /* overlay must be BELOW the video */
 }
 
 

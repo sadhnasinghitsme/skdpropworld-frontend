@@ -125,6 +125,7 @@ app.get("/api", (req, res) => {
   res.send("✅ API is working fine!");
 });
 
+
 // Start MongoDB + Server
 async function startServer() {
   await mongoose.connect(process.env.MONGO_URI, {
