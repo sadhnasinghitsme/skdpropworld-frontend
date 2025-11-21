@@ -302,20 +302,15 @@
 
 /* YEIDA Hero Section Styles with Video Background */
 .hero {
-  color: white;
-  padding: 120px 20px;
-  text-align: center;
   position: relative;
+  width: 100%;
+  height: 100vh;    /* Full screen */
   overflow: hidden;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-  min-height: 600px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* Fallback background - always show this */
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.5)), 
-              url('/slide1.jpg.JPG') center/cover no-repeat;
+
+  /* Optional fallback if video fails to load */
+  background: url('/slide1.jpg.JPG') center/cover no-repeat;
 }
+
 
 /* Video Background */
 .hero-video-bg {
@@ -325,7 +320,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: 1;
+  z-index: -1;        /* Keeps video behind text */
   pointer-events: none;
 }
 
