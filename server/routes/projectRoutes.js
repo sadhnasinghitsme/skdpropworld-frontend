@@ -171,7 +171,12 @@ router.post("/delete-image", async (req, res) => {
     }
 
     // Delete the image from Cloudinary
-    await deleteFromCloudinary(publicId);
+    try {
+      await deleteFromCloudinary(publicId);
+    } catch (error) {
+      console.error("Error deleting from Cloudinary:", error);
+      // Continue even if Cloudinary deletion fails, as we still want to clean up the database
+    }
 
     // Remove the image from any project that references it
     await Project.updateMany(
@@ -193,8 +198,11 @@ router.post("/delete-image", async (req, res) => {
 
     return res.status(200).json({ message: "Image deleted successfully" });
   } catch (error) {
-    console.error("Error deleting image:", error);
-    return res.status(500).json({ message: "Server error" });
+    console.error("Error in delete-image route:", error);
+    return res.status(500).json({ 
+      message: "Error processing image deletion",
+      error: error.message 
+    });
   }
 });
 
@@ -347,11 +355,16 @@ router.put("/project-id/:id", async (req, res) => {
     if (updateData.heading) {
       let newSlug = slugify(updateData.slug || updateData.heading);
       let suffix = 1;
-      while (
-        await Project.findOne({ slug: newSlug, _id: { $ne: req.params.id } })
-      ) {
-        newSlug = `${slugify(updateData.heading)}-${suffix++}`;
-      }
+      let existingProject;
+      do {
+        existingProject = await Project.findOne({ 
+          slug: newSlug, 
+          _id: { $ne: req.params.id } 
+        });
+        if (existingProject) {
+          newSlug = `${slugify(updateData.heading)}-${suffix++}`;
+        }
+      } while (existingProject);
       updateData.slug = newSlug;
     }
 
