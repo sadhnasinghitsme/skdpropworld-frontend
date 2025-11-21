@@ -33,6 +33,7 @@ import YeidaNews from "./YeidaNews";
 
 const Homepage = () => {
   const counterRef = useRef(null);
+  const videoRef = useRef(null);
   const navigate = useNavigate();
   const [searchText, setSearchText] = useState("");
   const [activeTab, setActiveTab] = useState("residential");
@@ -212,6 +213,28 @@ const Homepage = () => {
         "https://counter1.optistats.ovh/private/counter.js?c=zr2u9fxr1583l6ms69zpskqsajgtp168&down=async";
       script.async = true;
       counterRef.current.appendChild(script);
+    }
+  }, []);
+
+  // Ensure video plays
+  useEffect(() => {
+    if (videoRef.current) {
+      const video = videoRef.current;
+      const playPromise = video.play();
+      
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            console.log("Video is playing");
+          })
+          .catch((error) => {
+            console.error("Error playing video:", error);
+            // Try to play again after a short delay
+            setTimeout(() => {
+              video.play().catch(err => console.log("Retry play failed:", err));
+            }, 1000);
+          });
+      }
     }
   }, []);
 
@@ -426,43 +449,33 @@ const Homepage = () => {
         
         {/* YEIDA Hero Section with Video Background */}
         <section className="hero">
-  <video
-    autoPlay
-    muted
-    loop
-    playsInline
-    className="hero-video-bg"
-    style={{
-      width: "100%",
-      height: "100%",
-      objectFit: "cover",
-      position: "absolute",
-      top: 0,
-      left: 0,
-      zIndex: -1
-    }}
-  >
-    <source
-      src="https://www.skdpropworld.com/videos/hero-video.mp4"
-      type="video/mp4"
-    />
-    Your browser does not support the video tag.
-    </video>
-    </section>
+          <video
+            ref={videoRef}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            className="hero-video-bg"
+            onLoadedData={(e) => {
+              e.target.play().catch(err => console.log("Video play error:", err));
+            }}
+            onError={(e) => {
+              console.error("Video loading error:", e);
+            }}
+          >
+            <source
+              src="https://www.skdpropworld.com/videos/hero-video.mp4"
+              type="video/mp4"
+            />
+            Your browser does not support the video tag.
+          </video>
           
           {/* Dark Overlay */}
-          <div className="hero-video-overlay" style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            background: 'rgba(0, 0, 0, 0.5)',
-            zIndex: 1
-          }}></div>
+          <div className="hero-video-overlay"></div>
           
           {/* Hero Content */}
-          <div className="hero-content" style={{ position: 'relative', zIndex: 2 }}>
+          <div className="hero-content">
             <h1>Explore Government-Approved YEIDA Residential Plots</h1> 
             <p>Find Residential Plots and investments near Noida International Airport.</p> 
             <a href="/projects" className="btn">View Project</a>
