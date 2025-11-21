@@ -36,6 +36,12 @@ const Homepage = () => {
   const videoRef = useRef(null);
   const navigate = useNavigate();
   const [searchText, setSearchText] = useState("");
+  const [videoError, setVideoError] = useState(false);
+  
+  // Debug: Log when component renders
+  useEffect(() => {
+    console.log("✅ Homepage component mounted");
+  }, []);
   const [activeTab, setActiveTab] = useState("residential");
   const [loan, setLoan] = useState("");
   const [rate, setRate] = useState("");
@@ -43,7 +49,7 @@ const Homepage = () => {
 
   const [tenure, setTenure] = useState("");
   const [emi, setEmi] = useState(null);
-  const API_BASE = import.meta.env.VITE_API_BASE_URL;
+  const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:10000";
   const [selectedType, setSelectedType] = useState("");
 
   const [propertyTypes, setPropertyTypes] = useState([]);
@@ -182,13 +188,20 @@ const Homepage = () => {
   }, [activeTab]);
 
   useEffect(() => {
+    if (!API_BASE) {
+      console.warn("⚠️ API_BASE is not defined");
+      return;
+    }
     axios
       .get(`${API_BASE}/api/snippet/seasonal-html`)
       .then((res) => {
-        setSeasonalHtml(res.data.seasonalHtml);
+        setSeasonalHtml(res.data.seasonalHtml || "");
       })
-      .catch((err) => console.error("Seasonal HTML fetch error", err));
-  }, []);
+      .catch((err) => {
+        console.error("Seasonal HTML fetch error", err);
+        setSeasonalHtml(""); // Set empty string on error
+      });
+  }, [API_BASE]);
 
   useEffect(() => {
     const fetchTopPicks = async () => {
@@ -225,13 +238,18 @@ const Homepage = () => {
       if (playPromise !== undefined) {
         playPromise
           .then(() => {
-            console.log("Video is playing");
+            console.log("✅ Video is playing");
+            setVideoError(false);
           })
           .catch((error) => {
-            console.error("Error playing video:", error);
+            console.error("❌ Error playing video:", error);
+            setVideoError(true);
             // Try to play again after a short delay
             setTimeout(() => {
-              video.play().catch(err => console.log("Retry play failed:", err));
+              video.play().catch(err => {
+                console.log("Retry play failed:", err);
+                setVideoError(true);
+              });
             }, 1000);
           });
       }
@@ -449,27 +467,41 @@ const Homepage = () => {
         
         {/* YEIDA Hero Section with Video Background */}
         <section className="hero">
-          <video
-            ref={videoRef}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-            className="hero-video-bg"
-            onLoadedData={(e) => {
-              e.target.play().catch(err => console.log("Video play error:", err));
-            }}
-            onError={(e) => {
-              console.error("Video loading error:", e);
-            }}
-          >
-            <source
-              src="https://www.skdpropworld.com/videos/hero-video.mp4"
-              type="video/mp4"
-            />
-            Your browser does not support the video tag.
-          </video>
+          {!videoError && (
+            <video
+              ref={videoRef}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+              className="hero-video-bg"
+              onLoadedData={(e) => {
+                e.target.play().catch(err => {
+                  console.log("Video play error:", err);
+                  setVideoError(true);
+                });
+              }}
+              onError={(e) => {
+                console.error("Video loading error:", e);
+                setVideoError(true);
+              }}
+              onCanPlay={() => {
+                setVideoError(false);
+              }}
+            >
+              <source
+                src="/videos/hero-video-compressed.mp4"
+                type="video/mp4"
+              />
+              {/* Fallback to external URL if local file doesn't work */}
+              <source
+                src="https://www.skdpropworld.com/videos/hero-video.mp4"
+                type="video/mp4"
+              />
+              Your browser does not support the video tag.
+            </video>
+          )}
           
           {/* Dark Overlay */}
           <div className="hero-video-overlay"></div>

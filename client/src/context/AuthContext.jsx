@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider value={{ isAuth, admin, login, logout }}>
-      {!loading && children} {/* ✅ only render when ready */}
+      {children} {/* Always render children, loading is handled internally */}
     </AuthContext.Provider>
   );
 };

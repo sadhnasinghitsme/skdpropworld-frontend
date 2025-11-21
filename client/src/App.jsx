@@ -139,12 +139,21 @@ function App() {
   useEffect(() => {
     const fetchConfig = async () => {
       try {
+        const API_BASE = import.meta.env.VITE_API_BASE_URL;
+        if (!API_BASE) {
+          console.warn("⚠️ VITE_API_BASE_URL not defined, skipping maintenance check");
+          setLoadingConfig(false);
+          return;
+        }
         const res = await axios.get(
-          `${import.meta.env.VITE_API_BASE_URL}/api/site-config`
+          `${API_BASE}/api/site-config`,
+          { timeout: 5000 } // 5 second timeout
         );
-        setMaintenanceMode(res.data.maintenanceMode);
-      } catch {
-        console.error("Error checking maintenance mode");
+        setMaintenanceMode(res.data.maintenanceMode || false);
+      } catch (err) {
+        console.error("Error checking maintenance mode:", err);
+        // Don't block the app if API fails
+        setMaintenanceMode(false);
       } finally {
         setLoadingConfig(false);
       }
@@ -162,13 +171,12 @@ function App() {
       </div>
     );
   }
-  // if (loadingConfig) return <div>Loading...</div>;
-  // if (loadingConfig) return <SplashScreen />;
-  if (!loadingConfig && maintenanceMode && !isAdminRoute) {
-    return <MaintenancePage />;
+  // Show loading screen while checking config
+  if (loadingConfig) {
+    return <SplashScreen />;
   }
 
-  // 👇 Only block public pages
+  // Only block public pages if maintenance mode is enabled
   if (maintenanceMode && !isAdminRoute) {
     return <MaintenancePage />;
   }
