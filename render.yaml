@@ -7,7 +7,7 @@ services:
     branch: main
     rootDir: server
     buildCommand: npm install
-    startCommand: npm start
+    startCommand: node diagnostic-server.js
     envVars:
       - key: NODE_VERSION
         value: 20.11.0
