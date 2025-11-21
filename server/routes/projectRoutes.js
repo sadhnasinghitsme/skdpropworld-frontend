@@ -453,6 +453,11 @@ router.put("/project-id/:id", async (req, res) => {
       }
     }
 
+    // Ensure we have a valid project ID
+    if (!req.params.id) {
+      return res.status(400).json({ message: "Project ID is required" });
+    }
+
     // Update the project in the database
     try {
       const updatedProject = await Project.findByIdAndUpdate(
