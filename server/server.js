@@ -16,8 +16,8 @@ prerender.set("prerenderToken", "QHhhrvIPvM5gm4fHnmaT");
 app.use(prerender);
 console.log("✅ Prerender middleware loaded");
 
-// Uncomment this for local-run
-const PORT = process.env.PORT || 5000;
+// Port configuration for deployment
+const PORT = process.env.PORT || 10000;
 app.use(cors());
 app.use(
   cors({
@@ -128,19 +128,27 @@ app.get("/api", (req, res) => {
 
 // Start MongoDB + Server
 async function startServer() {
-  await mongoose.connect(process.env.MONGO_URI, {
-    dbName: "SkdData",
-  });
+  try {
+    // Check if MONGO_URI is provided
+    if (!process.env.MONGO_URI) {
+      throw new Error("MONGO_URI environment variable is required");
+    }
 
-  console.log("MongoDB connected successfully.");
+    await mongoose.connect(process.env.MONGO_URI, {
+      dbName: "SkdData",
+    });
 
-  app.listen(PORT, "0.0.0.0", () => {
-    console.log(`🚀 Server running on port ${PORT}`);
-  });
+    console.log("✅ MongoDB connected successfully.");
+
+    app.listen(PORT, "0.0.0.0", () => {
+      console.log(`🚀 Server running on port ${PORT}`);
+      console.log(`🌐 Environment: ${process.env.NODE_ENV || 'development'}`);
+    });
+  } catch (err) {
+    console.error("❌ Server startup error:", err.message);
+    process.exit(1);
+  }
 }
 
-startServer().catch(err => {
-  console.error("❌ MongoDB connection error:", err);
-  process.exit(1);
-});
+startServer();
 

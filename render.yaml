@@ -1,15 +1,16 @@
 services:
   - type: web
-    name: skdpropworld-backend
+    name: yeida-backend
     env: node
     region: singapore
     plan: free
     branch: main
-    buildCommand: cd server && npm install
-    startCommand: cd server && npm start
+    rootDir: server
+    buildCommand: npm install
+    startCommand: npm start
     envVars:
       - key: NODE_VERSION
-        value: 18.20.0
+        value: 20.11.0
       - key: MONGO_URI
         sync: false
       - key: CLOUDINARY_CLOUD_NAME
@@ -22,4 +23,6 @@ services:
         sync: false
       - key: EMAIL_PASS
         sync: false
+      - key: PORT
+        value: 10000
     autoDeploy: true
