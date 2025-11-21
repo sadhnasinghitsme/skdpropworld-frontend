@@ -170,8 +170,26 @@ router.post("/delete-image", async (req, res) => {
       return res.status(400).json({ message: "Public ID is required" });
     }
 
-router.put("/update/:id", async (req, res) => {
-    await deleteFromCloudinary(existingProject.aboutImage.publicId);
+rorouter.put("/update/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const existingProject = await Project.findById(id);
+    if (!existingProject) {
+      return res.status(404).json({ message: "Project not found" });
+    }
+
+    if (existingProject.aboutImage?.publicId) {
+      await deleteFromCloudinary(existingProject.aboutImage.publicId);
+    }
+
+    // continue update logic...
+    res.status(200).json({ message: "Updated successfully" });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
 });
 
 
