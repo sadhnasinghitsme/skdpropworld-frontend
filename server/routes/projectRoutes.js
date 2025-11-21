@@ -170,30 +170,10 @@ router.post("/delete-image", async (req, res) => {
       return res.status(400).json({ message: "Public ID is required" });
     }
 
-rorouter.put("/update/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
+    // Delete the image from Cloudinary
+    await deleteFromCloudinary(publicId);
 
-    const existingProject = await Project.findById(id);
-    if (!existingProject) {
-      return res.status(404).json({ message: "Project not found" });
-    }
-
-    if (existingProject.aboutImage?.publicId) {
-      await deleteFromCloudinary(existingProject.aboutImage.publicId);
-    }
-
-    // continue update logic...
-    res.status(200).json({ message: "Updated successfully" });
-
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Server error" });
-  }
-});
-
-
-    // 2. Remove matching image from the appropriate field
+    // Remove the image from any project that references it
     await Project.updateMany(
       {
         $or: [
@@ -211,16 +191,14 @@ rorouter.put("/update/:id", async (req, res) => {
       }
     );
 
-    return res
-      .status(200)
-      .json({ message: "Image deleted from Cloudinary and unset in DB" });
-  } catch (err) {
-    console.error("Error deleting image from Cloudinary:", err);
-    return res
-      .status(500)
-      .json({ message: "Failed to delete image from Cloudinary" });
+    return res.status(200).json({ message: "Image deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting image:", error);
+    return res.status(500).json({ message: "Server error" });
   }
 });
+
+
 
 /**
  * GET /api/admin/projects/slug/:slug

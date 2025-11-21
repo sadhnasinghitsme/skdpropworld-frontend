@@ -443,8 +443,8 @@ const Homepage = () => {
               zIndex: -1
             }}
           >
-            <source src="/videos/background-video.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
+        <source src="https://www.skdpropworld.com/videos/hero-video.mp4" type="video/mp4" />    
+        Your browser does not support the video tag.
           </video>
           
           {/* Dark Overlay */}
