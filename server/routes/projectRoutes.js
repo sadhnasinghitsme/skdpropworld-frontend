@@ -414,12 +414,14 @@ router.put("/project-id/:id", async (req, res) => {
     // 🧹 Cloudinary cleanup for replaced bannerImage
     if (
       existingProject.bannerImage?.publicId &&
-      updateData.bannerImage?.publicId
+      updateData.bannerImage?.publicId &&
+      updateData.bannerImage.publicId !== existingProject.bannerImage.publicId
     ) {
-      if (
-        updateData.bannerImage.publicId !== existingProject.bannerImage.publicId
-      ) {
+      try {
         await deleteFromCloudinary(existingProject.bannerImage.publicId);
+      } catch (error) {
+        console.error("Error deleting old banner image from Cloudinary:", error);
+        // Continue with the update even if Cloudinary deletion fails
       }
     }
 
@@ -429,36 +431,53 @@ router.put("/project-id/:id", async (req, res) => {
       updateData.logoImage?.publicId &&
       updateData.logoImage.publicId !== existingProject.logoImage.publicId
     ) {
-      await deleteFromCloudinary(existingProject.logoImage.publicId);
+      try {
+        await deleteFromCloudinary(existingProject.logoImage.publicId);
+      } catch (error) {
+        console.error("Error deleting old logo image from Cloudinary:", error);
+        // Continue with the update even if Cloudinary deletion fails
+      }
     }
 
-    // 🧹 Cloudinary cleanup for replaced aboutImage
+    // Cloudinary cleanup for replaced aboutImage
     if (
       existingProject.aboutImage?.publicId &&
       updateData.aboutImage?.publicId &&
       updateData.aboutImage.publicId !== existingProject.aboutImage.publicId
     ) {
-      await deleteFromCloudinary(existingProject.aboutImage.publicId);
+      try {
+        await deleteFromCloudinary(existingProject.aboutImage.publicId);
+      } catch (error) {
+        console.error("Error deleting old about image from Cloudinary:", error);
+        // Continue with the update even if Cloudinary deletion fails
+      }
     }
 
-    // ✅ 5. Update the project in the database
-    const updated = await Project.findByIdAndUpdate(req.params.id, updateData, {
-      new: true,
-      runValidators: true,
-    });
+    // Update the project in the database
+    try {
+      const updatedProject = await Project.findByIdAndUpdate(
+        req.params.id,
+        updateData,
+        { new: true, runValidators: true }
+      );
 
-    if (!updated) {
-      return res.status(404).json({ message: "Project not found" });
+      if (!updatedProject) {
+        return res.status(404).json({ message: "Project not found" });
+      }
+      
+      return res.json(updatedProject);
+    } catch (error) {
+      console.error("Error updating project:", error);
+      return res.status(500).json({ 
+        message: "Error updating project", 
+        error: error.message 
+      });
     }
-
-    return res.json({
-      message: "Project updated successfully",
-      project: updated,
-    });
-  } catch (err) {
-    console.error("❌ Error updating project:", err.message);
-    if (err.errors) console.error("🔍 Validation errors:", err.errors);
-
+  } catch (error) {
+    console.error("Error updating project:", error);
+    return res.status(500).json({ 
+      message: "Error updating project", 
+      error: error.message 
     return res.status(500).json({
       message: "Validation failed",
       error: err.message,
