@@ -176,10 +176,7 @@
   /* Removed overflow: hidden to allow content below to be visible */
 }
 
-/* Background layer */
-.seasonal-background-wrapper {
-  display: none !important;
-}
+
 
 .homepage-container {
   position: relative;
@@ -299,12 +296,11 @@
 .hero {
   position: relative;
   width: 100%;
-  height: 100vh;
-  overflow: hidden;
+  min-height: 100vh;
+  overflow: visible !important;
 
   /* Dark gradient background - fallback if video doesn't load */
   background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-  min-height: 100vh;
 }
 
 /* VIDEO Behind content */
@@ -315,26 +311,16 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: 0;          /* video is at the bottom layer */
-  pointer-events: none;
+  z-index: -2 !important;
 }
 
-/* Dark transparent overlay ABOVE video */
 .hero-video-overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  
-  /* make overlay transparent so video shows! */
-  background: linear-gradient(
-    135deg,
-    rgba(0, 0, 0, 0.4) 0%,
-    rgba(0, 0, 0, 0.2) 100%
-  );
-
-  z-index: 1;        /* overlay is above the video */
+  z-index: -1 !important;
 }
 
 
@@ -410,6 +396,10 @@
   background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="white" opacity="0.08"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
   z-index: 1;
   pointer-events: none;
+}
+
+.hero::before, .hero::after {
+  display: none !important;
 }
 
 .hero-content h1 {
@@ -826,9 +816,8 @@
 }
 
 /* 👇 Add this at the bottom */
-.hero, .banner {
-  opacity: 1 !important;
-  filter: brightness(1) !important;
+section.hero {
+filter: unset ! important 
 }
 
 /* Popup Enquiry Form */
@@ -1768,4 +1757,8 @@
   .info-highlights {
     grid-template-columns: 1fr;
   }
+}
+
+.hero::before, .hero::after {
+  display: none !important;
 }

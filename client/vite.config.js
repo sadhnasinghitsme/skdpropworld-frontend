@@ -3,11 +3,12 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
-  base: "/",            // 🔥 Required for Vercel
+  base: "./",           // Use relative paths for HashRouter
   build: {
-    outDir: "dist",     // 🔥 Ensure correct output folder
-    assetsDir: "assets", // 🔥 Vite default, ensures proper JS/CSS folder
-    minify: false,
+    outDir: "dist",
+    assetsDir: "assets",
+    minify: true,       // Enable minification for production
+    sourcemap: false,   // Disable sourcemaps for smaller build
   },
   server: {
     port: 5173,

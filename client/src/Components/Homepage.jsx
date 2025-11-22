@@ -47,7 +47,6 @@ const Homepage = () => {
   const [selectedType, setSelectedType] = useState("");
 
   const [propertyTypes, setPropertyTypes] = useState([]);
-  const [seasonalHtml, setSeasonalHtml] = useState("");
   const searchAreaRef = useRef(null);
 
   const [length, setLength] = useState("");
@@ -181,14 +180,6 @@ const Homepage = () => {
     }
   }, [activeTab]);
 
-  useEffect(() => {
-    axios
-      .get(`${API_BASE}/api/snippet/seasonal-html`)
-      .then((res) => {
-        setSeasonalHtml(res.data.seasonalHtml);
-      })
-      .catch((err) => console.error("Seasonal HTML fetch error", err));
-  }, []);
 
   useEffect(() => {
     const fetchTopPicks = async () => {
@@ -791,11 +782,7 @@ const Homepage = () => {
     ></iframe>
   </section>
 
-        {/* Inject dynamic seasonal background */}
-        <div
-          className="seasonal-background-wrapper"
-          dangerouslySetInnerHTML={{ __html: seasonalHtml }}
-        ></div>
+
         <Container className="homepage-container text-center text-light">
           <Container className="text-center mt-3 ">
             {/* Hidden static H1 for SEO */}

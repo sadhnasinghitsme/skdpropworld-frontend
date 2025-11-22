@@ -1,19 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
-import { HelmetProvider } from "react-helmet-async"; // 🆕 Add this
+import { HelmetProvider } from "react-helmet-async";
 import "./index.css"; // Tailwind
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <HelmetProvider>
-    {" "}
-    {/* 🧠 Helmet context starts here */}
-    <BrowserRouter>
+    <HashRouter>
       <AuthProvider>
         <App />
       </AuthProvider>
-    </BrowserRouter>
+    </HashRouter>
   </HelmetProvider>
 );
