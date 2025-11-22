@@ -817,9 +817,7 @@
 
 /* 👇 Add this at the bottom */
 section.hero {
-
-filter: unset !important;
-
+  filter: unset !important;
 }
 
 /* Popup Enquiry Form */
