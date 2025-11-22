@@ -425,11 +425,14 @@ const Homepage = () => {
             loop
             playsInline
             className="hero-video-bg"
+            onError={(e) => console.error("Video failed to load:", e)}
+            onLoadedData={() => console.log("Video loaded successfully")}
           >
             <source
               src="/videos/hero-video-compressed.mp4"
               type="video/mp4"
             />
+            Your browser does not support the video tag.
           </video>
           
           {/* Dark Overlay */}
