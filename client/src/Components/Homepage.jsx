@@ -36,12 +36,6 @@ const Homepage = () => {
   const videoRef = useRef(null);
   const navigate = useNavigate();
   const [searchText, setSearchText] = useState("");
-  const [videoError, setVideoError] = useState(false);
-  
-  // Debug: Log when component renders
-  useEffect(() => {
-    console.log("✅ Homepage component mounted");
-  }, []);
   const [activeTab, setActiveTab] = useState("residential");
   const [loan, setLoan] = useState("");
   const [rate, setRate] = useState("");
@@ -49,7 +43,7 @@ const Homepage = () => {
 
   const [tenure, setTenure] = useState("");
   const [emi, setEmi] = useState(null);
-  const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:10000";
+  const API_BASE = import.meta.env.VITE_API_BASE_URL;
   const [selectedType, setSelectedType] = useState("");
 
   const [propertyTypes, setPropertyTypes] = useState([]);
@@ -188,20 +182,13 @@ const Homepage = () => {
   }, [activeTab]);
 
   useEffect(() => {
-    if (!API_BASE) {
-      console.warn("⚠️ API_BASE is not defined");
-      return;
-    }
     axios
       .get(`${API_BASE}/api/snippet/seasonal-html`)
       .then((res) => {
-        setSeasonalHtml(res.data.seasonalHtml || "");
+        setSeasonalHtml(res.data.seasonalHtml);
       })
-      .catch((err) => {
-        console.error("Seasonal HTML fetch error", err);
-        setSeasonalHtml(""); // Set empty string on error
-      });
-  }, [API_BASE]);
+      .catch((err) => console.error("Seasonal HTML fetch error", err));
+  }, []);
 
   useEffect(() => {
     const fetchTopPicks = async () => {
@@ -226,33 +213,6 @@ const Homepage = () => {
         "https://counter1.optistats.ovh/private/counter.js?c=zr2u9fxr1583l6ms69zpskqsajgtp168&down=async";
       script.async = true;
       counterRef.current.appendChild(script);
-    }
-  }, []);
-
-  // Ensure video plays
-  useEffect(() => {
-    if (videoRef.current) {
-      const video = videoRef.current;
-      const playPromise = video.play();
-      
-      if (playPromise !== undefined) {
-        playPromise
-          .then(() => {
-            console.log("✅ Video is playing");
-            setVideoError(false);
-          })
-          .catch((error) => {
-            console.error("❌ Error playing video:", error);
-            setVideoError(true);
-            // Try to play again after a short delay
-            setTimeout(() => {
-              video.play().catch(err => {
-                console.log("Retry play failed:", err);
-                setVideoError(true);
-              });
-            }, 1000);
-          });
-      }
     }
   }, []);
 
@@ -466,45 +426,31 @@ const Homepage = () => {
         <Navbar />
         
         {/* YEIDA Hero Section with Video Background */}
-        <section className="hero">
-          {!videoError && (
-            <video
-              ref={videoRef}
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="auto"
-              className="hero-video-bg"
-              onLoadedData={(e) => {
-                e.target.play().catch(err => {
-                  console.log("Video play error:", err);
-                  setVideoError(true);
-                });
-              }}
-              onError={(e) => {
-                console.error("Video loading error:", e);
-                setVideoError(true);
-              }}
-              onCanPlay={() => {
-                setVideoError(false);
-              }}
-            >
-              <source
-                src="/videos/hero-video-compressed.mp4"
-                type="video/mp4"
-              />
-              {/* Fallback to external URL if local file doesn't work */}
-              <source
-                src="https://www.skdpropworld.com/videos/hero-video.mp4"
-                type="video/mp4"
-              />
-              Your browser does not support the video tag.
-            </video>
-          )}
+        <section className="hero" style={{ minHeight: '600px', background: '#1a1a1a', position: 'relative' }}>
+          <video
+            key="hero-video"
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="hero-video-bg"
+          >
+            <source
+              src="/videos/hero-video-compressed.mp4"
+              type="video/mp4"
+            />
+          </video>
           
           {/* Dark Overlay */}
-          <div className="hero-video-overlay"></div>
+          <div className="hero-video-overlay" style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            background: 'rgba(0, 0, 0, 0.5)',
+            zIndex: 1
+          }}></div>
           
           {/* Hero Content */}
           <div className="hero-content">
@@ -836,7 +782,7 @@ const Homepage = () => {
         <section id="map">
     <h2>YEIDA Map Overview</h2>
     <iframe
-      src="https://www.google.com/maps/embed?...YEIDA+Sectors+Noida..."
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d224357.48098042266!2d77.38709805!3d28.3949388!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cdc8e0c6a5b8f%3A0x3e3e3e3e3e3e3e3e!2sYEIDA%2C%20Uttar%20Pradesh!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin"
       width="100%"
       height="400"
       style={{ border: 0 }}
@@ -1272,7 +1218,12 @@ const Homepage = () => {
                 className="newyear-cta-btn"
                 onClick={() => {
                   setShowNewYearPopup(false);
-                  document.querySelector('.lead-form-section').scrollIntoView({ behavior: 'smooth' });
+                  const leadForm = document.querySelector('#leadform');
+                  if (leadForm) {
+                    leadForm.scrollIntoView({ behavior: 'smooth' });
+                  } else {
+                    window.scrollTo(0, 0);
+                  }
                 }}
               >
                 Claim Your Offer Now! 🎯

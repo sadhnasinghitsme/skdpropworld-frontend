@@ -281,10 +281,14 @@ router.get("/project-id/:id", async (req, res) => {
 /**
  * GET /api/admin/projects
  * Get all projects (sorted newest first)
+ * If ?all=true is provided, returns all projects including invisible ones
+ * Otherwise, returns only visible projects
  */
 router.get("/", async (req, res) => {
   try {
-    const projects = await Project.find().sort({ createdAt: -1 });
+    const showAll = req.query.all === 'true';
+    const query = showAll ? {} : { visible: true };
+    const projects = await Project.find(query).sort({ createdAt: -1 });
     return res.json(projects);
   } catch (err) {
     console.error("Error fetching projects:", err);
@@ -543,6 +547,46 @@ router.get("/search", async (req, res) => {
   } catch (error) {
     console.error("Error searching projects:", error);
     return res.status(500).json({ message: "Failed to search projects" });
+  }
+});
+
+/**
+ * POST /api/admin/projects/show-only-yeida
+ * Hide all projects except YEIDA project
+ */
+router.post("/show-only-yeida", async (req, res) => {
+  try {
+    // Set all projects to invisible
+    await Project.updateMany({}, { visible: false });
+    
+    // Find and make YEIDA project visible
+    const yeidaProject = await Project.findOne({
+      $or: [
+        { heading: { $regex: /yeida/i } },
+        { slug: { $regex: /yeida/i } },
+        { location: { $regex: /yeida/i } }
+      ]
+    });
+
+    if (yeidaProject) {
+      yeidaProject.visible = true;
+      await yeidaProject.save();
+      return res.json({ 
+        message: "Only YEIDA project is now visible",
+        project: {
+          id: yeidaProject._id,
+          heading: yeidaProject.heading,
+          slug: yeidaProject.slug
+        }
+      });
+    } else {
+      return res.status(404).json({ 
+        message: "YEIDA project not found. Please create it first using /api/admin/projects/create-yeida"
+      });
+    }
+  } catch (error) {
+    console.error("Error showing only YEIDA project:", error);
+    return res.status(500).json({ message: "Failed to update project visibility" });
   }
 });
 

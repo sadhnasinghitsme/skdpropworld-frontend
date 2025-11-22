@@ -134,8 +134,12 @@ async function startServer() {
       throw new Error("MONGO_URI environment variable is required");
     }
 
+    console.log("🔄 Attempting to connect to MongoDB...");
+    
     await mongoose.connect(process.env.MONGO_URI, {
       dbName: "SkdData",
+      serverSelectionTimeoutMS: 10000, // 10 seconds timeout
+      socketTimeoutMS: 45000,
     });
 
     console.log("✅ MongoDB connected successfully.");
@@ -146,6 +150,13 @@ async function startServer() {
     });
   } catch (err) {
     console.error("❌ Server startup error:", err.message);
+    if (err.message.includes("authentication failed")) {
+      console.error("💡 Tip: Check your MongoDB username and password in MONGO_URI");
+    } else if (err.message.includes("timeout") || err.message.includes("ENOTFOUND")) {
+      console.error("💡 Tip: Check MongoDB Atlas Network Access - allow 0.0.0.0/0 or Render IPs");
+    } else if (err.message.includes("MONGO_URI")) {
+      console.error("💡 Tip: Set MONGO_URI in Render Environment Variables");
+    }
     process.exit(1);
   }
 }
