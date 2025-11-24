@@ -30,14 +30,5 @@
       ],
       "destination": "https://service.prerender.io/https://www.skdpropworld.com/:1"
     }
-  ],
-  "routes": [
-    {
-      "handle": "filesystem"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
-    }
   ]
 }
