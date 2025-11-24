@@ -61,6 +61,30 @@ const Homepage = () => {
 
 
 
+  // Force video to play on user interaction
+  useEffect(() => {
+    const playVideo = () => {
+      const video = document.querySelector('.hero-video-bg');
+      if (video) {
+        video.play().catch(err => {
+          console.log("Video play failed:", err);
+        });
+      }
+    };
+
+    // Try to play immediately
+    playVideo();
+
+    // Also try on any user interaction
+    document.addEventListener('click', playVideo, { once: true });
+    document.addEventListener('scroll', playVideo, { once: true });
+
+    return () => {
+      document.removeEventListener('click', playVideo);
+      document.removeEventListener('scroll', playVideo);
+    };
+  }, []);
+
   // New Year Popup - Show once after 3 seconds
   useEffect(() => {
     const hasSeenPopup = sessionStorage.getItem('newYearPopupSeen');
@@ -418,26 +442,34 @@ const Homepage = () => {
         <Navbar />
         
         {/* YEIDA Hero Section with Video Background */}
-        <section className="hero" style={{ minHeight: '600px', background: '#1a1a1a', position: 'relative' }}>
+        <div style={{ 
+          position: 'relative', 
+          minHeight: '600px', 
+          width: '100%',
+          overflow: 'hidden',
+          background: '#000'
+        }}>
           <video
-            key="hero-video"
             autoPlay
             muted
             loop
             playsInline
-            className="hero-video-bg"
-            onError={(e) => console.error("Video failed to load:", e)}
-            onLoadedData={() => console.log("Video loaded successfully")}
+            style={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              minWidth: '100%',
+              minHeight: '100%',
+              width: 'auto',
+              height: 'auto',
+              transform: 'translate(-50%, -50%)',
+              zIndex: 0
+            }}
           >
-            <source
-              src="/videos/hero-video-compressed.mp4"
-              type="video/mp4"
-            />
-            Your browser does not support the video tag.
+            <source src="/videos/hero-video-compressed.mp4" type="video/mp4" />
           </video>
           
-          {/* Dark Overlay */}
-          <div className="hero-video-overlay" style={{
+          <div style={{
             position: 'absolute',
             top: 0,
             left: 0,
@@ -447,13 +479,31 @@ const Homepage = () => {
             zIndex: 1
           }}></div>
           
-          {/* Hero Content */}
-          <div className="hero-content">
-            <h1>Explore Government-Approved YEIDA Residential Plots</h1> 
-            <p>Find Residential Plots and investments near Noida International Airport.</p> 
-            <a href="/projects" className="btn">View Project</a>
+          <div style={{ 
+            position: 'relative', 
+            zIndex: 2,
+            padding: '150px 20px',
+            textAlign: 'center',
+            color: 'white'
+          }}>
+            <h1 style={{ fontSize: '3rem', fontWeight: 'bold', marginBottom: '20px' }}>
+              Explore Government-Approved YEIDA Residential Plots
+            </h1> 
+            <p style={{ fontSize: '1.5rem', marginBottom: '30px' }}>
+              Find Residential Plots and investments near Noida International Airport.
+            </p> 
+            <a href="/projects" style={{
+              background: '#ffc107',
+              color: '#000',
+              padding: '15px 40px',
+              fontSize: '1.2rem',
+              borderRadius: '50px',
+              textDecoration: 'none',
+              fontWeight: 'bold',
+              display: 'inline-block'
+            }}>View Project</a>
           </div>
-        </section>
+        </div>
 
         <section id="yeida-projects">
   <h2>YEIDA Project Highlights</h2>

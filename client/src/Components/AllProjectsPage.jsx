@@ -254,7 +254,34 @@ const AllProjectsPage = () => {
 
       <Navbar />
 
-      <div className="container-fluid py-5">
+      {/* Background Video */}
+      <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: -1, overflow: 'hidden' }}>
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            opacity: 0.3
+          }}
+        >
+          <source src="/videos/hero-video-compressed.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <div style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          background: 'rgba(0, 0, 0, 0.6)'
+        }} />
+      </div>
+
+      <div className="container-fluid py-5" style={{ position: 'relative', zIndex: 1 }}>
         <div className="row">
           {/* Sidebar */}
           <div className="col-md-3 mb-4">
