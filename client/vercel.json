@@ -1,15 +1,4 @@
 {
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "X-Prerender-Token",
-          "value": "QHhhrvIPvM5gm4fHnmaT"
-        }
-      ]
-    }
-  ],
   "rewrites": [
     {
       "source": "/sitemap.xml",
@@ -21,14 +10,18 @@
     },
     {
       "source": "/(.*)",
-      "has": [
+      "destination": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
         {
-          "type": "header",
-          "key": "User-Agent",
-          "value": ".*(Googlebot|bingbot|Yandex|Baidu|DuckDuckBot|facebookexternalhit|Twitterbot|Slackbot).*"
+          "key": "X-Prerender-Token",
+          "value": "QHhhrvIPvM5gm4fHnmaT"
         }
-      ],
-      "destination": "https://service.prerender.io/https://www.skdpropworld.com/:1"
+      ]
     }
   ]
 }
