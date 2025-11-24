@@ -145,87 +145,11 @@ const Navbar = () => {
                   Home
                 </Link>
               </li>
-              {/* Projects – grouped */}
-              <li className="nav-item dropdown">
-                <a
-                  className="nav-link dropdown-toggle skd-menu-item"
-                  href="#"
-                  data-bs-toggle="dropdown"
-                >
+              {/* Projects */}
+              <li className="nav-item">
+                <Link className="nav-link skd-menu-item" to="/projects">
                   Projects
-                </a>
-
-                <ul className="dropdown-menu skd-menu">
-                  {/* View Project Link */}
-                  <li>
-                    <Link className="dropdown-item fw-bold" to="/projects">
-                      View Project
-                    </Link>
-                  </li>
-                  <li><hr className="dropdown-divider" /></li>
-                  
-                  {Object.entries(grouped).map(([type, list]) => {
-                    const safeId = `submenu-${type
-                      .toLowerCase()
-                      .replace(/\s+/g, "-")}`;
-                    return (
-                      <li key={type} className="skd-dropdown-submenu">
-                        {isMobile ? (
-                          <>
-                            <div
-                              className="dropdown-item d-flex justify-content-between align-items-center"
-                              data-bs-toggle="collapse"
-                              data-bs-target={`#${safeId}`}
-                              onClick={(e) => e.stopPropagation()}
-                              style={{ cursor: "pointer" }}
-                            >
-                              <span>{type}</span>
-                              {/* <span>▼</span> */}
-                            </div>
-
-                            <ul
-                              className="collapse list-unstyled ps-3"
-                              id={safeId}
-                            >
-                              {list.map((proj) => (
-                                <li key={proj.slug}>
-                                  <Link
-                                    className="dropdown-item skd-link"
-                                    to={`/projects/${proj.slug}`}
-                                  >
-                                    {proj.heading}
-                                  </Link>
-                                </li>
-                              ))}
-                            </ul>
-                          </>
-                        ) : (
-                          <>
-                            <a
-                              className="dropdown-item dropdown-toggle"
-                              href="#"
-                              onClick={(e) => e.preventDefault()}
-                            >
-                              {type}
-                            </a>
-                            <ul className="dropdown-menu">
-                              {list.map((proj) => (
-                                <li key={proj._id}>
-                                  <Link
-                                    className="dropdown-item skd-link"
-                                    to={`/projects/${proj.slug}`} // ✅ NEW
-                                  >
-                                    {proj.heading}
-                                  </Link>
-                                </li>
-                              ))}
-                            </ul>
-                          </>
-                        )}
-                      </li>
-                    );
-                  })}
-                </ul>
+                </Link>
               </li>
               {/* ------------- */}
               {[
