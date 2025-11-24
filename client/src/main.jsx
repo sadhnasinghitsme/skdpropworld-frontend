@@ -8,7 +8,7 @@ import "./index.css"; // Tailwind
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <HelmetProvider>
-    <BrowserRouter>
+    <BrowserRouter basename="/">
       <AuthProvider>
         <App />
       </AuthProvider>
