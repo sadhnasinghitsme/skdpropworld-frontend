@@ -7,7 +7,6 @@ const { SitemapStream, streamToPromise } = require("sitemap");
 const { createGzip } = require("zlib");
 const sitemap = require("./routes/sitemap");
 const htmlSnippetRoutes = require("./routes/htmlSnippet");
-const newsRoutes = require("./routes/newsRoutes.js");
 const inventoryRoutes = require("./routes/inventoryRoutes.js");
 const app = express();
 // const PORT = process.env.PORT || 8080;
