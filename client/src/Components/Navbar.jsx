@@ -180,12 +180,12 @@ const Navbar = () => {
 
                 <ul className="dropdown-menu">
                   {/* पूरी लिस्ट – कार्ड पेज */}
-                  {/* <li> */}
-                  {/* <Link className="dropdown-item" to="/office-bearers">
-                    Meet Our Leaders
-                  </Link> */}
-                  {/* </li> */}
-                  {/* <li></li> */}
+                  <li>
+                    <Link className="dropdown-item" to="/office-bearers">
+                      Meet Our Leaders
+                    </Link>
+                  </li>
+                  <li><hr className="dropdown-divider" /></li>
 
                   {/* इंडिविजुअल सेक्शन */}
                   <li>
