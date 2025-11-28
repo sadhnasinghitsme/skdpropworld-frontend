@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const compression = require("compression");
 require("dotenv").config();
 const path = require("path");
 const { SitemapStream, streamToPromise } = require("sitemap");
@@ -14,6 +15,10 @@ const prerender = require("prerender-node");
 prerender.set("prerenderToken", "QHhhrvIPvM5gm4fHnmaT");
 app.use(prerender);
 console.log("✅ Prerender middleware loaded");
+
+// Enable gzip compression for all responses
+app.use(compression());
+console.log("✅ Compression middleware loaded");
 
 // Port configuration for deployment
 const PORT = process.env.PORT || 10000;
