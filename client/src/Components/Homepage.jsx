@@ -57,9 +57,19 @@ const Homepage = () => {
   const [showNewYearPopup, setShowNewYearPopup] = useState(false);
   const [expandedSector, setExpandedSector] = useState(null);
   const [selectedCity, setSelectedCity] = useState("");
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
   
   // Detect mobile device for performance optimization
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || window.innerWidth < 768;
+
+  // Lazy load video after initial page load
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShouldLoadVideo(true);
+    }, 1500); // Load video after 1.5 seconds
+    
+    return () => clearTimeout(timer);
+  }, []);
 
 
 
@@ -451,13 +461,14 @@ const Homepage = () => {
           overflow: 'hidden',
           background: '#000'
         }}>
-          {/* Disable video on mobile for better performance */}
-          {!isMobile && (
+          {/* Lazy load video on desktop only */}
+          {!isMobile && shouldLoadVideo && (
             <video
               autoPlay
               muted
               loop
               playsInline
+              preload="none"
               style={{
                 position: 'absolute',
                 top: '50%',

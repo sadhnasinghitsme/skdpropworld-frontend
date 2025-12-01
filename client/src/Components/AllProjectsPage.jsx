@@ -254,13 +254,14 @@ const AllProjectsPage = () => {
 
       <Navbar />
 
-      {/* Background Video */}
+      {/* Background Video - Lazy loaded */}
       <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: -1, overflow: 'hidden' }}>
         <video
           autoPlay
           muted
           loop
           playsInline
+          preload="none"
           style={{
             width: '100%',
             height: '100%',
