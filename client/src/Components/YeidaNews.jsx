@@ -35,10 +35,10 @@ const YeidaNews = () => {
     <section className="yeida-news-section">
       <Container>
         <div className="news-header">
-          <h2 className="news-title">
+          <h1 className="news-title">
             <i className="fas fa-newspaper me-3"></i>
             Latest YEIDA News & Updates
-          </h2>
+          </h1>
           <p className="news-subtitle">Stay updated with the latest developments in YEIDA region</p>
         </div>
 

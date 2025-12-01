@@ -119,10 +119,10 @@ const AdminNewsManager = () => {
   return (
     <div className="admin-news-manager">
       <div className="d-flex justify-content-between align-items-center mb-4">
-        <h2>
+        <h1>
           <i className="fas fa-newspaper me-2"></i>
           Manage YEIDA News
-        </h2>
+        </h1>
         <Button variant="primary" onClick={() => setShowModal(true)}>
           <i className="fas fa-plus me-2"></i>
           Add New News

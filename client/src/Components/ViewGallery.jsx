@@ -117,7 +117,7 @@ const ViewGallery = () => {
       </Helmet>
       <Navbar />
       <div className="container-fluid p-5 py-4 containerhunmai">
-        <h2 className="text-center golden-heading mb-4 mt-4">Gallery</h2>
+        <h1 className="text-center golden-heading mb-4 mt-4">Real Estate Gallery - Projects, Events & Site Visits</h1>
         {categories.map((cat) => (
           <section key={cat} className="mb-5">
             <h3 className="text-white mb-3">{cat}</h3>

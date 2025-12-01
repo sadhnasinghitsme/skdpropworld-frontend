@@ -54,7 +54,7 @@ const Services = () => {
       <Navbar />
       <div className="container-fluid  text-white py-5">
         <div className="container text-center">
-          <h2 className="mb-5">Our Services</h2>
+          <h1 className="mb-5">Our Real Estate Services - Buy, Sell & Consult</h1>
 
           <div className="row justify-content-center">
             {/* Sell Property */}

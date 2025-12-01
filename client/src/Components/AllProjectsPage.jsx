@@ -425,10 +425,10 @@ const AllProjectsPage = () => {
             {/* Registered Properties Section */}
             {filtered.filter(p => p.type?.toLowerCase() === 'registered').length > 0 && (
               <>
-                <h2 className="text-center mb-4 text-white">
+                <h1 className="text-center mb-4 text-white">
                   <i className="fas fa-check-circle text-success me-2"></i>
-                  Registered Properties
-                </h2>
+                  All Properties in YEIDA, Noida & Delhi NCR
+                </h1>
                 <div className="row mb-5">
                   {filtered
                     .filter(p => p.type?.toLowerCase() === 'registered')

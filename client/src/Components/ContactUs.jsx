@@ -70,7 +70,7 @@ const ContactUs = () => {
       <Navbar />
       <div className="contact-container">
         <div className="contact-left">
-          <h2 className="text-white">We’d Love to Hear From You</h2>
+          <h1 className="text-white">Contact SKD Propworld - Property Dealer in YEIDA, Noida & Greater Noida</h1>
           <p>Follow us on our social platforms or get in touch directly!</p>
 
           <div className="social-buttons">

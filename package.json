@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "sharp": "^0.34.5",
     "sitemap": "^9.0.0"
   }
 }

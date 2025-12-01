@@ -16,21 +16,20 @@ import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Navbar from "./Navbar";
 import SupportWidget from "./SupportWidget";
-import AllProjects from "./AllProjects";
-import ViewYouTubeSeries from "./ViewYouTubeSeries";
-import OfficeBearers from "./OfficeBearers";
-
-
-import PrimeWorkLocations from "../PrimeWorkLocations";
-import Testimonials from "../Testimonials";
-import LeadForm from "./LeadForm";
 import Footer from "../Footer";
 import axios from "axios";
-
 import "./Homepage.css";
-import Stats from "./Stats";
-import NewsScroller from "./NewsScroller";
-import YeidaNews from "./YeidaNews";
+
+// Lazy load heavy components for better mobile performance
+const AllProjects = React.lazy(() => import("./AllProjects"));
+const ViewYouTubeSeries = React.lazy(() => import("./ViewYouTubeSeries"));
+const OfficeBearers = React.lazy(() => import("./OfficeBearers"));
+const PrimeWorkLocations = React.lazy(() => import("../PrimeWorkLocations"));
+const Testimonials = React.lazy(() => import("../Testimonials"));
+const LeadForm = React.lazy(() => import("./LeadForm"));
+const Stats = React.lazy(() => import("./Stats"));
+const NewsScroller = React.lazy(() => import("./NewsScroller"));
+const YeidaNews = React.lazy(() => import("./YeidaNews"));
 
 const Homepage = () => {
   const counterRef = useRef(null);
@@ -58,6 +57,9 @@ const Homepage = () => {
   const [showNewYearPopup, setShowNewYearPopup] = useState(false);
   const [expandedSector, setExpandedSector] = useState(null);
   const [selectedCity, setSelectedCity] = useState("");
+  
+  // Detect mobile device for performance optimization
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || window.innerWidth < 768;
 
 
 
@@ -449,25 +451,28 @@ const Homepage = () => {
           overflow: 'hidden',
           background: '#000'
         }}>
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            style={{
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              minWidth: '100%',
-              minHeight: '100%',
-              width: 'auto',
-              height: 'auto',
-              transform: 'translate(-50%, -50%)',
-              zIndex: 0
-            }}
-          >
-            <source src="/videos/hero-video-compressed.mp4" type="video/mp4" />
-          </video>
+          {/* Disable video on mobile for better performance */}
+          {!isMobile && (
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              style={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                minWidth: '100%',
+                minHeight: '100%',
+                width: 'auto',
+                height: 'auto',
+                transform: 'translate(-50%, -50%)',
+                zIndex: 0
+              }}
+            >
+              <source src="/videos/hero-video-compressed.mp4" type="video/mp4" />
+            </video>
+          )}
           
           <div style={{
             position: 'absolute',
@@ -1188,21 +1193,35 @@ const Homepage = () => {
           </Container>
         </Container>
       </div>
-      <ViewYouTubeSeries />
-      <OfficeBearers />
       
-
+      {/* Lazy loaded components with Suspense for better mobile performance */}
+      <React.Suspense fallback={<div className="text-center py-5"><div className="spinner-border text-warning" role="status"></div></div>}>
+        <ViewYouTubeSeries />
+      </React.Suspense>
       
+      <React.Suspense fallback={<div className="text-center py-5"><div className="spinner-border text-warning" role="status"></div></div>}>
+        <OfficeBearers />
+      </React.Suspense>
 
-      <PrimeWorkLocations />
+      <React.Suspense fallback={<div className="text-center py-5"><div className="spinner-border text-warning" role="status"></div></div>}>
+        <PrimeWorkLocations />
+      </React.Suspense>
 
-      <Testimonials />
+      <React.Suspense fallback={<div className="text-center py-5"><div className="spinner-border text-warning" role="status"></div></div>}>
+        <Testimonials />
+      </React.Suspense>
 
-      <Stats />
+      <React.Suspense fallback={<div className="text-center py-5"><div className="spinner-border text-warning" role="status"></div></div>}>
+        <Stats />
+      </React.Suspense>
 
-      <YeidaNews />
+      <React.Suspense fallback={<div className="text-center py-5"><div className="spinner-border text-warning" role="status"></div></div>}>
+        <YeidaNews />
+      </React.Suspense>
 
-      <LeadForm />
+      <React.Suspense fallback={<div className="text-center py-5"><div className="spinner-border text-warning" role="status"></div></div>}>
+        <LeadForm />
+      </React.Suspense>
 
       <Footer />
 

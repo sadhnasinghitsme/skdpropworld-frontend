@@ -104,9 +104,9 @@ const BearerDetail = () => {
       </Helmet>
       <Navbar />
       <div className="container-fluid py-5 bearer-detail">
-        <h2 className="text-center text-warning fw-bold mb-5">
-          Meet The Office Bearers
-        </h2>
+        <h1 className="text-center text-warning fw-bold mb-5">
+          Meet Our Leadership Team - SKD Propworld Directors
+        </h1>
 
         {profiles.map((profile) => (
           <div

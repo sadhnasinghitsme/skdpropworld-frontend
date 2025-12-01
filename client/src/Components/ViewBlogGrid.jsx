@@ -65,7 +65,7 @@ const ViewBlogGrid = () => {
       </Helmet>
       <Navbar />
       <div className="userblog-container">
-        <h2 className="userblog-heading">Latest Blogs</h2>
+        <h1 className="userblog-heading">Latest Real Estate Blogs & Insights</h1>
         <div className="userblog-grid">
           {blogs.map((blog) => (
             <Link

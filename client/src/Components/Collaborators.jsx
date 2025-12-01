@@ -72,7 +72,7 @@ const Collaborators = () => {
         />
       </Helmet>
       <div className="collaborators-section">
-        <h2 className="section-title"> OUR COLLABORATORS </h2>
+        <h1 className="section-title">Our Trusted Real Estate Collaborators & Developers</h1>
         <div className="collaborator-slider">
           <div className="logo-track">
             {collaboratorLogos.concat(collaboratorLogos).map((logo, idx) => (
