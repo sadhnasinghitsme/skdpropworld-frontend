@@ -120,7 +120,7 @@ const MapBrowser = () => {
 
       <Navbar />
       <div className="mapbrowser-container">
-        <h2 className="mapbrowser-heading">Explore Our Maps</h2>
+        <h1 className="mapbrowser-heading">Explore YEIDA Property Maps & Layouts</h1>
 
         {/* Breadcrumb */}
         <div className="breadcrumb-exciting">
