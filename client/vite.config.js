@@ -7,7 +7,7 @@ export default defineConfig({
   build: {
     outDir: "dist",
     assetsDir: "assets",
-    minify: "terser",
+    minify: "esbuild",
     sourcemap: false,
     rollupOptions: {
       output: {
@@ -18,13 +18,7 @@ export default defineConfig({
         }
       }
     },
-    chunkSizeWarningLimit: 1000,
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true
-      }
-    }
+    chunkSizeWarningLimit: 1000
   },
   server: {
     port: 5173,
