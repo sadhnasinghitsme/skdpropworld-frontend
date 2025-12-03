@@ -835,6 +835,70 @@ const Homepage = () => {
       )}
     </div>
 
+    {/* Sector 25 - Semi Residential */}
+    <div className="yeida-project">
+      <div 
+        className="project-header"
+        onClick={() => setExpandedSector(expandedSector === 'sector25' ? null : 'sector25')}
+        style={{ cursor: 'pointer' }}
+      >
+        <h3>Sector 25 Semi Residential Plots {expandedSector === 'sector25' ? '▼' : '▶'}</h3>
+        <p>Versatile semi-residential plots perfect for mixed-use development near Yamuna Expressway.</p>
+        <span className="click-hint">Click to {expandedSector === 'sector25' ? 'hide' : 'view'} details</span>
+      </div>
+      
+      {expandedSector === 'sector25' && (
+        <div className="sector-details">
+          <h4>📍 About YEIDA Sector 25</h4>
+          <p className="sector-description">
+            YEIDA Sector 25 offers unique semi-residential plots that combine the benefits of both 
+            residential and commercial properties. This sector is ideal for investors looking for 
+            flexible development options with high appreciation potential.
+          </p>
+          
+          <div className="sector-features">
+            <div className="feature-item">
+              <span className="feature-icon">🏗️</span>
+              <strong>Plot Sizes:</strong> 150 sq.m to 500 sq.m
+            </div>
+            <div className="feature-item">
+              <span className="feature-icon">💰</span>
+              <strong>Price Range:</strong> ₹90 Lakh to ₹3.50 Cr
+            </div>
+            <div className="feature-item">
+              <span className="feature-icon">✈️</span>
+              <strong>Distance from Airport:</strong> 12 to 16 km
+            </div>
+            <div className="feature-item">
+              <span className="feature-icon">🛣️</span>
+              <strong>Connectivity:</strong> Direct Yamuna Expressway Access
+            </div>
+            <div className="feature-item">
+              <span className="feature-icon">⚡</span>
+              <strong>Infrastructure:</strong> Mixed-Use Development Ready
+            </div>
+            <div className="feature-item">
+              <span className="feature-icon">🏫</span>
+              <strong>Nearby:</strong> Commercial Hubs, Schools, Hospitals
+            </div>
+          </div>
+          
+          <div className="sector-highlights">
+            <h5>✨ Key Highlights:</h5>
+            <ul>
+              <li>Semi-Residential Zoning - Flexible Usage</li>
+              <li>Ideal for Home + Office/Shop Combination</li>
+              <li>High Rental Yield Potential</li>
+              <li>YEIDA Approved with Clear Titles</li>
+              <li>Growing Commercial Activity</li>
+              <li>Expected ROI: 20-30% annually</li>
+              <li>Perfect for Small Businesses & Startups</li>
+            </ul>
+          </div>
+        </div>
+      )}
+    </div>
+
   </div>
 </section>
 
