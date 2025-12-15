@@ -129,6 +129,7 @@ const YouTubeManager = lazy(() =>
   import("./Components/Admin Pages/YouTubeManager")
 );
 const BearerDetail = lazy(() => import("./Components/BearerDetail"));
+const PublicInventory = lazy(() => import("./Components/PublicInventory"));
 
 function App() {
   const [maintenanceMode, setMaintenanceMode] = useState(false);
@@ -243,6 +244,15 @@ function App() {
             element={
               <Suspense fallback={<LoadingSpinner />}>
                 <ProjectDetail />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path="/inventory"
+            element={
+              <Suspense fallback={<LoadingSpinner />}>
+                <PublicInventory />
               </Suspense>
             }
           />

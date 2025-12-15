@@ -118,6 +118,11 @@ const AdminSidebar = ({ adminName, remainingTime }) => {
       label: "News Manager",
       icon: "bi-newspaper",
     },
+    {
+      path: "/admin/add-inventory",
+      label: "Inventory Manager",
+      icon: "bi-box-seam",
+    },
     { path: "/admin/maps-manager", label: "Maps Manager", icon: "bi-map" },
     {
       path: "/admin/gallery-manager",

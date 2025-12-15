@@ -151,6 +151,12 @@ const Navbar = () => {
                   Projects
                 </Link>
               </li>
+              {/* Inventory */}
+              <li className="nav-item">
+                <Link className="nav-link skd-menu-item" to="/inventory">
+                  Available Plots
+                </Link>
+              </li>
               {/* ------------- */}
               {[
                 ["Maps", "/maps"],

@@ -62,40 +62,17 @@ const Homepage = () => {
   // Detect mobile device for performance optimization
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || window.innerWidth < 768;
 
-  // Lazy load video after initial page load
+  // Lazy load video after initial page load - OPTIMIZED
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setShouldLoadVideo(true);
-    }, 1500); // Load video after 1.5 seconds
-    
-    return () => clearTimeout(timer);
-  }, []);
-
-
-
-  // Force video to play on user interaction
-  useEffect(() => {
-    const playVideo = () => {
-      const video = document.querySelector('.hero-video-bg');
-      if (video) {
-        video.play().catch(err => {
-          console.log("Video play failed:", err);
-        });
-      }
-    };
-
-    // Try to play immediately
-    playVideo();
-
-    // Also try on any user interaction
-    document.addEventListener('click', playVideo, { once: true });
-    document.addEventListener('scroll', playVideo, { once: true });
-
-    return () => {
-      document.removeEventListener('click', playVideo);
-      document.removeEventListener('scroll', playVideo);
-    };
-  }, []);
+    // Only load video on desktop and after 2 seconds
+    if (!isMobile) {
+      const timer = setTimeout(() => {
+        setShouldLoadVideo(true);
+      }, 2000); // Increased delay to let page load first
+      
+      return () => clearTimeout(timer);
+    }
+  }, [isMobile]);
 
   // New Year Popup - Show once after 3 seconds
   useEffect(() => {
@@ -313,6 +290,15 @@ const Homepage = () => {
     navigate(`/projects?${params.toString()}`);
   };
 
+  const goToInventory = (term) => {
+    const params = new URLSearchParams();
+    
+    if (term) params.set("searchText", term);
+    if (selectedType) params.set("type", selectedType);
+    
+    navigate(`/inventory?${params.toString()}`);
+  };
+
   return (
     <>
       <Helmet>
@@ -321,6 +307,8 @@ const Homepage = () => {
           Home | SKD PropWorld | Top Property Dealer in  Greater Noida, YEIDA (Yamuna
           Authority), Greater Noida, Delhi
         </title>
+        <link rel="canonical" href="https://www.skdpropworld.com/" />
+
         <meta
           name="title"
           content="Top Property Dealer in YEIDA, GreaterNoida, Delhi, NCR | Buy, Sell, Rent Real Estate Plots, House, Villa, Flat, Commercial, Studio Apartments"
@@ -453,15 +441,15 @@ const Homepage = () => {
       <div className="homepage-hero">
         <Navbar />
         
-        {/* YEIDA Hero Section with Video Background */}
+        {/* YEIDA Hero Section with Video Background - OPTIMIZED */}
         <div style={{ 
           position: 'relative', 
           minHeight: '600px', 
           width: '100%',
           overflow: 'hidden',
-          background: '#000'
+          background: 'linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%)'
         }}>
-          {/* Lazy load video on desktop only */}
+          {/* Optimized video loading - Desktop only, delayed load, with poster */}
           {!isMobile && shouldLoadVideo && (
             <video
               autoPlay
@@ -469,6 +457,7 @@ const Homepage = () => {
               loop
               playsInline
               preload="none"
+              poster="/hero-poster.jpg"
               style={{
                 position: 'absolute',
                 top: '50%',
@@ -478,7 +467,8 @@ const Homepage = () => {
                 width: 'auto',
                 height: 'auto',
                 transform: 'translate(-50%, -50%)',
-                zIndex: 0
+                zIndex: 0,
+                objectFit: 'cover'
               }}
             >
               <source src="/videos/hero-video-compressed.mp4" type="video/mp4" />
@@ -854,16 +844,20 @@ const Homepage = () => {
             YEIDA Sector 25 offers unique semi-residential plots that combine the benefits of both 
             residential and commercial properties. This sector is ideal for investors looking for 
             flexible development options with high appreciation potential.
+            Explore 7% Kisan Kota Plots in YEIDA, strategically located near the Yamuna Expressway 
+            and the upcoming Jewar Airport. These farmer-quota plots offer both residential and commercial
+             usability, making them one of the most promising investment opportunities in Noida’s fastest-growing
+              region.
           </p>
           
           <div className="sector-features">
             <div className="feature-item">
               <span className="feature-icon">🏗️</span>
-              <strong>Plot Sizes:</strong> 150 sq.m to 500 sq.m
+              <strong>Plot Sizes:</strong> 60 sq.m to 1000 sq.m
             </div>
             <div className="feature-item">
               <span className="feature-icon">💰</span>
-              <strong>Price Range:</strong> ₹90 Lakh to ₹3.50 Cr
+              <strong>Price Range:</strong> ₹50 Lakh to ₹7 Cr
             </div>
             <div className="feature-item">
               <span className="feature-icon">✈️</span>
@@ -879,7 +873,7 @@ const Homepage = () => {
             </div>
             <div className="feature-item">
               <span className="feature-icon">🏫</span>
-              <strong>Nearby:</strong> Commercial Hubs, Schools, Hospitals
+              <strong>Nearby:</strong> Commercial Hubs, Schools, Hospitals, Budha International Circuit
             </div>
           </div>
           
@@ -991,7 +985,23 @@ const Homepage = () => {
                         </Nav.Link>
                       </Nav.Item>
 
-                     
+                      <Nav.Item>
+                        <Nav.Link eventKey="commercial">
+                          Commercial
+                        </Nav.Link>
+                      </Nav.Item>
+
+                      <Nav.Item>
+                        <Nav.Link eventKey="industrial">
+                          Industrial
+                        </Nav.Link>
+                      </Nav.Item>
+
+                      <Nav.Item>
+                        <Nav.Link eventKey="inventory">
+                          📋 Available Plots
+                        </Nav.Link>
+                      </Nav.Item>
 
                       <Nav.Item>
                         <Nav.Link eventKey="top-picks">
@@ -1015,37 +1025,54 @@ const Homepage = () => {
                         </Nav.Link>
                       </Nav.Item>
                     </Nav>
-                    {["residential", "commercial", "industrial"].includes(
+                    {["residential", "commercial", "industrial", "inventory"].includes(
                       activeTab
                     ) && (
                       <InputGroup className="search-bar justify-content-center mt-3 ">
-                        {activeTab === "residential" && (
+                        {(activeTab === "residential" || activeTab === "inventory") && (
                           <Form.Select
                             className="skd-category-select"
                             value={selectedType}
                             onChange={(e) => setSelectedType(e.target.value)}
                           >
-                            <option value="">Property Types</option>
+                            <option value="">
+                              {activeTab === "inventory" ? "All Types" : "Property Types"}
+                            </option>
                             <option value="Registered">Registered</option>
                             <option value="Unregistered">Unregistered</option>
+                            {activeTab === "inventory" && (
+                              <option value="Semi Commercial">Semi Commercial</option>
+                            )}
                           </Form.Select>
                         )}
 
                         <Form.Control
                           type="text"
                           className="form-control"
-                          placeholder="Search by city or project name"
+                          placeholder={
+                            activeTab === "inventory" 
+                              ? "Search plots by location or sector..." 
+                              : "Search by city or project name"
+                          }
                           value={searchText}
                           onChange={(e) => setSearchText(e.target.value)}
                           onKeyDown={(e) =>
-                            e.key === "Enter" && goToProjects(searchText)
+                            e.key === "Enter" && (
+                              activeTab === "inventory" 
+                                ? goToInventory(searchText)
+                                : goToProjects(searchText)
+                            )
                           }
                         />
                         <Button
                           className="skd-search-btn"
-                          onClick={() => goToProjects(searchText)}
+                          onClick={() => 
+                            activeTab === "inventory" 
+                              ? goToInventory(searchText)
+                              : goToProjects(searchText)
+                          }
                         >
-                          Search
+                          {activeTab === "inventory" ? "Search Plots" : "Search"}
                         </Button>
                       </InputGroup>
                     )}
