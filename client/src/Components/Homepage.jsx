@@ -304,8 +304,7 @@ const Homepage = () => {
       <Helmet>
         {/* Primary Meta Tags */}
         <title>
-          Home | SKD PropWorld | Top Property Dealer in  Greater Noida, YEIDA (Yamuna
-          Authority), Greater Noida, Delhi
+          YEIDA Plots in Greater Noida | Property Dealer & Real Estate Consultant – SKD Propworld
         </title>
         <link rel="canonical" href="https://www.skdpropworld.com/" />
 
@@ -315,7 +314,7 @@ const Homepage = () => {
         />
         <meta
           name="description"
-          content="Looking for trusted property dealers in YEIDA, Greater Noida, Ghaziabad, Delhi, or Greater Noida? We offer best deals in flats, plots, commercial & residential properties."
+          content="SKD Propworld is a trusted property dealer and real estate consultant for YEIDA plots in Greater Noida. Get verified authority plots with site visit support."
         />
         <meta
           name="keywords"
@@ -492,9 +491,10 @@ const Homepage = () => {
             textAlign: 'center',
             color: 'white'
           }}>
+            {/* Primary, single H1 for homepage */}
             <h1 style={{ fontSize: '3rem', fontWeight: 'bold', marginBottom: '20px' }}>
-              Explore Government-Approved YEIDA Residential Plots
-            </h1> 
+              YEIDA Authority Plots in Greater Noida
+            </h1>
             <p style={{ fontSize: '1.5rem', marginBottom: '30px' }}>
               Find Residential Plots and investments near Noida International Airport.
             </p> 
@@ -913,12 +913,8 @@ const Homepage = () => {
 
         <Container className="homepage-container text-center text-light">
           <Container className="text-center mt-3 ">
-            {/* Hidden static H1 for SEO */}
-            <h1 style={{ display: "none" }}>
-              Real Estate Experts in Noida, YEIDA, Greater Noida & Delhi NCR
-            </h1>
-
-            <h1 className="hero-heading pt-4">
+            {/* Secondary hero heading (use H2 to keep only one H1 on page) */}
+            <h2 className="hero-heading pt-4">
               Find
               <span className="highlights">
                 <Typewriter
@@ -931,7 +927,7 @@ const Homepage = () => {
                   delaySpeed={1500}
                 />
               </span>
-            </h1>
+            </h2>
 
             <div className="container-fluid">
               <div className="row">
@@ -1367,7 +1363,7 @@ const Homepage = () => {
             </button>
             <div className="fireworks"></div>
             <div className="newyear-text">
-              <h1 className="newyear-title">🎉 New Year 2026 Special Offer! 🎊</h1>
+              <h2 className="newyear-title">🎉 New Year 2026 Special Offer! 🎊</h2>
               <p className="newyear-subtitle">Get ready to start the year with your dream property!</p>
               <div className="newyear-offer">
                 <h2>🎁 Special New Year Offer</h2>
