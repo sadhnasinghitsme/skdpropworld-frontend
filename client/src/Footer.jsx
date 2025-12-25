@@ -111,20 +111,23 @@ const Footer = () => {
                 SKD PROPWORLD PRIVATE LIMITED
               </h4>
               <p className="text-light">
-               SKD PropWorld Pvt. Ltd. is a trusted real estate consultancy specializing 
-               exclusively in residential plots under YEIDA (Yamuna Expressway Industrial 
-               Development Authority).With over a decade of experience, we are committed to 
-               helping clients make informed investment decisions in the most promising sectors 
-               of YEIDA. Our team offers expert guidance, transparent dealings, and end-to-end
-                support — ensuring a seamless property-buying experience.
-                Since 2011, SKD PropWorld has built its reputation on trust, integrity, and customer 
-                satisfaction, making us a reliable name for genuine residential plots along the 
-                Yamuna Expressway.
+                SKD PropWorld Pvt. Ltd. is a trusted real estate consultant and property dealer
+                based in Greater Noida, specializing in residential and commercial properties,
+                including verified YEIDA plots along the Yamuna Expressway.
               </p>
               <p className="text-light">
-                With over a decade of experience and a growing international
-                presence, SKD PropWorld is your reliable property consultant for
-                real estate solutions in key Indian cities and abroad. We are
+                With over a decade of experience, we work as a reliable real estate agent in
+                Greater Noida, helping buyers and investors make informed property decisions
+                through transparent processes and expert market guidance. Our focus is on
+                providing genuine property consultation for residential plots, commercial
+                investments, and long-term opportunities under YEIDA (Yamuna Expressway
+                Industrial Development Authority).
+              </p>
+              <p className="text-light">
+                Since 2011, SKD PropWorld has built a strong reputation for trust, integrity,
+                and customer satisfaction. We offer end-to-end property consultation services,
+                ensuring a smooth and reliable experience for clients investing in Greater Noida
+                and YEIDA regions.
                 committed to delivering transparency, trust, and tailored real
                 estate services to meet every client’s unique needs serving
                 since 2011. <br /> <br />

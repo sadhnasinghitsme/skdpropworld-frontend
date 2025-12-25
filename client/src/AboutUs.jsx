@@ -60,24 +60,29 @@ const AboutUs = () => {
           <div className="container position-relative">
             <h2 className="mb-4 text-center fw-bold text-white">Who We Are</h2>
             <p className="lead text-justify text-white">
-              At <strong>SKD Propworld</strong>, we specialize exclusively in <strong>YEIDA (Yamuna Expressway Industrial Development Authority)</strong> projects. Our goal is to provide clear, trustworthy, and professional real estate services for buyers and investors interested in YEIDA Residential Plots. We focus on delivering accurate information, smooth documentation support, and personalized guidance to help clients make confident decisions in the YEIDA region.
+              At <strong>SKD Propworld</strong>, we work as a professional real estate agent 
+              and property consultant in Greater Noida, specializing in residential and commercial 
+              properties,including verified YEIDA plots along the Yamuna Expressway.
               <br />
               <br />
-              Our goal is to provide clear, trustworthy, and professional real estate
-               services for buyers and investors interested in YEIDA Residential Plots.
-               We focus on delivering accurate information, smooth documentation support,
-                and personalized guidance to help clients make confident decisions in the 
-                YEIDA region.Our mission is to empower clients with transparent advice,
-                 expert knowledge of YEIDA sectors, and hassle-free assistance—whether you’re
-                  looking to buy a residential plot, secure an industrial space, or invest in 
-                  high-growth YEIDA zones near the upcoming Noida International Airport.
-                  SKD has been established since 2011, continues to deliver excellence.
+               As a trusted property dealer in Greater Noida, we provide clear, reliable,
+              and transparent real estate services for buyers and investors interested in
+            YEIDA residential plots and high-growth investment zones. Our team focuses on
+            accurate information, smooth documentation support, and personalized guidance
+             to help clients make confident property decisions.
+
+           With strong local expertise in YEIDA sectors and years of experience since 2011,
+          we assist clients looking to buy residential plots, invest in commercial or
+          industrial spaces, or explore long-term opportunities near the upcoming
+          Noida International Airport (Jewar Airport).
+
+
 
               <br />
               <br />
-              With years of experience dedicated to YEIDA projects, SKD Propworld takes pride
-               in being a trusted name for anyone seeking reliability, clarity, and real value
-                in the Yamuna Expressway real estate market.
+              SKD PropWorld is committed to delivering trustworthy real estate consultation
+              and end-to-end support, making us a reliable choice for anyone seeking a
+              real estate agent in Greater Noida with proven YEIDA market knowledge.
             </p>
           </div>
         </section>

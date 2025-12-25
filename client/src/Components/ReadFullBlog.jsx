@@ -118,12 +118,21 @@ const ReadFullBlog = () => {
   if (error) return <div className="blogdetail-error">Error: {error}</div>;
   if (!blog) return <div className="blogdetail-error">Blog not found.</div>;
 
+  // SEO: override title for the YEIDA Plots blog
+  const SPECIAL_YEIDA_TITLE =
+    "YEIDA Plots in Greater Noida | Property Dealer & Real Estate Consultant – SKD Propworld";
+
+  const pageTitle =
+    blog._id === "693d1ad0f880b08242ab9606"
+      ? SPECIAL_YEIDA_TITLE
+      : `${blog.title || "Blog"} | SKD PropWorld Blog`;
+
   return (
     <ErrorBoundary>
       <>
         <Helmet>
         {/* Primary Meta Tags */}
-        <title>{`${blog.title || "Blog"} | SKD PropWorld Blog`}</title>
+        <title>{pageTitle}</title>
         <meta
           name="description"
           content={
@@ -143,10 +152,7 @@ const ReadFullBlog = () => {
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="article" />
-        <meta
-          property="og:title"
-          content={`${blog.title || "Blog"} | SKD PropWorld Blog`}
-        />
+        <meta property="og:title" content={pageTitle} />
         <meta
           property="og:description"
           content={
@@ -162,10 +168,7 @@ const ReadFullBlog = () => {
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary" />
-        <meta
-          name="twitter:title"
-          content={`${blog.title || "Blog"} | SKD PropWorld Blog`}
-        />
+        <meta name="twitter:title" content={pageTitle} />
         <meta
           name="twitter:description"
           content={

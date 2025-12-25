@@ -253,21 +253,14 @@ const Homepage = () => {
   }, []);
 
   const keywords = [
-  "YEIDA Approved Residential Plots",
-  "Residential Land near Jewar Airport",
-  "Affordable Plots in YEIDA Region",
-  "Invest Smartly with YEIDA Plots",
-  "Premium Properties along Yamuna Expressway",
-  "Future-Ready Plots in YEIDA Sectors 18 & 20",
-  "Residential Properties in YEIDA",
-  "Plots with Great Connectivity to Noida & Delhi",
-  "Jewar Airport Investment Opportunities",
-  "YEIDA Plots for Home & Business",
-  "Modern Infrastructure with YEIDA Projects",
-  "Secure Your Future with YEIDA Property",
-  "Dream Homes near Jewar Airport",
-  "Luxury Living in YEIDA Smart City",
-  "Everything you need, right here with SKD PropWorld",
+   "property dealer in Greater Noida",
+  "YEIDA plots in Greater Noida",
+  "YEIDA approved residential plots",
+  "residential plots near Jewar Airport",
+  "YEIDA plots for investment",
+  "real estate consultant YEIDA",
+  "plots near Yamuna Expressway",
+  "YEIDA residential property"
   ];
 
   const goToProjects = (term) => {
@@ -304,9 +297,11 @@ const Homepage = () => {
       <Helmet>
         {/* Primary Meta Tags */}
         <title>
-          YEIDA Plots in Greater Noida | Property Dealer & Real Estate Consultant – SKD Propworld
+          Real Estate Agent in Greater Noida | YEIDA Plots & Property Consultant - SKD Propworld
         </title>
         <link rel="canonical" href="https://www.skdpropworld.com/" />
+        <link rel="alternate" hreflang="en" href="https://www.skdpropworld.com/" />
+        <link rel="alternate" hreflang="en-IN" href="https://www.skdpropworld.com/" />
 
         <meta
           name="title"
@@ -314,7 +309,7 @@ const Homepage = () => {
         />
         <meta
           name="description"
-          content="SKD Propworld is a trusted property dealer and real estate consultant for YEIDA plots in Greater Noida. Get verified authority plots with site visit support."
+          content="Real estate agent in Greater Noida. Buy, sell & invest in YEIDA plots, residential & commercial property. Trusted consultant with verified listings."
         />
         <meta
           name="keywords"
@@ -434,8 +429,6 @@ const Homepage = () => {
           })}
         </script>
       </Helmet>
-      {/* **************************************** */}
-      {/* the text above is for SEO */}
 
       <div className="homepage-hero">
         <Navbar />
@@ -493,11 +486,16 @@ const Homepage = () => {
           }}>
             {/* Primary, single H1 for homepage */}
             <h1 style={{ fontSize: '3rem', fontWeight: 'bold', marginBottom: '20px' }}>
-              YEIDA Authority Plots in Greater Noida
+              Real Estate Agent in Greater Noida
             </h1>
-            <p style={{ fontSize: '1.5rem', marginBottom: '30px' }}>
-              Find Residential Plots and investments near Noida International Airport.
-            </p> 
+            <p style={{ fontSize: '1.5rem', marginBottom: '20px' }}>
+              SKD Prop World works as a trusted real estate agent and property consultant in Greater Noida,
+              assisting clients with residential and commercial property transactions,
+              including YEIDA plot investments.
+            </p>
+            <p style={{ fontSize: '1.2rem', marginBottom: '30px' }}>
+              We provide professional <a href="/services" style={{ color: '#ffc107', textDecoration: 'underline' }}>real estate consultation services</a> for buyers and investors in Greater Noida.
+            </p>
             <a href="/projects" style={{
               background: '#ffc107',
               color: '#000',
@@ -898,17 +896,48 @@ const Homepage = () => {
 
 
 
-        <section id="map">
-    <h2>YEIDA Map Overview</h2>
-    <iframe
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d224357.48098042266!2d77.38709805!3d28.3949388!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cdc8e0c6a5b8f%3A0x3e3e3e3e3e3e3e3e!2sYEIDA%2C%20Uttar%20Pradesh!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin"
-      width="100%"
-      height="400"
-      style={{ border: 0 }}
-      allowFullScreen
-      loading="lazy"
-    ></iframe>
-  </section>
+        <section id="map" style={{ padding: '40px 0', background: '#f8f9fa' }}>
+          <Container>
+            <h2 style={{ textAlign: 'center', marginBottom: '30px' }}>YEIDA Map Overview</h2>
+            <div style={{ 
+              width: '100%', 
+              height: '400px', 
+              borderRadius: '8px',
+              overflow: 'hidden',
+              boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+              position: 'relative'
+            }}>
+              <iframe
+                src="https://maps.google.com/maps?q=28.470602,77.509825&z=12&output=embed"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                title="YEIDA Location Map"
+                onError={(e) => {
+                  console.error('Google Maps failed to load');
+                  e.target.style.display = 'none';
+                }}
+              ></iframe>
+            </div>
+            <p style={{ 
+              textAlign: 'center', 
+              marginTop: '15px',
+              color: '#6c757d',
+              fontSize: '0.9rem'
+            }}>
+              <a 
+                href="https://www.google.com/maps/place/YEIDA,+Yamuna+Expressway,+Greater+Noida,+Uttar+Pradesh/@28.470602,77.509825,12z" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                style={{ color: '#3498db', textDecoration: 'none' }}
+              >
+                View on Google Maps →
+              </a>
+            </p>
+          </Container>
+        </section>
 
 
         <Container className="homepage-container text-center text-light">
@@ -929,26 +958,46 @@ const Homepage = () => {
               </span>
             </h2>
 
+            {/* SEO Section 2: Trusted Property Dealer in Greater Noida */}
+            <section className="seo-section seo-section-middle my-4">
+              <h2>Trusted Property Dealer in Greater Noida</h2>
+              <p>
+                As a trusted property dealer in Greater Noida, SKD Propworld offers transparent
+                guidance, honest advice, and end-to-end support for buyers and investors. From
+                shortlisting properties to documentation and registration, our team ensures a
+                smooth and hassle-free experience.
+              </p>
+              <p>
+                Contact our <a href="/contact-us">real estate team in Greater Noida</a> for personalized property guidance.
+              </p>
+            </section>
+
             <div className="container-fluid">
               <div className="row">
                 <div className="col-sm-5">
                   <section className="homepage-content container-fluid mb-2 pb-2 text-start">
                     <h2 className="mb-3 ">Why Invest in YEIDA</h2>
                     <p>
-                      YEIDA (Yamuna Expressway Industrial Development Authority) is one of
-                       the fastest-growing and most promising real estate regions in North India. 
-                      Strategically located along the Yamuna Expressway, YEIDA offers
-                       excellent connectivity to Noida, Greater Noida, Agra,
-                        and the upcoming Noida International Airport (Jewar Airport).
-                      With world-class infrastructure, planned townships,
-                       and upcoming projects such as Film City and logistics parks,
-                        YEIDA promises immense growth potential and high returns on investment.
+                      YEIDA (Yamuna Expressway Industrial Development Authority) is one of the
+                      fastest-growing real estate regions near Greater Noida. Located along the
+                      Yamuna Expressway, YEIDA offers excellent connectivity to Noida, Greater Noida,
+                      Agra, and the upcoming Noida International Airport (Jewar Airport).
                     </p>
                     <p>
-                      With deep local expertise and honest advice, we help
-                      clients make informed property decisions. Hundreds have
-                      trusted us for our transparent process and market
-                      knowledge.
+                      As a local real estate agent and consultant in Greater Noida, we help buyers
+                      and investors explore verified YEIDA plots with strong growth potential.
+                      With planned townships, infrastructure development, Film City, and logistics
+                      parks, YEIDA has become a preferred destination for long-term residential
+                      and commercial property investment.
+                    </p>
+                    <p>
+                      At SKD Prop World, we provide professional real estate consultation and
+                      property dealer services to help clients make informed decisions in YEIDA.
+                      Our transparent process and local market expertise ensure reliable guidance
+                      for property investment in Greater Noida.
+                    </p>
+                    <p>
+                      Explore our <a href="/yeida-plots">YEIDA plots in Greater Noida</a> for long-term investment opportunities.
                     </p>
 
                     <ul style={{ display: "none" }}>
@@ -1316,6 +1365,73 @@ const Homepage = () => {
       <React.Suspense fallback={<div className="text-center py-5"><div className="spinner-border text-warning" role="status"></div></div>}>
         <YeidaNews />
       </React.Suspense>
+
+      {/* SEO Section 3: Professional Real Estate Consultant for YEIDA */}
+      <section className="seo-section seo-section-bottom py-5" style={{
+        background: '#f8f9fa',
+        padding: '60px 0',
+        marginTop: '40px'
+      }}>
+        <Container>
+          <h2 style={{
+            color: '#212529',
+            fontSize: '2.5rem',
+            fontWeight: 'bold',
+            marginBottom: '25px',
+            textAlign: 'center'
+          }}>
+            Professional Real Estate Consultant for YEIDA
+          </h2>
+          <p style={{
+            color: '#495057',
+            fontSize: '1.1rem',
+            lineHeight: '1.8',
+            marginBottom: '20px',
+            textAlign: 'center',
+            maxWidth: '900px',
+            margin: '0 auto 20px auto'
+          }}>
+            SKD Propworld acts as a professional real estate consultant for YEIDA,
+            helping buyers, NRI investors, and end-users understand location benefits,
+            legal status, and future growth potential of each plot. Our in-depth YEIDA
+            knowledge ensures you make confident and well-informed property decisions.
+          </p>
+          <div style={{
+            textAlign: 'center',
+            maxWidth: '900px',
+            margin: '0 auto'
+          }}>
+            <p style={{
+              color: '#495057',
+              fontSize: '1rem',
+              lineHeight: '1.8',
+              marginBottom: '15px'
+            }}>
+              Learn more <a href="/about-us" style={{
+                color: '#ffc107',
+                textDecoration: 'none',
+                fontWeight: '600',
+                borderBottom: '2px solid #ffc107',
+                transition: 'all 0.3s ease'
+              }}>about us</a> and our commitment to providing exceptional real estate services in Greater Noida.
+            </p>
+            <p style={{
+              color: '#495057',
+              fontSize: '1rem',
+              lineHeight: '1.8',
+              marginBottom: '0'
+            }}>
+              We provide professional <a href="/services" style={{
+                color: '#ffc107',
+                textDecoration: 'none',
+                fontWeight: '600',
+                borderBottom: '2px solid #ffc107',
+                transition: 'all 0.3s ease'
+              }}>real estate consultation services</a> for buyers and investors in Greater Noida.
+            </p>
+          </div>
+        </Container>
+      </section>
 
       <React.Suspense fallback={<div className="text-center py-5"><div className="spinner-border text-warning" role="status"></div></div>}>
         <LeadForm />
