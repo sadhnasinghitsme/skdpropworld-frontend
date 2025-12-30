@@ -83,7 +83,7 @@ const OfficeBearers = () => {
       <section className="office-bearers text-center">
         <div className="container">
           <div className="text-center mb-4">
-            <h1 className="fw-bold pt-5 pb-2">Meet Our Leadership Team - YEIDA Real Estate Experts</h1>
+            <h2 className="fw-bold pt-5 pb-2">Meet Our Leadership Team - YEIDA Real Estate Experts</h2>
           </div>
 
           <div className="row justify-content-center mb-2">

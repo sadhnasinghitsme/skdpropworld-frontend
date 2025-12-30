@@ -297,7 +297,8 @@ const Homepage = () => {
       <Helmet>
         {/* Primary Meta Tags */}
         <title>
-          Real Estate Agent in Greater Noida | YEIDA Plots & Property Consultant - SKD Propworld
+          Real Estate Agent in Greater Noida | SKD PropWorld
+
         </title>
         <link rel="canonical" href="https://www.skdpropworld.com/" />
         <link rel="alternate" hreflang="en" href="https://www.skdpropworld.com/" />

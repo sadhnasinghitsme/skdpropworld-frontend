@@ -10,7 +10,8 @@ const sitemap = require("./routes/sitemap");
 const htmlSnippetRoutes = require("./routes/htmlSnippet");
 const inventoryRoutes = require("./routes/inventoryRoutes.js");
 const app = express();
-// const PORT = process.env.PORT || 8080;
+// Server configuration - Force using port 3001
+const PORT = 3001;
 const prerender = require("prerender-node");
 prerender.set("prerenderToken", "QHhhrvIPvM5gm4fHnmaT");
 app.use(prerender);
@@ -20,29 +21,39 @@ console.log("✅ Prerender middleware loaded");
 app.use(compression());
 console.log("✅ Compression middleware loaded");
 
-// Port configuration for deployment
-const PORT = process.env.PORT || 10000;
-app.use(cors());
-app.use(
-  cors({
-    origin: [
-      "http://localhost:5000",
-      "http://localhost:5173",
-      "https://skd-production.up.railway.app",
-      "https://www-skdpropworld-com.onrender.com",
-      "https://skd-test.vercel.app",
-      "https://skdpropworld.com",
-      "https://www.skdpropworld.com",
-      "https://https-www-skdpropworld-com.vercel.app"
-    ],
-    credentials: true,
-  })
-);
+// CORS configuration
+const corsOptions = {
+  origin: function (origin, callback) {
+    const allowedOrigins = [
+      'http://localhost:5173',
+      'http://localhost:5000',
+      'https://skd-production.up.railway.app',
+      'https://www-skdpropworld-com.onrender.com',
+      'https://skd-test.vercel.app',
+      'https://skdpropworld.com',
+      'https://www.skdpropworld.com',
+      'https://https-www-skdpropworld-com.vercel.app'
+    ];
+    
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'x-prerender-token']
+};
 
-// Uncomment this for production build
-// app.use(
-//   cors({
-//     origin: [
+// Apply CORS with the above options
+app.use(cors(corsOptions));
+
+// Handle preflight requests
+app.options('*', cors(corsOptions));
 //       "http://localhost:5173",
 //       "https://skd-testmode.vercel.app",
 //       "https://www.skdpropworld.com", // ✅ Now it's correct
@@ -148,9 +159,16 @@ async function startServer() {
 
     console.log("✅ MongoDB connected successfully.");
 
-    app.listen(PORT, "0.0.0.0", () => {
+    const server = app.listen(PORT, "0.0.0.0", () => {
+      console.log(`\n=== Server Configuration ===`);
+      console.log(`PORT: ${PORT}`);
+      console.log(`NODE_ENV: ${process.env.NODE_ENV || 'development'}`);
+      console.log(`MongoDB: ${process.env.MONGO_URI ? 'Configured' : 'Not Configured'}`);
+      console.log(`==========================\n`);
       console.log(`🚀 Server running on port ${PORT}`);
       console.log(`🌐 Environment: ${process.env.NODE_ENV || 'development'}`);
+      console.log(`📊 Server started at ${new Date().toISOString()}`);
+      console.log(`👂 Server PID: ${process.pid}`);
     });
   } catch (err) {
     console.error("❌ Server startup error:", err.message);
