@@ -1,7 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://www.skdpropworld.com/sitemap.xml
-
-Disallow: /admin/
-Disallow: /api/
