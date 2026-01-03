@@ -5,18 +5,25 @@
   "framework": "vite",
   "redirects": [
     {
-      "source": "http://skdpropworld.com/:path*",
-      "destination": "https://www.skdpropworld.com/:path*",
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "skdpropworld.vercel.app"
+        }
+      ],
+      "destination": "https://www.skdpropworld.com/$1",
       "permanent": true
     },
     {
-      "source": "http://www.skdpropworld.com/:path*",
-      "destination": "https://www.skdpropworld.com/:path*",
-      "permanent": true
-    },
-    {
-      "source": "https://skdpropworld.com/:path*",
-      "destination": "https://www.skdpropworld.com/:path*",
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "skdpropworld.com"
+        }
+      ],
+      "destination": "https://www.skdpropworld.com/$1",
       "permanent": true
     }
   ],
@@ -35,14 +42,6 @@
     }
   ],
   "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "X-Prerender-Token",
-          "value": "QHhhrvIPvM5gm4fHnmaT"
-        }
-      ]
-    }
+    
   ]
 }
