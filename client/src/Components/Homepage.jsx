@@ -298,11 +298,7 @@ const Homepage = () => {
         {/* Primary Meta Tags */}
         <title>
           Real Estate Agent in Greater Noida | SKD PropWorld
-
         </title>
-        <link rel="canonical" href="https://www.skdpropworld.com/" />
-        <link rel="alternate" hreflang="en" href="https://www.skdpropworld.com/" />
-        <link rel="alternate" hreflang="en-IN" href="https://www.skdpropworld.com/" />
 
         <meta
           name="title"

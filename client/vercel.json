@@ -3,6 +3,23 @@
   "outputDirectory": "dist",
   "installCommand": "npm install",
   "framework": "vite",
+  "redirects": [
+    {
+      "source": "http://skdpropworld.com/:path*",
+      "destination": "https://www.skdpropworld.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "http://www.skdpropworld.com/:path*",
+      "destination": "https://www.skdpropworld.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "https://skdpropworld.com/:path*",
+      "destination": "https://www.skdpropworld.com/:path*",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/sitemap.xml",
