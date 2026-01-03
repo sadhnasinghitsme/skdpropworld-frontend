@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const bcrypt = require("bcryptjs");
 
 const Admin = require("../models/Admin");
 require("dotenv").config(); // ✅ Load environment variables
@@ -46,9 +47,15 @@ router.post("/login", async (req, res) => {
       return res.status(404).json({ message: "Admin not found" });
     }
 
-    if (admin.password !== password) {
+    // Compare hashed password
+    const isMatch = await bcrypt.compare(password, admin.password);
+    if (!isMatch) {
       return res.status(401).json({ message: "Incorrect password" });
     }
+
+    // Return admin data (without password)
+    const adminData = admin.toObject();
+    delete adminData.password;
 
     return res.status(200).json({
       message: "Login successful",

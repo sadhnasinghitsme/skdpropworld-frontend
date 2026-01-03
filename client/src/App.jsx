@@ -73,6 +73,8 @@ import AllProjects from "./Components/AllProjects.jsx";
 import AllProjectsPage from "./Components/AllProjectsPage";
 import AdminInventory from "./Components/Admin Pages/AdminInventory.jsx";
 import AdminNewsManager from "./Components/Admin Pages/AdminNewsManager.jsx";
+import CanonicalURL from "./Components/CanonicalURL";
+import WWWRedirect from "./Components/WWWRedirect";
 
 // 🟡 Heavy & Admin Pages – Lazy Loaded
 const AdminDashboard = lazy(() => import("./AdminDashboard"));
@@ -184,6 +186,8 @@ function App() {
 
   return (
     <>
+      <WWWRedirect />
+      <CanonicalURL />
       <ToTop>
         <Routes>
           <Route path="/" element={<Homepage />} />

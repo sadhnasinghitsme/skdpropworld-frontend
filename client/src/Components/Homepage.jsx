@@ -399,11 +399,10 @@ const Homepage = () => {
 
             "@type": "RealEstateAgent",
             name: "SKD PropWorld Private Limited",
-            url: "https://skdpropworld.com/",
+            url: "https://www.skdpropworld.com/",
             logo: "https://www.skdpropworld.com/favicon.ico",
             image: "https://www.skdpropworld.com/og-image.png",
-            description:
-              "We help you buy, sell, and rent property in YEIDA (Yamuna Expressway Industrial Development Area), Delhi NCR, Noida, Ghaziabad, and Greater Noida.",
+            description: "SKD PropWorld is a trusted real estate agent in Greater Noida & YEIDA, offering residential plots, apartments, and investment properties near Yamuna Expressway with expert guidance and best deals.",
             address: {
               "@type": "PostalAddress",
               streetAddress:
@@ -1392,7 +1391,7 @@ const Homepage = () => {
             maxWidth: '900px',
             margin: '0 auto 20px auto'
           }}>
-            SKD Propworld acts as a professional real estate consultant for YEIDA,
+            SKD Propworld acts as a professional real estate agent  for YEIDA,
             helping buyers, NRI investors, and end-users understand location benefits,
             legal status, and future growth potential of each plot. Our in-depth YEIDA
             knowledge ensures you make confident and well-informed property decisions.

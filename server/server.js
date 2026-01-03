@@ -21,6 +21,32 @@ console.log("✅ Prerender middleware loaded");
 app.use(compression());
 console.log("✅ Compression middleware loaded");
 
+// WWW redirect middleware - Force www subdomain and HTTPS in production
+app.use((req, res, next) => {
+  if (process.env.NODE_ENV === 'production') {
+    const host = req.get('host');
+    const url = req.originalUrl;
+    const isHttps = req.secure || req.get('x-forwarded-proto') === 'https';
+    
+    // Check if we need to redirect
+    if (!isHttps || !host.startsWith('www.')) {
+      // Remove any existing 'www.' to avoid duplicates
+      const domain = host.replace(/^www\./i, '');
+      
+      // Build the new URL with https and www
+      const newUrl = `https://www.${domain}${url}`;
+      
+      // Only redirect if the URL would actually change
+      if (req.originalUrl !== newUrl) {
+        return res.redirect(301, newUrl);
+      }
+    }
+  }
+  
+  next();
+});
+console.log("✅ WWW redirect middleware loaded");
+
 // CORS configuration
 const corsOptions = {
   origin: function (origin, callback) {
@@ -52,8 +78,17 @@ const corsOptions = {
 // Apply CORS with the above options
 app.use(cors(corsOptions));
 
-// Handle preflight requests
+// Handle preflight requests for all routes
 app.options('*', cors(corsOptions));
+
+// Explicit OPTIONS handler for login route
+app.options('/api/admin/login', cors(corsOptions), (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', req.headers.origin || '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.sendStatus(200);
+});
 //       "http://localhost:5173",
 //       "https://skd-testmode.vercel.app",
 //       "https://www.skdpropworld.com", // ✅ Now it's correct

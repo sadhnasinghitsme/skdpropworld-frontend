@@ -9,21 +9,42 @@ import { Helmet } from "react-helmet-async";
 // Function to convert YouTube URLs to embed format
 const getEmbedUrl = (url) => {
   if (!url) return '';
+  
   try {
-    let videoId = '';
-    
-    // Handle youtu.be short URLs
-    if (url.includes('youtu.be/')) {
-      videoId = url.split('youtu.be/')[1].split('?')[0];
-    } 
-    // Handle regular YouTube URLs
-    else {
-      const regExp = /^.*(youtube\.com\/watch\?v=|youtube\.com\/embed\/|youtube\.com\/v\/|youtu\.be\/)([^#\&\?]*).*/;
-      const match = url.match(regExp);
-      videoId = (match && match[2].length === 11) ? match[2] : null;
+    // If it's already an embed URL, return as is
+    if (url.includes('youtube.com/embed/')) {
+      return url;
     }
     
-    return videoId ? `https://www.youtube.com/embed/${videoId}?rel=0&showinfo=0` : '';
+    let videoId = '';
+    
+    // Handle youtu.be short URLs (https://youtu.be/VIDEO_ID)
+    if (url.includes('youtu.be/')) {
+      videoId = url.split('youtu.be/')[1].split(/[?&#]/)[0];
+    } 
+    // Handle watch URLs (https://www.youtube.com/watch?v=VIDEO_ID)
+    else if (url.includes('youtube.com/watch')) {
+      const urlObj = new URL(url);
+      videoId = urlObj.searchParams.get('v');
+    }
+    // Handle embed URLs (should be caught by first condition)
+    // Handle youtu.be with additional parameters
+    else if (url.includes('youtube.com/embed/')) {
+      const parts = url.split('youtube.com/embed/');
+      videoId = parts[1].split(/[?&#]/)[0];
+    }
+    // Handle youtu.be with additional parameters
+    else if (url.includes('youtu.be/')) {
+      videoId = url.split('youtu.be/')[1].split(/[?&#]/)[0];
+    }
+    
+    // If we have a valid video ID, return the embed URL
+    if (videoId && videoId.length === 11) {
+      return `https://www.youtube.com/embed/${videoId}?rel=0&showinfo=0&enablejsapi=1`;
+    }
+    
+    console.warn('Could not extract YouTube video ID from URL:', url);
+    return '';
   } catch (error) {
     console.error('Error processing YouTube URL:', url, error);
     return '';
@@ -65,24 +86,34 @@ const ViewYouTubeSeries = () => {
     const fetchVideos = async () => {
       try {
         setLoading(true);
-        const response = await axios.get('/api/admin/youtube');
+        const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001';
+        const response = await axios.get(`${API_BASE}/api/admin/youtube`);
         
         if (!Array.isArray(response.data)) {
           console.error('Invalid response format:', response.data);
           throw new Error('Invalid response from server');
         }
         
-        const validVideos = response.data.filter(video => 
-          video && 
-          video.url && 
-          video.title && 
-          typeof video.title === 'string' && 
-          typeof video.url === 'string'
-        );
+        // Filter for valid videos and only those related to YEIDA or Greater Noida
+        const validVideos = response.data.filter(video => {
+          if (!video || !video.url || !video.title || typeof video.title !== 'string' || typeof video.url !== 'string') {
+            return false;
+          }
+          
+          // Check if title or description contains location keywords (case insensitive)
+          const locationKeywords = ['yeida', 'greater noida', 'noida extension', 'yamuna expressway'];
+          const title = video.title.toLowerCase();
+          const description = (video.description || '').toLowerCase();
+          
+          return locationKeywords.some(keyword => 
+            title.includes(keyword) || 
+            description.includes(keyword)
+          );
+        });
         
         if (validVideos.length === 0) {
-          console.warn('No valid videos found in the response');
-          setError('No videos available at the moment.');
+          console.warn('No location-specific videos found');
+          setError('No videos available for the selected locations (YEIDA/Greater Noida) at the moment.');
         } else {
           setError(null);
         }

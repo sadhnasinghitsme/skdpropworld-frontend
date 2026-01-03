@@ -1,4 +1,24 @@
 User-agent: *
 Allow: /
-Allow: /favicon.ico
+
+# Sitemap location
 Sitemap: https://www.skdpropworld.com/sitemap.xml
+
+# Disallow admin areas
+Disallow: /admin/
+Disallow: /api/
+
+# Disallow duplicate content
+Disallow: /*?*
+Disallow: /*#*
+
+# Allow important pages
+Allow: /projects/
+Allow: /read-blog/
+Allow: /about-us
+Allow: /contact-us
+Allow: /services
+Allow: /career@skd
+
+# Crawl delay (optional)
+Crawl-delay: 1

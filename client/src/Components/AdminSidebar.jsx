@@ -94,50 +94,76 @@ const AdminSidebar = ({ adminName, remainingTime }) => {
 
   const navItems = [
     {
+      path: "/admin/dashboard",
+      label: "Dashboard",
+      icon: "bi-speedometer2",
+      requiredRole: 'admin'
+    },
+    {
       path: "/admin/projects-leads",
       label: "Project Leads",
-      icon: "bi-people-fill",
+      icon: "bi-people",
+      requiredRole: 'admin'
     },
     {
       path: "/admin/contact-us-responeses",
-      label: "Conatct-Us Form Responses",
+      label: "Contact-Us Form Responses",
       icon: "bi-people-fill",
+      requiredRole: 'admin'
     },
     {
       path: "/admin/control-projects",
       label: "Project Manager",
       icon: "bi-folder-plus",
+      requiredRole: 'admin'
     },
     {
       path: "/admin/blogs-manager",
       label: "Blogs Manager",
       icon: "bi-journal-plus",
+      requiredRole: 'admin'
     },
     {
       path: "/admin/news-manager",
       label: "News Manager",
       icon: "bi-newspaper",
+      requiredRole: 'admin'
+    },
+    {
+      path: "/admin/youtube-manager",
+      label: "YouTube Manager",
+      icon: "bi-youtube",
+      requiredRole: 'admin' // This ensures it's visible to all admins
     },
     {
       path: "/admin/add-inventory",
       label: "Inventory Manager",
       icon: "bi-box-seam",
+      requiredRole: 'admin'
     },
-    { path: "/admin/maps-manager", label: "Maps Manager", icon: "bi-map" },
+    { 
+      path: "/admin/maps-manager", 
+      label: "Maps Manager", 
+      icon: "bi-map",
+      requiredRole: 'admin'
+    },
     {
       path: "/admin/gallery-manager",
       label: "Gallery Control",
       icon: "bi-images",
+      requiredRole: 'admin'
     },
     {
       path: "/admin/career-applications",
-      label: "Career Applications ",
+      label: "Career Applications",
       icon: "bi-briefcase-fill",
+      requiredRole: 'admin'
     },
     {
       path: "/admin/profile",
       label: "Profile & Site Control",
       icon: "bi-person-circle",
+      requiredRole: 'admin'
     },
   ];
 
