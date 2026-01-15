@@ -2,8 +2,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const compression = require("compression");
-require("dotenv").config();
 const path = require("path");
+require("dotenv").config({ path: path.join(__dirname, ".env") });
 const { SitemapStream, streamToPromise } = require("sitemap");
 const { createGzip } = require("zlib");
 const sitemap = require("./routes/sitemap");
@@ -52,6 +52,7 @@ const corsOptions = {
   origin: function (origin, callback) {
     const allowedOrigins = [
       'http://localhost:5173',
+      'http://localhost:5174',
       'http://localhost:5000',
       'https://skd-production.up.railway.app',
       'https://www-skdpropworld-com.onrender.com',
@@ -161,16 +162,16 @@ console.log("→ Mounting /api/admin/youtube");
 app.use("/api/admin/youtube", require("./routes/youtubeVideos"));
 
 // DB Connection
-// mongoose
-//   .connect(process.env.MONGO_URI, {
-//     dbName: "SkdData",
-//   })
-//   .then(() => {
-//     console.log("MongoDB connected");
-//     app.listen(5000, () => console.log("Server running on port 5000"));
-//   })
-//   .catch((err) => console.error("MongoDB connection error:", err));
-// Simple test route
+mongoose
+  .connect(process.env.MONGO_URI, {
+    dbName: "SkdData",
+  })
+  .then(() => {
+    console.log("MongoDB connected");
+    const PORT = process.env.PORT || 5000;
+    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+  })
+  .catch((err) => console.error("MongoDB connection error:", err));
 app.get("/api", (req, res) => {
   res.send("✅ API is working fine!");
 });

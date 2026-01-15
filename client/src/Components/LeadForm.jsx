@@ -72,6 +72,12 @@ const LeadForm = () => {
 
       if (res.ok) {
         toast.success("Form submitted successfully!");
+        // Track conversion
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', 'conversion', {
+            'send_to': 'AW-11180191597/vEY-CI7N9-EbEO3ekNMp'
+          });
+        }
         setFormData({
           name: "",
           email: "",

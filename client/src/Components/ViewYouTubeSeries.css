@@ -1,262 +1,101 @@
-.youtube-section {
-  background-color: #0e0e0e;
-  color: #fff;
-  padding: 60px 20px;
-  font-family: "Segoe UI", sans-serif;
+/* YouTube Series Section */
+.youtube-series-section {
+  position: relative;
+  overflow: hidden;
+  background-color: #f8f9fa;
+  padding: 80px 0;
 }
 
-.youtube-hero-new {
-  padding: 40px;
-  color: #000;
-  background: linear-gradient(-45deg, #f3e7d3, #ebd2af, #ecedea);
-  background-size: 400% 400%;
-  animation: gradientBG 12s ease infinite;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-}
-
-@keyframes gradientBG {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-.youtube-icon-large {
-  font-size: 80px;
-  color: #e89745;
-  flex-shrink: 0;
-}
-
-.right-text {
-  text-align: left;
-}
-
-.hero-title {
-  font-size: 2.5rem;
-  font-weight: 800;
-  color: #e89745;
-  margin: 0 0 8px;
-}
-
-.hero-subtitle {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #000;
-  margin: 0 0 12px;
-}
-
-.hero-tagline {
-  font-size: 1.1rem;
-  color: #6f6767;
-  line-height: 1.6;
-  margin: 0;
-}
-
-.video-strip {
-  display: flex;
-  gap: 20px;
-  flex-wrap: nowrap;
-  max-width: 100%; /* NEW */
-  box-sizing: border-box;
-}
-/* 
+/* Video Card */
 .video-card {
-  flex: 0 0 280px;
-  scroll-snap-align: start;
-  background: #3c3c3c !important;
-  padding: 12px;
+  background: white;
   border-radius: 12px;
-  transition: transform 0.3s ease;
-} */
-.video-card {
-  flex: 0 0 auto; /* don't force fixed width */
-  min-width: 250px;
-  max-width: 280px;
-  width: 100%;
-  background: #3c3c3c !important;
-  padding: 12px;
-  border-radius: 12px;
-  transition: transform 0.3s ease;
-  scroll-snap-align: start;
-  box-sizing: border-box;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  height: 100%;
 }
 
 .video-card:hover {
-  transform: scale(1.02);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 }
 
-.video-card iframe {
-  width: 100%;
-  height: 160px;
-  border: none;
-  border-radius: 8px;
-}
-
-.video-card h4 {
-  color: #fff;
-  font-size: 1rem;
-  margin: 8px 0 4px;
-}
-
-.video-card p {
-  color: #aaa;
-  font-size: 0.85rem;
-  margin: 0;
-}
-
-.btnn {
-  display: inline-block;
-  padding: 12px 24px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: white;
-  background: linear-gradient(270deg, #f87251, #ffbb00, #ffb347, #f1bb56);
-  background-size: 600% 600%;
-  border: none;
-  /* border-radius: 8px; */
-  outline: none;
-  text-decoration: none;
+.video-thumbnail {
+  position: relative;
   cursor: pointer;
-  animation: gradientPulse 8s ease infinite;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 8px 24px rgba(255, 136, 0, 0.3);
+  background-size: cover;
+  background-position: center;
+  transition: all 0.3s ease;
 }
-.scroll-btn {
-  all: unset; /* RESET ALL STYLES */
-  background-color: #e50914;
+
+.play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ff0000;
+  font-size: 20px;
+  transition: all 0.3s ease;
+}
+
+.video-thumbnail:hover .play-button {
+  background: #ff0000;
   color: white;
-  font-size: 2rem;
-  padding: 10px 15px;
-  cursor: pointer;
-  z-index: 1;
-  height: fit-content;
-  transition: background 0.3s ease;
-  display: inline-block;
-  line-height: 1;
+  transform: translate(-50%, -50%) scale(1.1);
 }
 
-.scroll-btn:hover {
-  background-color: #c40711 !important;
-}
-
-.scroll-btn.left,
-.scroll-btn.right {
-  margin-right: 10px;
-  box-shadow: none !important;
-  border: none !important;
-  outline: none !important;
-  color: #000;
-}
-
+/* Scroll Container */
 .scroll-container {
   overflow-x: auto;
-  padding: 10px 0 20px;
+  padding: 20px 0;
   width: 100%;
-  scroll-snap-type: x mandatory;
-  box-sizing: border-box;
-  max-width: 100%;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;  /* Hide scrollbar for IE and Edge */
+  scrollbar-width: none;  /* Hide scrollbar for Firefox */
 }
+
 .scroll-container::-webkit-scrollbar {
-  height: 7px; /* horizontal scrollbar height */
+  display: none; /* Hide scrollbar for Chrome, Safari and Opera */
 }
 
-.scroll-container::-webkit-scrollbar-track {
-  background: #f0f0f0;
-  border-radius: 10px;
-}
-
-.scroll-container::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, #f39c12, #f1c40f);
-  border-radius: 10px;
-  transition: background 0.3s ease;
-}
-
-.scroll-container::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, #e67e22, #f39c12);
-}
-
-.btnn:hover {
-  background: transparent;
-  box-shadow: none;
-  color: black;
-}
-
-@keyframes gradientPulse {
-  0% {
-    background-position: 0% 50%;
+/* Responsive Styles */
+@media (max-width: 991.98px) {
+  .youtube-series-section {
+    padding: 60px 0;
   }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-.scroll-btn {
-  background-color: #e50914;
-  color: white;
-  border: none; /* removes border */
-  outline: none; /* removes outline */
-  border-radius: 0; /* removes circle shape */
-  font-size: 2rem;
-  padding: 10px 15px;
-  cursor: pointer;
-  z-index: 1;
-  height: fit-content;
-  transition: background 0.3s ease;
-}
-
-.scroll-btn:hover {
-  background-color: #c40711 !important;
-}
-
-.scroll-btn.left,
-.scroll-btn.right {
-  margin-right: 10px;
-  box-shadow: none !important;
-  color: #000;
-  /* background: #fff; */
-}
-
-/* ---------- Responsive Fixes ---------- */
-@media (max-width: 768px) {
-  .youtube-hero-new {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .right-text {
-    text-align: center;
+  
+  .video-card {
     margin-bottom: 20px;
   }
+}
 
-  .video-strip {
-    gap: 12px;
-  }
+/* Modal Styles */
+.video-modal .modal-content {
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+}
 
-  .video-card {
-    flex: 0 0 90%;
-    max-width: 90%;
-    margin: 0 auto;
-  }
+.video-modal .modal-header {
+  border-bottom: none;
+  padding-bottom: 0;
+}
 
-  .video-card iframe {
-    height: 200px;
-  }
+.video-modal .modal-title {
+  font-weight: 600;
+  color: #333;
+}
 
-  .scroll-btn {
-    display: none;
-  }
-  .scroll-container {
-    overflow-x: auto;
-  }
+/* Hide scrollbar when modal is open */
+body.modal-open {
+  overflow: hidden;
+  padding-right: 0 !important;
 }

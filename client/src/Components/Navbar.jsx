@@ -162,7 +162,7 @@ const Navbar = () => {
                 ["Maps", "/maps"],
                 // ["Services", "/services"],
                 ["Blogs", "/all-blogs"],
-
+                ["FAQ", "/faq"],
                 ["Gallery", "/view-gallery"],
                 ["About Us", "/about-us"],
                 // ["Career@ SKD", "/career@skd"],
@@ -208,22 +208,28 @@ const Navbar = () => {
                 </ul>
               </li>
               {/* Other quick links */}
-              {[
-                // ["About Us", "/about-us"],
-                // ["Maps", "/maps"],
-                // ["Services", "/services"],
-                // ["Blogs", "/all-blogs"],
-
-                // ["Gallery", "/view-gallery"],
-                ["Career@ SKD", "/career@skd"],
-                ["Contact Us", "/contact-us"],
-              ].map(([label, path]) => (
-                <li key={path} className="nav-item">
-                  <Link className="nav-link skd-menu-item" to={path}>
-                    {label}
-                  </Link>
-                </li>
-              ))}
+              <li className="nav-item dropdown">
+                <a
+                  className="nav-link dropdown-toggle skd-menu-item"
+                  href="#"
+                  data-bs-toggle="dropdown"
+                >
+                  More
+                </a>
+                <ul className="dropdown-menu">
+                  <li>
+                    <Link className="dropdown-item" to="/career@skd">
+                      Career@ SKD
+                    </Link>
+                  </li>
+                  <li><hr className="dropdown-divider" /></li>
+                  <li>
+                    <Link className="dropdown-item" to="/contact-us">
+                      Contact Us
+                    </Link>
+                  </li>
+                </ul>
+              </li>
               {/* Office Bearers */}
               {/* Admin */}
               {/* <li className="nav-item">

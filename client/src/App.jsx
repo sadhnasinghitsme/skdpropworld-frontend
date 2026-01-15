@@ -75,6 +75,7 @@ import AdminInventory from "./Components/Admin Pages/AdminInventory.jsx";
 import AdminNewsManager from "./Components/Admin Pages/AdminNewsManager.jsx";
 import CanonicalURL from "./Components/CanonicalURL";
 import WWWRedirect from "./Components/WWWRedirect";
+import FAQ from "./Components/FAQ";
 
 // 🟡 Heavy & Admin Pages – Lazy Loaded
 const AdminDashboard = lazy(() => import("./AdminDashboard"));
@@ -240,6 +241,16 @@ function App() {
               <Suspense fallback={<LoadingSpinner />}>
                 <AllProjectsPage />
               </Suspense>
+            }
+          />
+
+          <Route
+            path="/faq"
+            element={
+              <>
+                <Navbar />
+                <FAQ />
+              </>
             }
           />
 

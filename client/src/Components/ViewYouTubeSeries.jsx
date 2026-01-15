@@ -1,10 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
-import { FaYoutube, FaArrowRight, FaArrowLeft } from "react-icons/fa";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import { FaYoutube, FaArrowRight, FaArrowLeft, FaPlay } from "react-icons/fa";
 import { Helmet } from "react-helmet-async";
+import './ViewYouTubeSeries.css';
 
 // Function to convert YouTube URLs to embed format
 const getEmbedUrl = (url) => {
@@ -27,15 +25,10 @@ const getEmbedUrl = (url) => {
       const urlObj = new URL(url);
       videoId = urlObj.searchParams.get('v');
     }
-    // Handle embed URLs (should be caught by first condition)
     // Handle youtu.be with additional parameters
     else if (url.includes('youtube.com/embed/')) {
       const parts = url.split('youtube.com/embed/');
       videoId = parts[1].split(/[?&#]/)[0];
-    }
-    // Handle youtu.be with additional parameters
-    else if (url.includes('youtu.be/')) {
-      videoId = url.split('youtu.be/')[1].split(/[?&#]/)[0];
     }
     
     // If we have a valid video ID, return the embed URL
@@ -55,102 +48,75 @@ const ViewYouTubeSeries = () => {
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const sliderRef = useRef(null);
+  const [selectedVideo, setSelectedVideo] = useState(null);
+  const scrollContainerRef = useRef(null);
 
-  const settings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    autoplay: false,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-        }
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1
-        }
-      }
-    ]
+  // Function to handle scroll left
+  const scrollLeft = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({
+        left: -300,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  // Function to handle scroll right
+  const scrollRight = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({
+        left: 300,
+        behavior: 'smooth'
+      });
+    }
   };
 
   useEffect(() => {
     const fetchVideos = async () => {
       try {
         setLoading(true);
-        const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001';
-        const response = await axios.get(`${API_BASE}/api/admin/youtube`);
-        
-        if (!Array.isArray(response.data)) {
-          console.error('Invalid response format:', response.data);
-          throw new Error('Invalid response from server');
-        }
-        
-        // Filter for valid videos and only those related to YEIDA or Greater Noida
-        const validVideos = response.data.filter(video => {
-          if (!video || !video.url || !video.title || typeof video.title !== 'string' || typeof video.url !== 'string') {
-            return false;
-          }
-          
-          // Check if title or description contains location keywords (case insensitive)
-          const locationKeywords = ['yeida', 'greater noida', 'noida extension', 'yamuna expressway'];
-          const title = video.title.toLowerCase();
-          const description = (video.description || '').toLowerCase();
-          
-          return locationKeywords.some(keyword => 
-            title.includes(keyword) || 
-            description.includes(keyword)
-          );
-        });
-        
-        if (validVideos.length === 0) {
-          console.warn('No location-specific videos found');
-          setError('No videos available for the selected locations (YEIDA/Greater Noida) at the moment.');
-        } else {
-          setError(null);
-        }
-        
-        setVideos(validVideos);
+        const response = await axios.get('/api/admin/youtube');
+        setVideos(response.data);
       } catch (err) {
         console.error('Error fetching videos:', err);
-        setError('Failed to load videos. Please try again later.');
-        setVideos([]);
+        setError('Failed to load videos. Using sample data instead.');
+        
+        // Fallback to sample data if API fails
+        setVideos([
+          {
+            _id: '1',
+            title: 'Unlocking Real Estate - Episode 1',
+            url: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+            thumbnail: 'https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg',
+            description: 'Introduction to Real Estate Investment'
+          },
+          {
+            _id: '2',
+            title: 'Market Trends 2023',
+            url: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+            thumbnail: 'https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg',
+            description: 'Latest trends in the real estate market'
+          }
+        ]);
       } finally {
         setLoading(false);
       }
     };
-    
+
     fetchVideos();
   }, []);
 
   if (loading) {
-    return (
-      <div className="container my-5 py-5 text-center">
-        <div className="spinner-border text-warning" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="container my-5 py-5 text-center">
-        <div className="alert alert-warning">{error}</div>
-      </div>
-    );
+    return <div className="text-center py-5">Loading videos...</div>;
   }
 
   return (
-    <section className="py-5" style={{ backgroundColor: '#f8f9fa' }}>
+    <section className="youtube-series-section py-5" style={{ backgroundColor: '#f8f9fa' }}>
+      <Helmet>
+        <title>Unlocking Real Estate | SKD Prop World</title>
+        <meta name="description" content="Watch our YouTube series on real estate investment and market trends" />
+      </Helmet>
+      
       <div className="container">
         <div className="row align-items-center">
           {/* Left Column - Podcast Info */}
@@ -158,7 +124,7 @@ const ViewYouTubeSeries = () => {
             <div className="pe-lg-4">
               <FaYoutube className="text-danger mb-3" style={{ fontSize: '2.5rem' }} />
               <h2 className="mb-3">
-                Exclusive <span className="text-primary">Real Estate</span> Podcast
+                Unlocking <span className="text-primary">Real Estate</span>
               </h2>
               <p className="lead mb-3">A show which helps you invest wisely</p>
               <p className="text-muted mb-4">
@@ -169,7 +135,7 @@ const ViewYouTubeSeries = () => {
                 href="https://www.youtube.com/channel/UCBqqQkxHtycbgChxmW_JwAA" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="btn btn-primary"
+                className="btn btn-danger d-inline-flex align-items-center"
               >
                 Visit Channel <FaArrowRight className="ms-2" />
               </a>
@@ -178,58 +144,166 @@ const ViewYouTubeSeries = () => {
           
           {/* Right Column - Video Carousel */}
           <div className="col-lg-8 position-relative">
-            <button 
-              className="btn btn-link position-absolute start-0 top-50 translate-middle-y z-3 d-none d-lg-block"
-              style={{left: '-20px'}}
-              onClick={() => sliderRef.current.slickPrev()}
-            >
-              <div className="rounded-circle bg-white shadow-sm d-flex align-items-center justify-content-center" style={{width: '40px', height: '40px'}}>
-                <FaArrowLeft />
-              </div>
-            </button>
+            {error && <div className="alert alert-warning">{error}</div>}
             
-            <Slider ref={sliderRef} {...settings}>
-              {videos.map((video) => (
-                <div key={video._id} className="px-2">
-                  <div className="card h-100 border-0 shadow-sm">
-                    <div className="ratio ratio-16x9">
-                      <iframe
-                        src={getEmbedUrl(video.url)}
-                        title={video.title}
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                        className="rounded-top"
-                      ></iframe>
+            {videos.length > 0 ? (
+              <div className="position-relative">
+                <div 
+                  ref={scrollContainerRef}
+                  className="scroll-container"
+                  style={{
+                    display: 'flex',
+                    overflowX: 'auto',
+                    gap: '20px',
+                    padding: '20px 0',
+                    scrollBehavior: 'smooth',
+                    msOverflowStyle: 'none',
+                    scrollbarWidth: 'none'
+                  }}
+                >
+                  {videos.map((video) => (
+                    <div 
+                      key={video._id} 
+                      className="video-card"
+                      style={{
+                        flex: '0 0 auto',
+                        width: '300px',
+                        backgroundColor: 'white',
+                        borderRadius: '12px',
+                        overflow: 'hidden',
+                        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                        transition: 'transform 0.3s ease, box-shadow 0.3s ease'
+                      }}
+                    >
+                      <div 
+                        className="video-thumbnail position-relative"
+                        style={{
+                          paddingTop: '56.25%',
+                          backgroundImage: `url(${video.thumbnail})`,
+                          backgroundSize: 'cover',
+                          backgroundPosition: 'center',
+                          cursor: 'pointer'
+                        }}
+                        onClick={() => setSelectedVideo(video)}
+                      >
+                        <div 
+                          className="play-button"
+                          style={{
+                            position: 'absolute',
+                            top: '50%',
+                            left: '50%',
+                            transform: 'translate(-50%, -50%)',
+                            width: '60px',
+                            height: '60px',
+                            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                            borderRadius: '50%',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            color: '#ff0000',
+                            fontSize: '24px',
+                            transition: 'all 0.3s ease'
+                          }}
+                        >
+                          <FaPlay />
+                        </div>
+                      </div>
+                      <div className="p-3">
+                        <h5 className="mb-1" style={{ fontSize: '1rem', fontWeight: '600' }}>
+                          {video.title}
+                        </h5>
+                        {video.description && (
+                          <p className="text-muted small mb-0">
+                            {video.description}
+                          </p>
+                        )}
+                      </div>
                     </div>
-                    <div className="card-body">
-                      <h5 className="card-title" style={{fontSize: '1rem'}}>
-                        {video.title.length > 50 ? `${video.title.substring(0, 50)}...` : video.title}
-                      </h5>
-                      {video.description && (
-                        <p className="card-text small text-muted">
-                          {video.description.length > 80 
-                            ? `${video.description.substring(0, 80)}...` 
-                            : video.description}
-                        </p>
-                      )}
-                    </div>
-                  </div>
+                  ))}
                 </div>
-              ))}
-            </Slider>
-            
-            <button 
-              className="btn btn-link position-absolute end-0 top-50 translate-middle-y z-3 d-none d-lg-block"
-              style={{right: '-20px'}}
-              onClick={() => sliderRef.current.slickNext()}
-            >
-              <div className="rounded-circle bg-white shadow-sm d-flex align-items-center justify-content-center" style={{width: '40px', height: '40px'}}>
-                <FaArrowRight />
+                
+                <button 
+                  className="btn btn-link position-absolute start-0 top-50 translate-middle-y d-none d-lg-flex align-items-center justify-content-center"
+                  style={{
+                    left: '-20px',
+                    width: '40px',
+                    height: '40px',
+                    borderRadius: '50%',
+                    backgroundColor: 'white',
+                    boxShadow: '0 0.125rem 0.25rem rgba(0, 0, 0, 0.075)',
+                    border: 'none',
+                    zIndex: 2
+                  }}
+                  onClick={scrollLeft}
+                >
+                  <FaArrowLeft />
+                </button>
+                
+                <button 
+                  className="btn btn-link position-absolute end-0 top-50 translate-middle-y d-none d-lg-flex align-items-center justify-content-center"
+                  style={{
+                    right: '-20px',
+                    width: '40px',
+                    height: '40px',
+                    borderRadius: '50%',
+                    backgroundColor: 'white',
+                    boxShadow: '0 0.125rem 0.25rem rgba(0, 0, 0, 0.075)',
+                    border: 'none',
+                    zIndex: 2
+                  }}
+                  onClick={scrollRight}
+                >
+                  <FaArrowRight />
+                </button>
               </div>
-            </button>
+            ) : (
+              <div className="alert alert-info">No videos available at the moment. Please check back later.</div>
+            )}
           </div>
         </div>
       </div>
+
+      {/* Video Modal */}
+      {selectedVideo && (
+        <div 
+          className="modal fade show d-block" 
+          tabIndex="-1" 
+          style={{ 
+            backgroundColor: 'rgba(0,0,0,0.8)',
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: 1050
+          }}
+        >
+          <div className="modal-dialog modal-dialog-centered modal-lg" style={{ marginTop: '2rem' }}>
+            <div className="modal-content border-0">
+              <div className="modal-header border-0">
+                <h5 className="modal-title">{selectedVideo.title}</h5>
+                <button 
+                  type="button" 
+                  className="btn-close" 
+                  onClick={() => setSelectedVideo(null)}
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div className="modal-body p-0">
+                <div className="ratio ratio-16x9">
+                  <iframe
+                    src={getEmbedUrl(selectedVideo.url) + '&autoplay=1'}
+                    title={selectedVideo.title}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    style={{ border: 'none' }}
+                  ></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
