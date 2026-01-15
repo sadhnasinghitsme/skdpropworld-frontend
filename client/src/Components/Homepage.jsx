@@ -54,7 +54,6 @@ const Homepage = () => {
   const [unit, setUnit] = useState("feet");
   const [ratePerSqFt, setRatePerSqFt] = useState("");
   const [areaResult, setAreaResult] = useState(null);
-  const [showNewYearPopup, setShowNewYearPopup] = useState(false);
   const [expandedSector, setExpandedSector] = useState(null);
   const [selectedCity, setSelectedCity] = useState("");
   const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
@@ -73,18 +72,6 @@ const Homepage = () => {
       return () => clearTimeout(timer);
     }
   }, [isMobile]);
-
-  // New Year Popup - Show once after 3 seconds
-  useEffect(() => {
-    const hasSeenPopup = sessionStorage.getItem('newYearPopupSeen');
-    if (!hasSeenPopup) {
-      const timer = setTimeout(() => {
-        setShowNewYearPopup(true);
-        sessionStorage.setItem('newYearPopupSeen', 'true');
-      }, 3000);
-      return () => clearTimeout(timer);
-    }
-  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -1463,45 +1450,7 @@ const Homepage = () => {
         </div>
       </div>
 
-      {/* New Year 2025 Popup */}
-      {showNewYearPopup && (
-        <div className="newyear-popup-overlay">
-          <div className="newyear-popup-content">
-            <button 
-              className="newyear-close-btn"
-              onClick={() => setShowNewYearPopup(false)}
-            >
-              ✕
-            </button>
-            <div className="fireworks"></div>
-            <div className="newyear-text">
-              <h2 className="newyear-title">🎉 New Year 2026 Special Offer! 🎊</h2>
-              <p className="newyear-subtitle">Get ready to start the year with your dream property!</p>
-              <div className="newyear-offer">
-                <h2>🎁 Special New Year Offer</h2>
-                <p>Get <span className="highlight-text">Exclusive Deals</span> on YEIDA Properties</p>
-                <p className="offer-details">✨ Zero Registration Fees on Select Plots</p>
-                <p className="offer-details">✨ Special Discounts on Residential Properties</p>
-                <p className="offer-details">✨ Limited Time Offer - Valid Till Jan 15, 2025</p>
-              </div>
-              <button 
-                className="newyear-cta-btn"
-                onClick={() => {
-                  setShowNewYearPopup(false);
-                  const leadForm = document.querySelector('#leadform');
-                  if (leadForm) {
-                    leadForm.scrollIntoView({ behavior: 'smooth' });
-                  } else {
-                    window.scrollTo(0, 0);
-                  }
-                }}
-              >
-                Claim Your Offer Now! 🎯
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+
     </>
   );
 };
