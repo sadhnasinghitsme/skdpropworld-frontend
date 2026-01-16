@@ -51,6 +51,7 @@ console.log("✅ WWW redirect middleware loaded");
 const corsOptions = {
   origin: function (origin, callback) {
     const allowedOrigins = [
+      'http://localhost:3001',
       'http://localhost:5173',
       'http://localhost:5174',
       'http://localhost:5000',
@@ -161,19 +162,24 @@ app.use("/api/admin/dashboard-stats", require("./routes/adminStats"));
 console.log("→ Mounting /api/admin/youtube");
 app.use("/api/admin/youtube", require("./routes/youtubeVideos"));
 
-// DB Connection
-mongoose
-  .connect(process.env.MONGO_URI, {
-    dbName: "SkdData",
-  })
-  .then(() => {
-    console.log("MongoDB connected");
-    const PORT = process.env.PORT || 5000;
-    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-  })
-  .catch((err) => console.error("MongoDB connection error:", err));
 app.get("/api", (req, res) => {
   res.send("✅ API is working fine!");
+});
+
+// Serve frontend build files
+const frontendPath = path.join(__dirname, "../client/dist");
+app.use(express.static(frontendPath));
+
+// Root route
+app.get("/", (req, res) => {
+  const indexPath = path.join(frontendPath, "index.html");
+  res.sendFile(indexPath);
+});
+
+// Catch-all for SPA routing (must be last)
+app.get("*", (req, res) => {
+  const indexPath = path.join(frontendPath, "index.html");
+  res.sendFile(indexPath);
 });
 
 

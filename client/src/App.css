@@ -295,3 +295,17 @@ html {
   transform: translateY(-5px);
 }
 
+/* Hide New Year popup and festival banners */
+[class*="new-year"],
+[class*="festival"],
+[class*="popup"],
+[class*="banner"],
+.festival-popup,
+.new-year-banner {
+  display: none !important;
+}
+
+/* Prevent injection of external popups */
+script + * {
+  display: none !important;
+}

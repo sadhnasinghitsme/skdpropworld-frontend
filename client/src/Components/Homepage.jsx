@@ -284,7 +284,7 @@ const Homepage = () => {
       <Helmet>
         {/* Primary Meta Tags */}
         <title>
-          Real Estate Agent in Greater Noida | SKD PropWorld
+          SKD PropWorld | Real Estate Agent in Greater Noida & YEIDA
         </title>
 
         <meta
@@ -293,7 +293,7 @@ const Homepage = () => {
         />
         <meta
           name="description"
-          content="Real estate agent in Greater Noida. Buy, sell & invest in YEIDA plots, residential & commercial property. Trusted consultant with verified listings."
+          content="Trusted real estate agent in Greater Noida & YEIDA. Buy, sell or invest in residential plots, & commercial plots Contact SKD PropWorld today."
         />
         <meta
           name="keywords"
