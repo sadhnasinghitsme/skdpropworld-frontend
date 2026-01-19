@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta name="google-site-verification" content="your-verification-code" />
+    <meta name="google-adsense-account" content="ca-pub-0000000000000000">
      <script>
     (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -50,7 +52,23 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>SKD PropWorld | Real Estate Agent in Greater Noida</title>
+    <title>SKD PropWorld | Real Estate Agent in Greater Noida & YEIDA | Property Dealer Noida</title>
+    <meta name="description" content="SKD PropWorld is a trusted real estate agent in Greater Noida, offering verified YEIDA plots and residential & commercial properties across Delhi NCR. Contact us today for best property deals." />
+    <meta name="keywords" content="real estate agent Greater Noida, property dealer Noida, YEIDA plots, property consultant Noida, buy property in Noida, residential plots Greater Noida, commercial property Noida, flats for sale Noida" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.skdpropworld.com/" />
+    <meta property="og:title" content="SKD PropWorld | Trusted Real Estate Agent in Greater Noida & YEIDA" />
+    <meta property="og:description" content="Find your dream property in Noida, Greater Noida & YEIDA. We offer residential & commercial properties, plots, and investment opportunities. Contact us today!" />
+    <meta property="og:image" content="https://www.skdpropworld.com/og-image.jpg" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://www.skdpropworld.com/" />
+    <meta property="twitter:title" content="SKD PropWorld | Trusted Real Estate Agent in Greater Noida & YEIDA" />
+    <meta property="twitter:description" content="Find your dream property in Noida, Greater Noida & YEIDA. We offer residential & commercial properties, plots, and investment opportunities." />
+    <meta property="twitter:image" content="https://www.skdpropworld.com/og-image.jpg" />
 
     <link rel="canonical" href="https://www.skdpropworld.com" />
     <link
@@ -279,6 +297,66 @@
     <script>
       window.prerenderReady = false;
     </script>
+    <!-- Hide SEO content when JavaScript is enabled -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Hide SEO content
+        const seoContent = document.querySelector('[data-seo-content]');
+        if (seoContent) {
+          seoContent.style.display = 'none';
+        }
+
+        // More aggressive function to remove all overlays and fix black screen
+        function fixBlackScreen() {
+          // 1. Remove all modal backdrops
+          document.querySelectorAll('.modal-backdrop, .modal, .fade, .modal-open').forEach(el => {
+            if (el.parentNode) {
+              el.parentNode.removeChild(el);
+            }
+          });
+          
+          // 2. Force remove any inline styles causing the issue
+          document.body.style.overflow = 'auto';
+          document.body.style.paddingRight = '0';
+          document.body.classList.remove('modal-open');
+          
+          // 3. Remove any full-screen overlays
+          const overlays = document.querySelectorAll('div[style*="background"], div[class*="overlay"], div[class*="backdrop"]');
+          overlays.forEach(overlay => {
+            const style = window.getComputedStyle(overlay);
+            if (style.position === 'fixed' && 
+                (style.backgroundColor === 'rgba(0, 0, 0, 0.5)' || 
+                 style.backgroundColor === 'rgba(0, 0, 0, 0.7)')) {
+              overlay.parentNode.removeChild(overlay);
+            }
+          });
+          
+          // 4. Force reflow to ensure styles are applied
+          document.body.offsetHeight;
+        }
+
+        // Run the fix immediately
+        fixBlackScreen();
+        
+        // Run it again after a short delay to catch any dynamically added elements
+        setTimeout(fixBlackScreen, 500);
+        
+        // Also run it on window load in case anything loads after DOMContentLoaded
+        window.addEventListener('load', fixBlackScreen);
+        
+        // And run it on scroll with debounce
+        let scrollTimer;
+        window.addEventListener('scroll', function() {
+          clearTimeout(scrollTimer);
+          scrollTimer = setTimeout(fixBlackScreen, 100);
+        });
+        
+        // Also run on any click in case that triggers modals
+        document.addEventListener('click', function() {
+          setTimeout(fixBlackScreen, 100);
+        });
+      });
+    </script>
   </head>
 <body>
     <noscript>
@@ -287,26 +365,260 @@
     </iframe>
   </noscript>
 
-  <div id="root"></div>
-  <noscript>
-    <div class="noscript-message">
-      This site requires JavaScript to function properly. Please enable it in your browser.
+  <div id="root">
+    <!-- SEO Content - Always visible to search engines and users -->
+    <div class="seo-content" data-seo-content>
+      <div class="seo-content" style="max-width: 1200px; margin: 0 auto; padding: 20px; font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+        <h1 style="color: #2c3e50; margin-bottom: 25px; font-size: 2.2em;">SKD PropWorld | Trusted Real Estate Agent in Greater Noida & YEIDA</h1>
+        
+        <p style="margin-bottom: 20px; font-size: 1.1em;">
+          Welcome to <strong>SKD PropWorld</strong>, your premier real estate partner in <strong>Greater Noida</strong> and <strong>YEIDA</strong> (Yamuna Expressway Industrial Development Authority). 
+          As one of the most trusted <strong>real estate agents in Noida</strong>, we specialize in helping clients find their dream properties with complete transparency and professional guidance.
+        </p>
+
+        <h2 style="color: #2c3e50; margin: 30px 0 15px; font-size: 1.6em;">Why Choose SKD PropWorld?</h2>
+        
+        <p style="margin-bottom: 15px;">
+          With years of experience in the <strong>Greater Noida real estate</strong> market, our team of experts provides comprehensive services for buying, selling, and investing in properties. 
+          Whether you're looking for <strong>residential plots in YEIDA</strong>, <strong>luxury apartments in Noida</strong>, or <strong>commercial spaces in Greater Noida</strong>, we have the perfect solution for you.
+        </p>
+
+        <h3 style="color: #2c3e50; margin: 25px 0 15px; font-size: 1.3em;">Our Expertise in Greater Noida & YEIDA</h3>
+        
+        <p style="margin-bottom: 15px;">
+          As leading <strong>property consultants in Noida</strong>, we have in-depth knowledge of the local real estate market, including:
+        </p>
+        
+        <ul style="margin-bottom: 20px; padding-left: 20px;">
+          <li style="margin-bottom: 10px;"><strong>YEIDA Plots:</strong> Prime investment opportunities in Yamuna Expressway's fastest-growing sectors</li>
+          <li style="margin-bottom: 10px;"><strong>Residential Projects:</strong> From budget-friendly apartments to luxury villas in Greater Noida</li>
+          <li style="margin-bottom: 10px;"><strong>Commercial Properties:</strong> Office spaces, retail shops, and warehouses in prime locations</li>
+          <li style="margin-bottom: 10px;"><strong>Legal Support:</strong> Complete documentation and registration assistance</li>
+        </ul>
+
+        <h3 style="color: #2c3e50; margin: 25px 0 15px; font-size: 1.3em;">Comprehensive Real Estate Services</h3>
+        
+        <p style="margin-bottom: 15px;">
+          Our services as a <strong>real estate agent in Greater Noida</strong> include:
+        </p>
+        
+        <ul style="margin-bottom: 20px; padding-left: 20px;">
+          <li style="margin-bottom: 10px;">Personalized property search based on your requirements</li>
+          <li style="margin-bottom: 10px;">Market analysis and property valuation</li>
+          <li style="margin-bottom: 10px;">Legal verification and due diligence</li>
+          <li style="margin-bottom: 10px;">Home loan assistance and financial guidance</li>
+          <li style="margin-bottom: 10px;">Post-purchase support and services</li>
+        </ul>
+
+        <p style="margin-bottom: 20px; font-weight: 500;">
+          Whether you're a first-time homebuyer, an experienced investor, or looking to sell your property, SKD PropWorld offers expert guidance 
+          and personalized service to help you make informed decisions in the dynamic real estate markets of <strong>Greater Noida</strong> and <strong>YEIDA</strong>.
+        </p>
+      </div>
+      
+      <div class="internal-links" style="margin: 40px auto; max-width: 1200px; padding: 0 20px;">
+        <h2 style="color: #2c3e50; margin-bottom: 25px; text-align: center; font-size: 2em;">Explore Properties in Noida & YEIDA</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 25px;">
+          <!-- Residential Properties -->
+          <div class="link-card" style="background: #f8f9fa; padding: 25px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+            <h3 style="color: #2c3e50; margin-top: 0; border-bottom: 2px solid #e9ecef; padding-bottom: 10px; font-size: 1.3em;">Residential Properties</h3>
+            <ul style="list-style: none; padding: 0; margin: 0; display: grid; gap: 8px;">
+              <li><a href="/residential/apartments-noida" style="color: #1a73e8; text-decoration: none; transition: color 0.2s; display: block; padding: 6px 0;">Apartments in Noida</a></li>
+              <li><a href="/residential/villas-greater-noida" style="color: #1a73e8; text-decoration: none; transition: color 0.2s; display: block; padding: 6px 0;">Villas in Greater Noida</a></li>
+              <li><a href="/residential/plots-yamuna-expressway" style="color: #1a73e8; text-decoration: none; transition: color 0.2s; display: block; padding: 6px 0;">Plots on Yamuna Expressway</a></li>
+              <li><a href="/residential/luxury-apartments" style="color: #1a73e8; text-decoration: none; transition: color 0.2s; display: block; padding: 6px 0;">Luxury Apartments</a></li>
+              <li><a href="/residential/affordable-housing" style="color: #1a73e8; text-decoration: none; transition: color 0.2s; display: block; padding: 6px 0;">Affordable Housing</a></li>
+            </ul>
+          </div>
+          
+          <!-- Commercial Properties -->
+          <div class="link-card" style="background: #f8f9fa; padding: 25px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+            <h3 style="color: #2c3e50; margin-top: 0; border-bottom: 2px solid #e9ecef; padding-bottom: 10px; font-size: 1.3em;">Commercial Properties</h3>
+            <ul style="list-style: none; padding: 0; margin: 0; display: grid; gap: 8px;">
+              <li><a href="/commercial/office-spaces" style="color: #1a73e8; text-decoration: none; transition: color 0.2s; display: block; padding: 6px 0;">Office Spaces</a></li>
+              <li><a href="/commercial/retail-shops" style="color: #1a73e8; text-decoration: none; transition: color 0.2s; display: block; padding: 6px 0;">Retail Shops</a></li>
+              <li><a href="/commercial/warehouses" style="color: #1a73e8; text-decoration: none; transition: color 0.2s; display: block; padding: 6px 0;">Warehouses & Godowns</a></li>
+              <li><a href="/commercial/showrooms" style="color: #1a73e8; text-decoration: none; transition: color 0.2s; display: block; padding: 6px 0;">Showrooms</a></li>
+              <li><a href="/commercial/co-working-spaces" style="color: #1a73e8; text-decoration: none; transition: color 0.2s; display: block; padding: 6px 0;">Co-working Spaces</a></li>
+            </ul>
+          </div>
+          
+          <!-- Popular Locations -->
+          <div class="link-card" style="background: #f8f9fa; padding: 25px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+            <h3 style="color: #2c3e50; margin-top: 0; border-bottom: 2px solid #e9ecef; padding-bottom: 10px; font-size: 1.3em;">Popular Locations</h3>
+            <ul style="list-style: none; padding: 0; margin: 0; display: grid; gap: 8px;">
+              <li><a href="/locations/greater-noida-west" style="color: #1a73e8; text-decoration: none; transition: color 0.2s; display: block; padding: 6px 0;">Greater Noida West</a></li>
+              <li><a href="/locations/yamuna-expressway" style="color: #1a73e8; text-decoration: none; transition: color 0.2s; display: block; padding: 6px 0;">Yamuna Expressway</a></li>
+              <li><a href="/locations/noida-extension" style="color: #1a73e8; text-decoration: none; transition: color 0.2s; display: block; padding: 6px 0;">Noida Extension</a></li>
+              <li><a href="/locations/sector-150" style="color: #1a73e8; text-decoration: none; transition: color 0.2s; display: block; padding: 6px 0;">Sector 150 Noida</a></li>
+              <li><a href="/locations/jaypee-wishtown" style="color: #1a73e8; text-decoration: none; transition: color 0.2s; display: block; padding: 6px 0;">Jaypee Wishtown</a></li>
+            </ul>
+          </div>
+          
+          <!-- Our Services -->
+          <div class="link-card" style="background: #f8f9fa; padding: 25px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+            <h3 style="color: #2c3e50; margin-top: 0; border-bottom: 2px solid #e9ecef; padding-bottom: 10px; font-size: 1.3em;">Our Services</h3>
+            <ul style="list-style: none; padding: 0; margin: 0; display: grid; gap: 8px;">
+              <li><a href="/services/property-valuation" style="color: #1a73e8; text-decoration: none; transition: color 0.2s; display: block; padding: 6px 0;">Property Valuation</a></li>
+              <li><a href="/services/legal-verification" style="color: #1a73e8; text-decoration: none; transition: color 0.2s; display: block; padding: 6px 0;">Legal Verification</a></li>
+              <li><a href="/services/home-loans" style="color: #1a73e8; text-decoration: none; transition: color 0.2s; display: block; padding: 6px 0;">Home Loan Assistance</a></li>
+              <li><a href="/services/rental-management" style="color: #1a73e8; text-decoration: none; transition: color 0.2s; display: block; padding: 6px 0;">Rental Management</a></li>
+              <li><a href="/services/post-purchase-support" style="color: #1a73e8; text-decoration: none; transition: color 0.2s; display: block; padding: 6px 0;">Post-Purchase Support</a></li>
+            </ul>
+          </div>
+          
+          <!-- Quick Links -->
+          <div class="link-card" style="background: #f8f9fa; padding: 25px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+            <h3 style="color: #2c3e50; margin-top: 0; border-bottom: 2px solid #e9ecef; padding-bottom: 10px; font-size: 1.3em;">Quick Links</h3>
+            <ul style="list-style: none; padding: 0; margin: 0; display: grid; gap: 8px;">
+              <li><a href="/about/company" style="color: #1a73e8; text-decoration: none; transition: color 0.2s; display: block; padding: 6px 0;">About SKD PropWorld</a></li>
+              <li><a href="/contact" style="color: #1a73e8; text-decoration: none; transition: color 0.2s; display: block; padding: 6px 0;">Contact Us</a></li>
+              <li><a href="/blog" style="color: #1a73e8; text-decoration: none; transition: color 0.2s; display: block; padding: 6px 0;">Real Estate Blog</a></li>
+              <li><a href="/testimonials" style="color: #1a73e8; text-decoration: none; transition: color 0.2s; display: block; padding: 6px 0;">Client Testimonials</a></li>
+              <li><a href="/careers" style="color: #1a73e8; text-decoration: none; transition: color 0.2s; display: block; padding: 6px 0;">Careers</a></li>
+            </ul>
+          </div>
+          
+          <!-- Popular Searches -->
+          <div class="link-card" style="background: #f8f9fa; padding: 25px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+            <h3 style="color: #2c3e50; margin-top: 0; border-bottom: 2px solid #e9ecef; padding-bottom: 10px; font-size: 1.3em;">Popular Searches</h3>
+            <ul style="list-style: none; padding: 0; margin: 0; display: grid; gap: 8px;">
+              <li><a href="/search?type=residential&budget=under-50lacs" style="color: #1a73e8; text-decoration: none; transition: color 0.2s; display: block; padding: 6px 0;">Properties Under 50 Lacs</a></li>
+              <li><a href="/search?type=residential&possession=ready-to-move" style="color: #1a73e8; text-decoration: none; transition: color 0.2s; display: block; padding: 6px 0;">Ready to Move Flats</a></li>
+              <li><a href="/search?type=commercial&purpose=investment" style="color: #1a73e8; text-decoration: none; transition: color 0.2s; display: block; padding: 6px 0;">High ROI Properties</a></li>
+              <li><a href="/search?type=residential&bhk=3bhk" style="color: #1a73e8; text-decoration: none; transition: color 0.2s; display: block; padding: 6px 0;">3 BHK Flats in Noida</a></li>
+              <li><a href="/search?type=residential&possession=under-construction" style="color: #1a73e8; text-decoration: none; transition: color 0.2s; display: block; padding: 6px 0;">New Launch Projects</a></li>
+            </ul>
+          </div>
+              <li style="margin-bottom: 8px;"><a href="/contact" style="color: #0066cc; text-decoration: none;">Contact Us</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="noscript-message" style="background: #f8f9fa; padding: 15px; border-left: 4px solid #dc3545; margin: 20px auto; max-width: 1200px;">
+        <p style="margin: 0; color: #721c24;">
+          This site requires JavaScript to function properly. Please enable it in your browser for the full experience.
+        </p>
+      </div>
     </div>
-  </noscript>
+  </div>
 
   <!-- Bootstrap JS Bundle (includes Popper) -->
-  <script
+  <script 
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
     crossorigin="anonymous"
-  ></script>
-
-  <!-- DO NOT manually include main.jsx -->
-  <!-- Vite automatically inserts correct JS bundle -->
-  <script type="module" src="/src/main.jsx"></script>
+    defer>
+  </script>
+  
+  <script>
+    // Immediate fix for any existing modals/overlays - runs before DOM is fully loaded
+    (function() {
+      // Function to remove overlays and fix styles
+      function fixOverlay() {
+        // Remove any potential overlay elements
+        const selectors = [
+          '.modal-backdrop',
+          '.overlay',
+          '.dark-overlay',
+          '[style*="background-color: rgba(0, 0, 0, 0.5)"]',
+          '[style*="background-color:rgba(0,0,0,0.5)"]',
+          '[class*="backdrop"]',
+          '[class*="overlay"]',
+          '.ReactModal__Overlay',
+          '.MuiBackdrop-root'
+        ];
+        
+        selectors.forEach(selector => {
+          document.querySelectorAll(selector).forEach(el => {
+            if (el && el.parentNode) {
+              el.parentNode.removeChild(el);
+            }
+          });
+        });
+        
+        // Reset body and html styles
+        const resetStyles = [
+          'overflow',
+          'position',
+          'padding-right',
+          'height',
+          'width',
+          'top',
+          'left',
+          'right',
+          'bottom'
+        ];
+        
+        // Reset body styles
+        resetStyles.forEach(prop => {
+          document.body.style[prop] = '';
+          document.documentElement.style[prop] = '';
+        });
+        
+        // Remove problematic classes
+        document.body.classList.remove('modal-open', 'ReactModal__Body--open');
+        document.documentElement.classList.remove('modal-open', 'ReactModal__Body--open');
+        
+        // Force reflow
+        document.body.offsetHeight;
+      }
+      
+      // Run immediately
+      fixOverlay();
+      
+      // Run again when DOM is loaded
+      document.addEventListener('DOMContentLoaded', fixOverlay);
+      
+      // Run after a short delay to catch any dynamically added overlays
+      setTimeout(fixOverlay, 100);
+      
+      // Also run on window load
+      window.addEventListener('load', fixOverlay);
+      
+      // Run on any click in case it triggers modals
+      document.addEventListener('click', function() {
+        setTimeout(fixOverlay, 50);
+      });
+      
+      // Run on any URL hash change
+      window.addEventListener('hashchange', fixOverlay);
+      
+      // Run on any popstate (browser back/forward)
+      window.addEventListener('popstate', fixOverlay);
+    })();
+  </script>
+  
+  <style>
+    /* Enhanced fix for black overlay issue */
+    .modal-backdrop, .overlay, .dark-overlay, .modal, .modal-dialog, .modal-content,
+    [style*="background-color: rgba(0, 0, 0, 0.5)"],
+    [style*="background-color:rgba(0,0,0,0.5)"],
+    [class*="backdrop"],
+    [class*="overlay"] {
+      display: none !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      visibility: hidden !important;
+      z-index: -1000 !important;
+    }
+    
+    body.modal-open, html.modal-open,
+    body[style*="overflow: hidden"],
+    body[style*="overflow:hidden"] {
+      overflow: auto !important;
+      padding-right: 0 !important;
+      position: static !important;
+      height: auto !important;
+    }
+    
+    /* Ensure content is visible */
+    body, html {
+      overflow: auto !important;
+      position: static !important;
+      height: auto !important;
+    }
+  </style>
 
 </body>
 </html>
-
-
-    
-
