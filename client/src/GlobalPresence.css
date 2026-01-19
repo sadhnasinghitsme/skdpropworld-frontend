@@ -15,24 +15,27 @@
 /* ---------- gradient overlay ---------- */
 .global-presence {
   position: absolute;
-  inset: 0 0 auto 0;
-  padding: 2rem 1rem 0.1rem; /* less height to reduce blur spread */
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 2rem 1rem 0.1rem;
   text-align: center;
   pointer-events: none;
   z-index: 5;
+  height: 200px; /* Fixed height for the gradient overlay */
+  width: 100%;
+  overflow: hidden;
 
-  /* More rapid fade */
+  /* More rapid fade - lighter and shorter gradient */
   background: linear-gradient(
     to bottom,
-    rgba(0, 0, 0, 0.85) 20%,
-    rgba(0, 0, 0, 0.5) 75%,
-    rgba(0, 0, 0, 0.3) 85%,
+    rgba(0, 0, 0, 0.7) 0%,
+    rgba(0, 0, 0, 0.4) 50%,
+    rgba(0, 0, 0, 0.1) 80%,
     rgba(0, 0, 0, 0) 100%
   );
 
-  /* Subtle blur that fades with gradient naturally */
-  backdrop-filter: blur(1px);
-  -webkit-backdrop-filter: blur(1px);
+  /* Remove blur as it can cause performance issues */
 }
 
 /* allow cards to receive clicks */

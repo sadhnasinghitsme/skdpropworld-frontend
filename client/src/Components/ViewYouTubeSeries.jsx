@@ -4,6 +4,8 @@ import { FaYoutube, FaArrowRight, FaArrowLeft, FaPlay } from "react-icons/fa";
 import { Helmet } from "react-helmet-async";
 import './ViewYouTubeSeries.css';
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
+
 // Function to convert YouTube URLs to embed format
 const getEmbedUrl = (url) => {
   if (!url) return '';
@@ -75,29 +77,25 @@ const ViewYouTubeSeries = () => {
     const fetchVideos = async () => {
       try {
         setLoading(true);
-        const response = await axios.get('/api/admin/youtube');
-        setVideos(response.data);
+        setError(null);
+        const response = await axios.get(`${API_BASE}/api/admin/youtube`);
+        
+        if (response.data && response.data.length > 0) {
+          // Process videos to ensure they have all required fields
+          const processedVideos = response.data.map(video => ({
+            ...video,
+            url: getEmbedUrl(video.url),
+            thumbnail: video.thumbnail || `https://img.youtube.com/vi/${getYoutubeId(video.url)}/hqdefault.jpg`
+          }));
+          setVideos(processedVideos);
+        } else {
+          setError('No videos found. Please check back later.');
+          setVideos([]);
+        }
       } catch (err) {
         console.error('Error fetching videos:', err);
-        setError('Failed to load videos. Using sample data instead.');
-        
-        // Fallback to sample data if API fails
-        setVideos([
-          {
-            _id: '1',
-            title: 'Unlocking Real Estate - Episode 1',
-            url: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-            thumbnail: 'https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg',
-            description: 'Introduction to Real Estate Investment'
-          },
-          {
-            _id: '2',
-            title: 'Market Trends 2023',
-            url: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-            thumbnail: 'https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg',
-            description: 'Latest trends in the real estate market'
-          }
-        ]);
+        setError('Failed to load videos. Please try again later.');
+        setVideos([]);
       } finally {
         setLoading(false);
       }
@@ -106,8 +104,25 @@ const ViewYouTubeSeries = () => {
     fetchVideos();
   }, []);
 
+  // Function to extract YouTube video ID from URL
+  const getYoutubeId = (url) => {
+    if (!url) return '';
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const match = url.match(regExp);
+    return (match && match[2].length === 11) ? match[2] : null;
+  };
+
   if (loading) {
-    return <div className="text-center py-5">Loading videos...</div>;
+    return (
+      <div className="youtube-series-section py-5" style={{ backgroundColor: '#f8f9fa' }}>
+        <div className="container text-center py-5">
+          <div className="spinner-border text-primary" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+          <p className="mt-3">Loading videos...</p>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -144,7 +159,20 @@ const ViewYouTubeSeries = () => {
           
           {/* Right Column - Video Carousel */}
           <div className="col-lg-8 position-relative">
-            {error && <div className="alert alert-warning">{error}</div>}
+            {error && (
+              <div className="alert alert-warning mb-4">
+                <i className="bi bi-exclamation-triangle me-2"></i>
+                {error}
+              </div>
+            )}
+            
+            {!loading && videos.length === 0 && !error && (
+              <div className="text-center py-5">
+                <i className="bi bi-film fs-1 text-muted mb-3 d-block"></i>
+                <h4>No videos available</h4>
+                <p className="text-muted">Check back later for new content</p>
+              </div>
+            )}
             
             {videos.length > 0 ? (
               <div className="position-relative">
