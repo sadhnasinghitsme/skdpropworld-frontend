@@ -4,6 +4,7 @@ import "./LeadForm.css"; // You’ll create this file for custom styling
 import { Toaster } from "react-hot-toast";
 import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
+import { apiRequest } from "../utils/api";
 
 const LeadForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -57,15 +58,10 @@ const LeadForm = () => {
     }
 
     try {
-      console.log('Submitting form to:', `${import.meta.env.VITE_API_BASE_URL}/api/lead/submit`);
-      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/lead/submit`, {
-  method: "POST",
-  headers: { 
-    "Content-Type": "application/json",
-    "Accept": "application/json"
-  },
-  body: JSON.stringify(formData)
-});
+      const res = await apiRequest('/api/lead/submit', {
+        method: "POST",
+        body: JSON.stringify(formData)
+      });
 
       if (res.ok) {
         // Show success immediately
