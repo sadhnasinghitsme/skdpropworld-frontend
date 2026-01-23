@@ -57,27 +57,38 @@ const LeadForm = () => {
     }
 
     try {
-      const res = await fetch(`${API_BASE}/api/lead/submit`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-
-      let data;
-      try {
-        data = await res.json();
-      } catch (jsonErr) {
-        data = { message: "Invalid JSON response from server" };
-      }
+      console.log('Submitting form to:', `${import.meta.env.VITE_API_BASE_URL}/api/lead/submit`);
+      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/lead/submit`, {
+  method: "POST",
+  headers: { 
+    "Content-Type": "application/json",
+    "Accept": "application/json"
+  },
+  body: JSON.stringify(formData)
+});
 
       if (res.ok) {
-        toast.success("Form submitted successfully!");
+        // Try to parse JSON, but don't fail if it's not JSON
+        try {
+          const data = await res.json();
+          if (data.message) {
+            toast.success(data.message);
+          } else {
+            toast.success("Form submitted successfully!");
+          }
+        } catch (jsonErr) {
+          // If we can't parse JSON but got a 200, still show success
+          toast.success("Form submitted successfully!");
+        }
+
         // Track conversion
         if (typeof window.gtag === 'function') {
           window.gtag('event', 'conversion', {
             'send_to': 'AW-11180191597/vEY-CI7N9-EbEO3ekNMp'
           });
         }
+
+        // Reset form
         setFormData({
           name: "",
           email: "",
@@ -86,7 +97,16 @@ const LeadForm = () => {
           message: "",
         });
       } else {
-        toast.error(data?.message || "Submission failed");
+        // Handle non-200 responses
+        let errorMessage = "Submission failed";
+        try {
+          const errorData = await res.json();
+          errorMessage = errorData.message || errorMessage;
+        } catch (e) {
+          // If we can't parse the error as JSON, use status text
+          errorMessage = res.statusText || errorMessage;
+        }
+        toast.error(errorMessage);
       }
     } catch (err) {
       toast.error("Something went wrong!");

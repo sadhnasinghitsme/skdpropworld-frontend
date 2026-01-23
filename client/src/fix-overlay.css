@@ -1,0 +1,55 @@
+/* Force remove any dark overlays */
+body {
+  background-color: white !important;
+  overflow: auto !important;
+}
+
+/* Remove all modal backdrops */
+.modal-backdrop,
+.fade,
+.modal-backdrop.show,
+.modal-backdrop.fade {
+  display: none !important;
+  opacity: 0 !important;
+  z-index: -9999 !important;
+}
+
+/* Reset body classes that might be causing the issue */
+body.modal-open {
+  overflow: auto !important;
+  padding-right: 0 !important;
+}
+
+/* Make sure all content is visible */
+* {
+  background-color: transparent !important;
+}
+
+/* Ensure content is not hidden */
+body > *:not(.modal-backdrop) {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  position: static !important;
+  z-index: auto !important;
+}
+
+/* Fix for any overlay elements */
+[class*="overlay"],
+[class*="backdrop"] {
+  display: none !important;
+}
+
+/* Make sure all content is visible */
+#root,
+#__next,
+#app,
+.app,
+.root {
+  opacity: 1 !important;
+  visibility: visible !important;
+  filter: none !important;
+  -webkit-filter: none !important;
+  transform: none !important;
+  -webkit-transform: none !important;
+}

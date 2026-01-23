@@ -1422,7 +1422,8 @@ const Homepage = () => {
 
       <Footer />
 
-      {/* Popup Enquiry Form */}
+      {/* Popup Enquiry Form - Removed to fix black screen issue */}
+      {/* 
       <div id="enquiryForm" className="enquiry-popup-overlay" style={{ display: 'none' }}>
         <div className="enquiry-popup-content">
           <button 
@@ -1444,13 +1445,11 @@ const Homepage = () => {
               <option value="Registered">Registered</option>
               <option value="Unregistered">Unregistered</option>
             </select>
-            <textarea placeholder="Your Message" rows="3"></textarea>
-            <button type="submit" className="popup-submit-btn">Submit Enquiry</button>
+            <button type="submit" className="btn btn-warning w-100">Submit</button>
           </form>
         </div>
       </div>
-
-
+      */}
     </>
   );
 };

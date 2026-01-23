@@ -17,7 +17,63 @@
     <!-- End Google Tag Manager -->
 
     <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#ffffff">
     <link rel="canonical" href="https://www.skdpropworld.com/" />
+    
+    <style>
+      /* Force remove all overlays and dark backgrounds */
+      body,
+      html,
+      #root,
+      .app,
+      .container,
+      .main-content {
+        background-color: white !important;
+        overflow: visible !important;
+        position: static !important;
+      }
+
+      /* Remove all overlays and backdrops */
+      .modal-backdrop,
+      .overlay,
+      .backdrop,
+      [class*="overlay"],
+      [class*="backdrop"],
+      [class*="modal"] {
+        display: none !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+        background: none !important;
+      }
+
+      /* Ensure all content is visible */
+      * {
+        background-color: transparent !important;
+        color: #333 !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        position: static !important;
+        transform: none !important;
+        filter: none !important;
+        -webkit-filter: none !important;
+        -webkit-transform: none !important;
+      }
+
+      /* Fix for any fixed or sticky elements */
+      header, footer, nav, .header, .footer, .navbar {
+        position: static !important;
+        background: white !important;
+      }
+
+      /* Make sure all text is readable */
+      p, h1, h2, h3, h4, h5, h6, span, div, a {
+        color: #333 !important;
+        background: transparent !important;
+      }
+    </style>
     <link
       rel="icon"
       type="image/x-icon"
@@ -56,7 +112,8 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>SKD PropWorld | Real Estate Agent in Greater Noida & YEIDA | Property Dealer Noida</title>
+    <title>SKD PropWorld | Best Real Estate Agent in Noida & Greater Noida</title>
+    <link rel="stylesheet" href="/src/fix-overlay.css">
     <meta name="description" content="SKD PropWorld is a trusted real estate agent in Greater Noida, offering verified YEIDA plots and residential & commercial properties across Delhi NCR. Contact us today for best property deals." />
     <meta name="keywords" content="real estate agent Greater Noida, property dealer Noida, YEIDA plots, property consultant Noida, buy property in Noida, residential plots Greater Noida, commercial property Noida, flats for sale Noida" />
     
@@ -289,62 +346,25 @@
     </script>
     <!-- Hide SEO content when JavaScript is enabled -->
     <script>
+      // Minimal script to hide SEO content
       document.addEventListener('DOMContentLoaded', function() {
-        // Hide SEO content
         const seoContent = document.querySelector('[data-seo-content]');
         if (seoContent) {
           seoContent.style.display = 'none';
         }
-
-        // More aggressive function to remove all overlays and fix black screen
-        function fixBlackScreen() {
-          // 1. Remove all modal backdrops
-          document.querySelectorAll('.modal-backdrop, .modal, .fade, .modal-open').forEach(el => {
-            if (el.parentNode) {
-              el.parentNode.removeChild(el);
-            }
-          });
-          
-          // 2. Force remove any inline styles causing the issue
-          document.body.style.overflow = 'auto';
-          document.body.style.paddingRight = '0';
-          document.body.classList.remove('modal-open');
-          
-          // 3. Remove any full-screen overlays
-          const overlays = document.querySelectorAll('div[style*="background"], div[class*="overlay"], div[class*="backdrop"]');
-          overlays.forEach(overlay => {
-            const style = window.getComputedStyle(overlay);
-            if (style.position === 'fixed' && 
-                (style.backgroundColor === 'rgba(0, 0, 0, 0.5)' || 
-                 style.backgroundColor === 'rgba(0, 0, 0, 0.7)')) {
-              overlay.parentNode.removeChild(overlay);
-            }
-          });
-          
-          // 4. Force reflow to ensure styles are applied
-          document.body.offsetHeight;
-        }
-
-        // Run the fix immediately
-        fixBlackScreen();
         
-        // Run it again after a short delay to catch any dynamically added elements
-        setTimeout(fixBlackScreen, 500);
-        
-        // Also run it on window load in case anything loads after DOMContentLoaded
-        window.addEventListener('load', fixBlackScreen);
-        
-        // And run it on scroll with debounce
-        let scrollTimer;
-        window.addEventListener('scroll', function() {
-          clearTimeout(scrollTimer);
-          scrollTimer = setTimeout(fixBlackScreen, 100);
+        // Remove any existing modal backdrops
+        const backdrops = document.querySelectorAll('.modal-backdrop');
+        backdrops.forEach(backdrop => {
+          if (backdrop && backdrop.parentNode) {
+            backdrop.parentNode.removeChild(backdrop);
+          }
         });
         
-        // Also run on any click in case that triggers modals
-        document.addEventListener('click', function() {
-          setTimeout(fixBlackScreen, 100);
-        });
+        // Reset body styles
+        document.body.style.overflow = 'auto';
+        document.body.style.paddingRight = '';
+        document.body.classList.remove('modal-open');
       });
     </script>
   </head>
@@ -605,5 +625,53 @@
     }
   </style>
 
+  <script>
+    // Run immediately when script loads
+    (function() {
+      // Remove all overlays and backdrops
+      const removeElements = [
+        '.modal-backdrop', 
+        '.overlay', 
+        '.backdrop',
+        '[class*="overlay"]',
+        '[class*="backdrop"]',
+        '[class*="modal"]'
+      ];
+      
+      function removeProblematicElements() {
+        removeElements.forEach(selector => {
+          document.querySelectorAll(selector).forEach(el => {
+            if (el && el.parentNode) {
+              el.parentNode.removeChild(el);
+            }
+          });
+        });
+        
+        // Reset body styles
+        document.body.style.overflow = 'auto';
+        document.body.style.paddingRight = '0';
+        document.body.classList.remove('modal-open');
+        
+        // Force reflow
+        document.body.offsetHeight;
+      }
+      
+      // Run immediately
+      removeProblematicElements();
+      
+      // Run again after a short delay to catch any dynamically added elements
+      setTimeout(removeProblematicElements, 500);
+      
+      // Also run when the page is fully loaded
+      window.addEventListener('load', removeProblematicElements);
+      
+      // And run on any click in case that triggers modals
+      document.addEventListener('click', removeProblematicElements);
+      
+      // And run on any state changes
+      window.addEventListener('popstate', removeProblematicElements);
+      
+    })();
+  </script>
 </body>
 </html>

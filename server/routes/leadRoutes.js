@@ -2,6 +2,7 @@
 const express = require("express");
 const router = express.Router();
 const Lead = require("../models/Lead"); // Make sure path is correct
+const { sendEmail } = require("../utils/sendEmail"); // Import sendEmail function with destructuring
 
 // POST /api/lead/submit
 router.post("/submit", async (req, res) => {
@@ -15,8 +16,15 @@ router.post("/submit", async (req, res) => {
 
     const newLead = new Lead({ name, email, phone, propertyType, message });
     await newLead.save();
-    // ✅ Call the email function here
-    await sendEmail(req.body);
+    
+    // ✅ Try to send email but don't fail if it doesn't work
+    try {
+      await sendEmail(req.body);
+      console.log("✅ Email sent successfully");
+    } catch (emailError) {
+      console.warn("⚠️ Email sending failed:", emailError.message);
+      // Don't fail the entire request if email fails
+    }
 
     res.status(201).json({ message: "Lead saved successfully" });
   } catch (error) {
@@ -80,6 +88,5 @@ router.put("/star/:id", async (req, res) => {
     res.status(500).json({ error: "Error toggling star" });
   }
 });
-const { sendEmail } = require("../utils/sendEmail"); // ✅ Correct destructuring
 
 module.exports = router;

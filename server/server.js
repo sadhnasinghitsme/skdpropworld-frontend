@@ -10,8 +10,8 @@ const sitemap = require("./routes/sitemap");
 const htmlSnippetRoutes = require("./routes/htmlSnippet");
 const inventoryRoutes = require("./routes/inventoryRoutes.js");
 const app = express();
-// Server configuration - Force using port 3001
-const PORT = 3001;
+// Server configuration - Force using port 3003 (changed from 3002)
+const PORT = 3003;
 const prerender = require("prerender-node");
 prerender.set("prerenderToken", "QHhhrvIPvM5gm4fHnmaT");
 app.use(prerender);
@@ -54,6 +54,11 @@ const corsOptions = {
       'http://localhost:3001',
       'http://localhost:5173',
       'http://localhost:5174',
+      'http://localhost:5175',
+      'http://localhost:5176',
+      'http://localhost:5177',
+      'http://localhost:5178',
+      'http://localhost:5179',
       'http://localhost:5000',
       'https://skd-production.up.railway.app',
       'https://www-skdpropworld-com.onrender.com',

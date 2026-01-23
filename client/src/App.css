@@ -1,10 +1,8 @@
 /* ===========  GLOBAL  =========== */
 body {
-  /* background: white !important; */
+  background: white !important;
   font-family: "Poppins", sans-serif;
-
-  /* background-color: #262626 !important; */
-  /* color: white; */
+  color: #333;
 }
 .dropdown-menu,
 .dropdown-item {
@@ -63,6 +61,26 @@ body {
   transition: background 0.4s ease, box-shadow 0.4s ease;
 }
 
+/* Absolute navbar for homepage (before scroll) */
+.skd-absolute-navbar {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.skd-absolute-navbar .skd-menu-item {
+  color: #fff !important;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+.skd-absolute-navbar .navbar-brand {
+  color: #fff !important;
+}
+
 /* .skd-transparent-navbar {
   background: transparent !important;
   background-color: transparent !important;
@@ -71,10 +89,30 @@ body {
 } */
 
 .skd-transparent-navbar {
-  background-color: #13131355 !important;
-  /* background: #13131355 !important; */
+  background-color: rgba(255, 255, 255, 0.9) !important;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   transition: background 0.4s ease, box-shadow 0.4s ease;
+  color: #333 !important;
+}
+
+/* Ensure text is readable on the light background */
+.skd-transparent-navbar .skd-menu-item,
+.skd-transparent-navbar .navbar-brand,
+.skd-transparent-navbar .nav-link {
+  color: #333 !important;
+}
+
+.skd-transparent-navbar .dropdown-menu {
+  background-color: #fff !important;
+}
+
+.skd-transparent-navbar .dropdown-item {
+  color: #333 !important;
+}
+
+.skd-transparent-navbar .dropdown-item:hover {
+  background-color: #f8f9fa;
+  color: #000 !important;
 }
 
 .skd-scrolled-navbar {
@@ -92,14 +130,25 @@ body {
 
 /* MAIN LINKS */
 .skd-menu-item {
-  color: #fff !important;
-  font-weight: 800;
+  color: #333 !important;
+  font-weight: 600;
   font-style: normal;
   padding: 8px 12px;
   border-radius: 4px;
   position: relative;
   transition: 0.3s;
 }
+
+/* White text for scrolled/dark navbar */
+.skd-scrolled-navbar .skd-menu-item {
+  color: #fff !important;
+}
+
+/* Ensure navbar brand is visible on dark background */
+.skd-scrolled-navbar .navbar-brand {
+  color: #fff !important;
+}
+
 .skd-menu-item:hover {
   background: #ffd700;
   color: #000 !important;
