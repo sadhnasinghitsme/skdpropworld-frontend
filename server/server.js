@@ -10,8 +10,8 @@ const sitemap = require("./routes/sitemap");
 const htmlSnippetRoutes = require("./routes/htmlSnippet");
 const inventoryRoutes = require("./routes/inventoryRoutes.js");
 const app = express();
-// Server configuration - Force using port 3003 (changed from 3002)
-const PORT = 3003;
+// Server configuration - Use environment PORT or fallback to 3003
+const PORT = process.env.PORT || 3003;
 const prerender = require("prerender-node");
 prerender.set("prerenderToken", "QHhhrvIPvM5gm4fHnmaT");
 app.use(prerender);
@@ -149,6 +149,33 @@ app.use("/api/career", require("./routes/careerRoutes"));
 console.log("→ Mounting /uploads/resumes");
 app.use("/uploads/resumes", express.static("uploads/resumes"));
 
+// Health check endpoint for production debugging
+app.get("/health", (req, res) => {
+  res.json({
+    status: "OK",
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime(),
+    environment: process.env.NODE_ENV || 'development',
+    port: PORT,
+    mongodb: mongoose.connection.readyState === 1 ? 'Connected' : 'Disconnected',
+    version: "1.0.0"
+  });
+});
+
+// API status endpoint
+app.get("/api/status", (req, res) => {
+  res.json({
+    api: "OK",
+    endpoints: [
+      "/api/lead/submit",
+      "/api/admin/projects", 
+      "/api/news",
+      "/api/project-enquiry"
+    ],
+    timestamp: new Date().toISOString()
+  });
+});
+
 console.log("→ Mounting /api/map-manager");
 app.use("/api/map-manager", require("./routes/mapEntryRoutes"));
 
@@ -202,6 +229,12 @@ async function startServer() {
       dbName: "SkdData",
       serverSelectionTimeoutMS: 10000, // 10 seconds timeout
       socketTimeoutMS: 45000,
+      // Production optimizations
+      maxPoolSize: 10, // Maintain up to 10 socket connections
+      serverSelectionTimeoutMS: 5000, // Keep trying to send operations for 5 seconds
+      socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
+      bufferCommands: false, // Disable mongoose buffering
+      bufferMaxEntries: 0 // Disable mongoose buffering
     });
 
     console.log("✅ MongoDB connected successfully.");

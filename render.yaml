@@ -7,7 +7,7 @@ services:
     branch: main
     rootDir: server
     buildCommand: npm install
-    startCommand: node diagnostic-server.js
+    startCommand: node server.js
     envVars:
       - key: NODE_VERSION
         value: 20.11.0
@@ -22,6 +22,8 @@ services:
       - key: EMAIL_USER
         sync: false
       - key: EMAIL_PASS
+        sync: false
+      - key: NOTIFY_RECEIVER
         sync: false
       - key: PORT
         value: 10000
