@@ -18,6 +18,10 @@ if (EMAIL_USER && EMAIL_PASS) {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS,
     },
+    // Add timeout settings for faster failure
+    connectionTimeout: 3000, // 3 seconds
+    greetingTimeout: 3000,   // 3 seconds
+    socketTimeout: 3000,     // 3 seconds
   });
 }
 

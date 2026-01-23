@@ -68,19 +68,9 @@ const LeadForm = () => {
 });
 
       if (res.ok) {
-        // Try to parse JSON, but don't fail if it's not JSON
-        try {
-          const data = await res.json();
-          if (data.message) {
-            toast.success(data.message);
-          } else {
-            toast.success("Form submitted successfully!");
-          }
-        } catch (jsonErr) {
-          // If we can't parse JSON but got a 200, still show success
-          toast.success("Form submitted successfully!");
-        }
-
+        // Show success immediately
+        toast.success("Form submitted successfully! We'll contact you soon.");
+        
         // Track conversion
         if (typeof window.gtag === 'function') {
           window.gtag('event', 'conversion', {

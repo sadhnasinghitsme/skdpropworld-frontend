@@ -17,16 +17,26 @@ router.post("/submit", async (req, res) => {
     const newLead = new Lead({ name, email, phone, propertyType, message });
     await newLead.save();
     
-    // ✅ Try to send email but don't fail if it doesn't work
-    try {
-      await sendEmail(req.body);
-      console.log("✅ Email sent successfully");
-    } catch (emailError) {
-      console.warn("⚠️ Email sending failed:", emailError.message);
-      // Don't fail the entire request if email fails
-    }
-
+    // ✅ Send response immediately after saving to database
     res.status(201).json({ message: "Lead saved successfully" });
+    
+    // 🔥 Send email asynchronously (fire and forget) - don't wait for it
+    setImmediate(async () => {
+      try {
+        // Add timeout to email sending (5 seconds max)
+        const emailPromise = sendEmail(req.body);
+        const timeoutPromise = new Promise((_, reject) => 
+          setTimeout(() => reject(new Error('Email timeout')), 5000)
+        );
+        
+        await Promise.race([emailPromise, timeoutPromise]);
+        console.log("✅ Email sent successfully");
+      } catch (emailError) {
+        console.warn("⚠️ Email sending failed:", emailError.message);
+        // Email failure doesn't affect user experience
+      }
+    });
+
   } catch (error) {
     console.error("Error saving lead:", error);
     res.status(500).json({ message: "Failed to save lead" });
