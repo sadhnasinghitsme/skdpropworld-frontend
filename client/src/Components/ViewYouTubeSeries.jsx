@@ -4,7 +4,7 @@ import { FaYoutube, FaArrowRight, FaArrowLeft, FaPlay } from "react-icons/fa";
 import { Helmet } from "react-helmet-async";
 import './ViewYouTubeSeries.css';
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
 // Function to convert YouTube URLs to embed format
 const getEmbedUrl = (url) => {

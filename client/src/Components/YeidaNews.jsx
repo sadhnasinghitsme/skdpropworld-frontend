@@ -8,7 +8,7 @@ const YeidaNews = () => {
   const [error, setError] = useState(null);
   const [selectedNews, setSelectedNews] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3003';
+  const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
   // Format date for display
   const formatDate = (dateString) => {
