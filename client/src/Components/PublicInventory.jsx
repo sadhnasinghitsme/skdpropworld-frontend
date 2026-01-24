@@ -37,7 +37,7 @@ const PublicInventory = () => {
   const [selectedInventory, setSelectedInventory] = useState(null);
   const [showModal, setShowModal] = useState(false);
 
-  const API_BASE = import.meta.env.VITE_API_BASE_URL;
+  const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
 
   useEffect(() => {
     fetchInventories();
@@ -65,7 +65,7 @@ const PublicInventory = () => {
   const fetchInventories = async () => {
     try {
       setLoading(true);
-      const res = await axios.get(`${API_BASE}/api/admin/inventories`);
+      const res = await axios.get(API_BASE ? `${API_BASE}/api/admin/inventories` : '/api/admin/inventories');
       const data = Array.isArray(res.data) ? res.data : [];
       setInventories(data);
       setError(null);
@@ -79,7 +79,7 @@ const PublicInventory = () => {
 
   const fetchSettings = async () => {
     try {
-      const res = await axios.get(`${API_BASE}/api/admin/inventories/settings`);
+      const res = await axios.get(API_BASE ? `${API_BASE}/api/admin/inventories/settings` : '/api/admin/inventories/settings');
       if (res.data) {
         const { _id, createdAt, updatedAt, __v, ...rest } = res.data;
         setSettings((prev) => ({ ...prev, ...rest }));

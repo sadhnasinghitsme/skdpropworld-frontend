@@ -17,7 +17,7 @@ function AdminLoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const { login } = useAuth();
-  const API_BASE = import.meta.env.VITE_API_BASE_URL;
+  const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
 
   const handleClick = () => {
     navigate("/admin/signup");
@@ -33,7 +33,7 @@ function AdminLoginForm() {
     }
 
     try {
-      const response = await fetch(`${API_BASE}/api/admin/login`, {
+      const response = await fetch(API_BASE ? `${API_BASE}/api/admin/login` : '/api/admin/login', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

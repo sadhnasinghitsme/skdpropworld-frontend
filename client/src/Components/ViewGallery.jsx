@@ -13,7 +13,7 @@ const ViewGallery = () => {
   const [images, setImages] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const API = import.meta.env.VITE_API_BASE_URL;
+  const API = import.meta.env.VITE_API_BASE_URL || '';
   const [selectedIndex, setSelectedIndex] = useState(null);
 
   useEffect(() => {
@@ -22,7 +22,7 @@ const ViewGallery = () => {
 
   const fetchImages = async () => {
     try {
-      const res = await axios.get(`${API}/api/admin/gallery`);
+      const res = await axios.get(API ? `${API}/api/admin/gallery` : '/api/admin/gallery');
       setImages(res.data);
     } catch (err) {
       console.error("Failed to fetch images", err);

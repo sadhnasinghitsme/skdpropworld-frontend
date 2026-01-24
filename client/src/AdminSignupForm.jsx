@@ -20,7 +20,7 @@ const AdminSignupForm = () => {
     password: "",
     secretCode: "", // ✅ Add this
   });
-  const API_BASE = import.meta.env.VITE_API_BASE_URL;
+  const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
   const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
@@ -59,7 +59,7 @@ const AdminSignupForm = () => {
     }
 
     try {
-      const res = await axios.post(`${API_BASE}/api/admin/signup`, formData);
+      const res = await axios.post(API_BASE ? `${API_BASE}/api/admin/signup` : '/api/admin/signup', formData);
       toast.success(res.data.message);
     } catch (err) {
       console.error("Signup error:", err);
