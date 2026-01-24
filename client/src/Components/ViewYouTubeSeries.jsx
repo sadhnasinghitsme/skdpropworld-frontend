@@ -4,7 +4,7 @@ import { FaYoutube, FaArrowRight, FaArrowLeft, FaPlay } from "react-icons/fa";
 import { Helmet } from "react-helmet-async";
 import './ViewYouTubeSeries.css';
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL;
+const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
 
 // Function to convert YouTube URLs to embed format
 const getEmbedUrl = (url) => {
@@ -78,7 +78,7 @@ const ViewYouTubeSeries = () => {
       try {
         setLoading(true);
         setError(null);
-        const response = await axios.get(`${API_BASE}/api/admin/youtube`);
+        const response = await axios.get(API_BASE ? `${API_BASE}/api/admin/youtube` : '/api/admin/youtube');
         
         if (response.data && response.data.length > 0) {
           // Process videos to ensure they have all required fields

@@ -8,7 +8,7 @@ const YeidaNews = () => {
   const [error, setError] = useState(null);
   const [selectedNews, setSelectedNews] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const API_BASE = import.meta.env.VITE_API_BASE_URL;
+  const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
 
   // Format date for display
   const formatDate = (dateString) => {
@@ -28,7 +28,7 @@ const YeidaNews = () => {
       try {
         setLoading(true);
         setError(null);
-        const apiUrl = `${API_BASE}/api/news`;
+        const apiUrl = API_BASE ? `${API_BASE}/api/news` : '/api/news';
         console.log('🔄 Fetching news from:', apiUrl);
         
         const response = await fetch(apiUrl);

@@ -2,25 +2,28 @@
 
 /**
  * Get the API base URL, handling both development and production environments
+ * In production with Vercel rewrites, can be empty to use relative URLs
+ * In development, should be the full localhost URL
  */
 export const getApiBaseUrl = () => {
-  const baseUrl = import.meta.env.VITE_API_BASE_URL;
+  const baseUrl = import.meta.env.VITE_API_BASE_URL || '';
   return baseUrl;
 };
 
 /**
  * Construct a full API URL for the given endpoint
  * @param {string} endpoint - The API endpoint (e.g., '/api/lead/submit')
- * @returns {string} - The full URL
+ * @returns {string} - The full URL or relative URL for Vercel rewrites
  */
 export const getApiUrl = (endpoint) => {
   const baseUrl = getApiBaseUrl();
   
+  // If no base URL (production with Vercel rewrites), use relative URL
   if (!baseUrl) {
-    throw new Error('VITE_API_BASE_URL is not configured');
+    return endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
   }
   
-  // Construct full URL
+  // If base URL exists (development), construct full URL
   const cleanEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
   return `${baseUrl}${cleanEndpoint}`;
 };
