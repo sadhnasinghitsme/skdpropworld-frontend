@@ -65,16 +65,23 @@ const corsOptions = {
       'https://skd-test.vercel.app',
       'https://skdpropworld.com',
       'https://www.skdpropworld.com',
-      'https://https-www-skdpropworld-com.vercel.app'
+      'https://https-www-skdpropworld-com.vercel.app',
+      'https://skdpropworld.vercel.app'
     ];
     
     // Allow requests with no origin (like mobile apps or curl requests)
     if (!origin) return callback(null, true);
     
+    // Debug logging
+    console.log(`🔍 CORS Check - Origin: ${origin}`);
+    console.log(`🔍 CORS Check - Allowed: ${allowedOrigins.includes(origin)}`);
+    
     if (allowedOrigins.indexOf(origin) === -1) {
-      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      const msg = `The CORS policy for this site does not allow access from the specified Origin: ${origin}`;
+      console.error(`❌ CORS Blocked: ${origin}`);
       return callback(new Error(msg), false);
     }
+    console.log(`✅ CORS Allowed: ${origin}`);
     return callback(null, true);
   },
   credentials: true,
