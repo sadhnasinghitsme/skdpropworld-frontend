@@ -30,11 +30,11 @@
   "rewrites": [
     {
       "source": "/sitemap.xml",
-      "destination": "https://www-skdpropworld-com.onrender.com/sitemap.xml"
+      "destination": "https://https-www-skdpropworld-com.onrender.com/sitemap.xml"
     },
     {
       "source": "/api/:path*",
-      "destination": "https://www-skdpropworld-com.onrender.com/api/:path*"
+      "destination": "https://https-www-skdpropworld-com.onrender.com/api/:path*"
     },
     {
       "source": "/(.*)",

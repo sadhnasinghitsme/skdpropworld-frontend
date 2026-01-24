@@ -6,11 +6,7 @@ services:
     plan: free
     branch: main
     rootDir: server
-    buildCommand: |
-      echo "Installing dependencies..."
-      npm install
-      echo "Dependencies installed successfully"
-      ls -la node_modules | head -10
+    buildCommand: npm install
     startCommand: node server.js
     healthCheckPath: /health
     envVars:
