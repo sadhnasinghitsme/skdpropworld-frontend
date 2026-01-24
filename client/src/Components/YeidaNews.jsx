@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Container, Row, Col, Modal, Button, Spinner, Alert } from 'react-bootstrap';
 import './YeidaNews.css';
+import { apiRequest } from '../utils/api';
 
 const YeidaNews = () => {
   const [news, setNews] = useState([]);
@@ -8,7 +9,6 @@ const YeidaNews = () => {
   const [error, setError] = useState(null);
   const [selectedNews, setSelectedNews] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001';
 
   // Format date for display
   const formatDate = (dateString) => {
@@ -27,14 +27,13 @@ const YeidaNews = () => {
     const fetchNews = async () => {
       try {
         setLoading(true);
-        const apiUrl = `${API_BASE}/api/news`;
-        console.log('Fetching news from:', apiUrl);
+        setError(null);
         
-        // Log before fetch
-        console.log('Making fetch request to:', apiUrl);
+        console.log('🔄 Fetching news...');
         
-        const response = await fetch(apiUrl);
-        console.log('Response status:', response.status);
+        const response = await apiRequest('/api/news', {
+          method: 'GET'
+        });
         
         if (!response.ok) {
           let errorData;
