@@ -30,6 +30,8 @@ const YeidaNews = () => {
         setError(null);
         const apiUrl = API_BASE ? `${API_BASE}/api/news` : '/api/news';
         console.log('🔄 Fetching news from:', apiUrl);
+        console.log('🔧 API_BASE:', API_BASE);
+        console.log('🌍 Environment:', import.meta.env.MODE);
         
         const response = await fetch(apiUrl);
         
