@@ -6,8 +6,8 @@ services:
     plan: free
     branch: main
     rootDir: server
-    buildCommand: npm install
-    startCommand: node server.js
+    buildCommand: npm install --production
+    startCommand: npm start
     healthCheckPath: /health
     envVars:
       - key: NODE_ENV
