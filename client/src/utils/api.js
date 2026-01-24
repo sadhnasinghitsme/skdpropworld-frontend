@@ -29,21 +29,70 @@ export const getApiUrl = (endpoint) => {
 };
 
 /**
- * Make an API request with proper URL handling
+ * Test multiple backend URLs to find a working one
+ * @returns {Promise<string>} - Working backend URL or null
+ */
+export const findWorkingBackend = async () => {
+  const backendUrls = [
+    'https://yeida-backend.onrender.com',
+    'https://skd-backend.onrender.com', 
+    'https://www-skdpropworld-com.onrender.com',
+    'https://skd-production.up.railway.app'
+  ];
+
+  console.log('🔍 Testing backend URLs...');
+  
+  for (const url of backendUrls) {
+    try {
+      console.log(`Testing: ${url}`);
+      const response = await fetch(`${url}/health`, { 
+        method: 'GET',
+        timeout: 5000 
+      });
+      
+      if (response.ok) {
+        console.log(`✅ Working backend found: ${url}`);
+        return url;
+      }
+    } catch (error) {
+      console.log(`❌ Failed: ${url} - ${error.message}`);
+    }
+  }
+  
+  console.log('🚨 No working backend found');
+  return null;
+};
+
+/**
+ * Make an API request with proper URL handling and error logging
  * @param {string} endpoint - The API endpoint
  * @param {object} options - Fetch options
  * @returns {Promise} - Fetch promise
  */
-export const apiRequest = (endpoint, options = {}) => {
+export const apiRequest = async (endpoint, options = {}) => {
   const url = getApiUrl(endpoint);
-  console.log(`API Request: ${url}`);
+  console.log(`🚀 API Request: ${url}`);
   
-  return fetch(url, {
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      ...options.headers,
-    },
-    ...options,
-  });
+  try {
+    const response = await fetch(url, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        ...options.headers,
+      },
+      ...options,
+    });
+
+    // Log response details for debugging
+    console.log(`📡 API Response: ${response.status} ${response.statusText}`);
+    
+    if (!response.ok) {
+      console.error(`❌ API Error: ${response.status} ${response.statusText} for ${url}`);
+    }
+    
+    return response;
+  } catch (error) {
+    console.error(`🔥 Network Error: ${error.message} for ${url}`);
+    throw error;
+  }
 };
