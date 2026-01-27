@@ -214,17 +214,21 @@ app.get("/api", (req, res) => {
   });
 });
 
-// Serve frontend build files
-const frontendPath = path.join(__dirname, "../client/dist");
-app.use(express.static(frontendPath));
-
 // Root route - Simple response for debugging
 app.get("/", (req, res) => {
   res.send("SKD Propworld Backend is running!");
 });
 
-// Catch-all for SPA routing (must be last)
+// Serve frontend build files (only for non-API routes)
+const frontendPath = path.join(__dirname, "../client/dist");
+app.use(express.static(frontendPath));
+
+// Catch-all for SPA routing (must be last, and should not catch API routes)
 app.get("*", (req, res) => {
+  // Don't catch API routes
+  if (req.path.startsWith('/api')) {
+    return res.status(404).json({ error: 'API endpoint not found' });
+  }
   const indexPath = path.join(frontendPath, "index.html");
   res.sendFile(indexPath);
 });

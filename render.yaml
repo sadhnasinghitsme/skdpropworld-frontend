@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: www-skdpropworld-com
+    name: skdpropworld-backend
     env: node
     region: singapore
     plan: free
