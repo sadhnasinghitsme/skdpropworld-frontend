@@ -172,7 +172,6 @@ app.get("/api/status", (req, res) => {
 });
 
 app.use("/", sitemap); // <-- mount it
-app.use("/api", require("./routes/htmlSnippet"));
 
 console.log("→ Mounting /api/admin");
 app.use("/api/admin", require("./routes/adminRoutes"));
