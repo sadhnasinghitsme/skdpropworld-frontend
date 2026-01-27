@@ -21,8 +21,13 @@ console.log("✅ Prerender middleware loaded");
 app.use(compression());
 console.log("✅ Compression middleware loaded");
 
-// WWW redirect middleware - Force www subdomain and HTTPS in production
+// WWW redirect middleware - Force www subdomain and HTTPS in production (SKIP for API routes)
 app.use((req, res, next) => {
+  // Skip redirect for API routes
+  if (req.path.startsWith('/api') || req.path.startsWith('/health')) {
+    return next();
+  }
+  
   if (process.env.NODE_ENV === 'production') {
     const host = req.get('host');
     const url = req.originalUrl;
@@ -126,6 +131,47 @@ app.use("/api/snippet", htmlSnippetRoutes);
 //     res.sendFile(path.resolve(__dirname, "../client/dist", "index.html"));
 //   });
 // }
+// API Routes - Must come BEFORE route mounting
+app.get("/api", (req, res) => {
+  res.json({
+    message: "✅ API is working fine!",
+    timestamp: new Date().toISOString(),
+    endpoints: [
+      "/api/lead/submit",
+      "/api/admin/projects", 
+      "/api/news",
+      "/api/project-enquiry"
+    ]
+  });
+});
+
+// Health check endpoint for production debugging
+app.get("/health", (req, res) => {
+  res.json({
+    status: "OK",
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime(),
+    environment: process.env.NODE_ENV || 'development',
+    port: PORT,
+    mongodb: mongoose.connection.readyState === 1 ? 'Connected' : 'Disconnected',
+    version: "1.0.0"
+  });
+});
+
+// API status endpoint
+app.get("/api/status", (req, res) => {
+  res.json({
+    api: "OK",
+    endpoints: [
+      "/api/lead/submit",
+      "/api/admin/projects", 
+      "/api/news",
+      "/api/project-enquiry"
+    ],
+    timestamp: new Date().toISOString()
+  });
+});
+
 app.use("/", sitemap); // <-- mount it
 app.use("/api", require("./routes/htmlSnippet"));
 
@@ -173,47 +219,6 @@ app.use("/api/admin/dashboard-stats", require("./routes/adminStats"));
 
 console.log("→ Mounting /api/admin/youtube");
 app.use("/api/admin/youtube", require("./routes/youtubeVideos"));
-
-// API Routes - Must come BEFORE static file serving
-app.get("/api", (req, res) => {
-  res.json({
-    message: "✅ API is working fine!",
-    timestamp: new Date().toISOString(),
-    endpoints: [
-      "/api/lead/submit",
-      "/api/admin/projects", 
-      "/api/news",
-      "/api/project-enquiry"
-    ]
-  });
-});
-
-// Health check endpoint for production debugging
-app.get("/health", (req, res) => {
-  res.json({
-    status: "OK",
-    timestamp: new Date().toISOString(),
-    uptime: process.uptime(),
-    environment: process.env.NODE_ENV || 'development',
-    port: PORT,
-    mongodb: mongoose.connection.readyState === 1 ? 'Connected' : 'Disconnected',
-    version: "1.0.0"
-  });
-});
-
-// API status endpoint
-app.get("/api/status", (req, res) => {
-  res.json({
-    api: "OK",
-    endpoints: [
-      "/api/lead/submit",
-      "/api/admin/projects", 
-      "/api/news",
-      "/api/project-enquiry"
-    ],
-    timestamp: new Date().toISOString()
-  });
-});
 
 // Root route - Simple response for debugging
 app.get("/", (req, res) => {
