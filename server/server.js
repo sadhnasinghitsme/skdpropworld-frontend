@@ -202,7 +202,16 @@ console.log("→ Mounting /api/admin/youtube");
 app.use("/api/admin/youtube", require("./routes/youtubeVideos"));
 
 app.get("/api", (req, res) => {
-  res.send("✅ API is working fine!");
+  res.json({
+    message: "✅ API is working fine!",
+    timestamp: new Date().toISOString(),
+    endpoints: [
+      "/api/lead/submit",
+      "/api/admin/projects", 
+      "/api/news",
+      "/api/project-enquiry"
+    ]
+  });
 });
 
 // Serve frontend build files
@@ -211,8 +220,12 @@ app.use(express.static(frontendPath));
 
 // Root route
 app.get("/", (req, res) => {
-  const indexPath = path.join(frontendPath, "index.html");
-  res.sendFile(indexPath);
+  res.json({
+    message: "✅ SKD Propworld Backend is running!",
+    timestamp: new Date().toISOString(),
+    environment: process.env.NODE_ENV || 'development',
+    port: PORT
+  });
 });
 
 // Catch-all for SPA routing (must be last)
