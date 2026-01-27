@@ -1,3 +1,4 @@
+console.log("🔥🔥🔥 SERVER.JS IS RUNNING ON RENDER 🔥🔥🔥");
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -10,6 +11,11 @@ const sitemap = require("./routes/sitemap");
 const htmlSnippetRoutes = require("./routes/htmlSnippet");
 const inventoryRoutes = require("./routes/inventoryRoutes.js");
 const app = express();
+
+app.get("/__proof", (req, res) => {
+  res.send("RENDER IS DEFINITELY RUNNING SERVER.JS");
+});
+
 // Server configuration - Use environment PORT or fallback to 10000 for Render
 const PORT = process.env.PORT || 10000;
 const prerender = require("prerender-node");
