@@ -14,7 +14,12 @@ const app = express();
 const PORT = process.env.PORT || 10000;
 const prerender = require("prerender-node");
 prerender.set("prerenderToken", "QHhhrvIPvM5gm4fHnmaT");
-app.use(prerender);
+app.use((req, res, next) => {
+  if (req.path.startsWith("/api")) {
+    return next(); // 🚫 skip prerender for APIs
+  }
+  prerender(req, res, next);
+});
 console.log("✅ Prerender middleware loaded");
 
 // Enable gzip compression for all responses
