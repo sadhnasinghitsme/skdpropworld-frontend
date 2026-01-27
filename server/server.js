@@ -21,33 +21,27 @@ console.log("✅ Prerender middleware loaded");
 app.use(compression());
 console.log("✅ Compression middleware loaded");
 
-// WWW redirect middleware - Force www subdomain and HTTPS in production (SKIP for API routes)
+// WWW redirect middleware - Force www subdomain and HTTPS in production (SKIP for Render domains AND API routes)
 app.use((req, res, next) => {
-  // Skip redirect for API routes
-  if (req.path.startsWith('/api') || req.path.startsWith('/health')) {
-    return next();
-  }
-  
-  if (process.env.NODE_ENV === 'production') {
-    const host = req.get('host');
-    const url = req.originalUrl;
-    const isHttps = req.secure || req.get('x-forwarded-proto') === 'https';
+  if (process.env.NODE_ENV === "production") {
+    const host = req.get("host") || "";
+    const isHttps = req.secure || req.get("x-forwarded-proto") === "https";
     
-    // Check if we need to redirect
-    if (!isHttps || !host.startsWith('www.')) {
-      // Remove any existing 'www.' to avoid duplicates
-      const domain = host.replace(/^www\./i, '');
-      
-      // Build the new URL with https and www
-      const newUrl = `https://www.${domain}${url}`;
-      
-      // Only redirect if the URL would actually change
-      if (req.originalUrl !== newUrl) {
-        return res.redirect(301, newUrl);
-      }
+    // 🚨 Skip redirect for Render domain
+    if (host.includes("onrender.com")) {
+      return next();
+    }
+    
+    // 🚨 Skip redirect for API routes
+    if (req.path.startsWith("/api")) {
+      return next();
+    }
+    
+    if (!isHttps || !host.startsWith("www.")) {
+      const domain = host.replace(/^www\./i, "");
+      return res.redirect(301, `https://www.${domain}${req.originalUrl}`);
     }
   }
-  
   next();
 });
 console.log("✅ WWW redirect middleware loaded");
