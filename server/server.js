@@ -156,6 +156,38 @@ app.use("/api/career", require("./routes/careerRoutes"));
 console.log("→ Mounting /uploads/resumes");
 app.use("/uploads/resumes", express.static("uploads/resumes"));
 
+console.log("→ Mounting /api/map-manager");
+app.use("/api/map-manager", require("./routes/mapEntryRoutes"));
+
+console.log("→ Mounting /api/admin/gallery");
+app.use("/api/admin/gallery", require("./routes/adminGallery"));
+
+console.log("→ Mounting /api/blogs");
+app.use("/api/blogs", require("./routes/blogRoutes"));
+
+console.log("→ Mounting /api/site-config");
+app.use("/api/site-config", require("./routes/siteConfigRoutes"));
+
+console.log("→ Mounting /api/admin/dashboard-stats");
+app.use("/api/admin/dashboard-stats", require("./routes/adminStats"));
+
+console.log("→ Mounting /api/admin/youtube");
+app.use("/api/admin/youtube", require("./routes/youtubeVideos"));
+
+// API Routes - Must come BEFORE static file serving
+app.get("/api", (req, res) => {
+  res.json({
+    message: "✅ API is working fine!",
+    timestamp: new Date().toISOString(),
+    endpoints: [
+      "/api/lead/submit",
+      "/api/admin/projects", 
+      "/api/news",
+      "/api/project-enquiry"
+    ]
+  });
+});
+
 // Health check endpoint for production debugging
 app.get("/health", (req, res) => {
   res.json({
@@ -183,52 +215,39 @@ app.get("/api/status", (req, res) => {
   });
 });
 
-console.log("→ Mounting /api/map-manager");
-app.use("/api/map-manager", require("./routes/mapEntryRoutes"));
-
-console.log("→ Mounting /api/admin/gallery");
-app.use("/api/admin/gallery", require("./routes/adminGallery"));
-
-console.log("→ Mounting /api/blogs");
-app.use("/api/blogs", require("./routes/blogRoutes"));
-
-console.log("→ Mounting /api/site-config");
-app.use("/api/site-config", require("./routes/siteConfigRoutes"));
-
-console.log("→ Mounting /api/admin/dashboard-stats");
-app.use("/api/admin/dashboard-stats", require("./routes/adminStats"));
-
-console.log("→ Mounting /api/admin/youtube");
-app.use("/api/admin/youtube", require("./routes/youtubeVideos"));
-
-app.get("/api", (req, res) => {
-  res.json({
-    message: "✅ API is working fine!",
-    timestamp: new Date().toISOString(),
-    endpoints: [
-      "/api/lead/submit",
-      "/api/admin/projects", 
-      "/api/news",
-      "/api/project-enquiry"
-    ]
-  });
-});
-
 // Root route - Simple response for debugging
 app.get("/", (req, res) => {
   res.send("SKD Propworld Backend is running!");
 });
 
-// Serve frontend build files (only for non-API routes)
+// Static files and SPA routing - ONLY for non-API routes
 const frontendPath = path.join(__dirname, "../client/dist");
-app.use(express.static(frontendPath));
 
-// Catch-all for SPA routing (must be last, and should not catch API routes)
-app.get("*", (req, res) => {
-  // Don't catch API routes
+// Serve static files, but not for API routes
+app.use((req, res, next) => {
   if (req.path.startsWith('/api')) {
-    return res.status(404).json({ error: 'API endpoint not found' });
+    return next();
   }
+  express.static(frontendPath)(req, res, next);
+});
+
+// Catch-all for SPA routing - ONLY for non-API routes
+app.get("*", (req, res) => {
+  // Explicitly reject API routes that weren't handled
+  if (req.path.startsWith('/api')) {
+    return res.status(404).json({ 
+      error: 'API endpoint not found',
+      path: req.path,
+      availableEndpoints: [
+        "/api",
+        "/api/status", 
+        "/api/news",
+        "/api/lead/submit"
+      ]
+    });
+  }
+  
+  // Serve frontend for all other routes
   const indexPath = path.join(frontendPath, "index.html");
   res.sendFile(indexPath);
 });
