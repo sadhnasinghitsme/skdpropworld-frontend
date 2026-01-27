@@ -70,14 +70,8 @@ const corsOptions = {
       'http://localhost:5178',
       'http://localhost:5179',
       'http://localhost:5000',
-      'https://skd-production.up.railway.app',
-      'https://www-skdpropworld-com.onrender.com',
-      'https://skd-test.vercel.app',
       'https://skdpropworld.com',
-      'https://www.skdpropworld.com',
-      'https://https-www-skdpropworld-com.vercel.app',
-      'https://skdpropworld.vercel.app',
-      'https://skdpropworld-frontend-nzr0ikv94-sadhnas-projects-14a13036.vercel.app'
+      'https://www.skdpropworld.com'
     ];
     
     // Allow requests with no origin (like mobile apps or curl requests)
@@ -85,15 +79,24 @@ const corsOptions = {
     
     // Debug logging
     console.log(`🔍 CORS Check - Origin: ${origin}`);
-    console.log(`🔍 CORS Check - Allowed: ${allowedOrigins.includes(origin)}`);
     
-    if (allowedOrigins.indexOf(origin) === -1) {
-      const msg = `The CORS policy for this site does not allow access from the specified Origin: ${origin}`;
-      console.error(`❌ CORS Blocked: ${origin}`);
-      return callback(new Error(msg), false);
+    // Check exact matches first
+    const isExactMatch = allowedOrigins.includes(origin);
+    
+    // Check if it's a Vercel deployment (any .vercel.app domain)
+    const isVercelDomain = /\.vercel\.app$/.test(origin);
+    
+    console.log(`🔍 CORS Check - Exact match: ${isExactMatch}`);
+    console.log(`🔍 CORS Check - Vercel domain: ${isVercelDomain}`);
+    
+    if (isExactMatch || isVercelDomain) {
+      console.log(`✅ CORS Allowed: ${origin}`);
+      return callback(null, true);
     }
-    console.log(`✅ CORS Allowed: ${origin}`);
-    return callback(null, true);
+    
+    const msg = `The CORS policy for this site does not allow access from the specified Origin: ${origin}`;
+    console.error(`❌ CORS Blocked: ${origin}`);
+    return callback(new Error(msg), false);
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
