@@ -10,8 +10,8 @@ const sitemap = require("./routes/sitemap");
 const htmlSnippetRoutes = require("./routes/htmlSnippet");
 const inventoryRoutes = require("./routes/inventoryRoutes.js");
 const app = express();
-// Server configuration - Use environment PORT or fallback to 3003
-const PORT = process.env.PORT || 3003;
+// Server configuration - Use environment PORT or fallback to 10000 for Render
+const PORT = process.env.PORT || 10000;
 const prerender = require("prerender-node");
 prerender.set("prerenderToken", "QHhhrvIPvM5gm4fHnmaT");
 app.use(prerender);
@@ -218,14 +218,9 @@ app.get("/api", (req, res) => {
 const frontendPath = path.join(__dirname, "../client/dist");
 app.use(express.static(frontendPath));
 
-// Root route
+// Root route - Simple response for debugging
 app.get("/", (req, res) => {
-  res.json({
-    message: "✅ SKD Propworld Backend is running!",
-    timestamp: new Date().toISOString(),
-    environment: process.env.NODE_ENV || 'development',
-    port: PORT
-  });
+  res.send("SKD Propworld Backend is running!");
 });
 
 // Catch-all for SPA routing (must be last)
