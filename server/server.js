@@ -76,7 +76,8 @@ const corsOptions = {
       'https://skdpropworld.com',
       'https://www.skdpropworld.com',
       'https://https-www-skdpropworld-com.vercel.app',
-      'https://skdpropworld.vercel.app'
+      'https://skdpropworld.vercel.app',
+      'https://skdpropworld-frontend-nzr0ikv94-sadhnas-projects-14a13036.vercel.app'
     ];
     
     // Allow requests with no origin (like mobile apps or curl requests)
